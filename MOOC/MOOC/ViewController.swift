@@ -5,15 +5,19 @@
 //  Created by Андрей Самаренко on 29.03.2021.
 //
 
-import UIKit
+import SwiftUI
 
-class ViewController: UIViewController {
-
+class ViewController: UIHostingController<AuthView> {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder, rootView: AuthView())
+    }
+    
+    required init() {
+        super.init(rootView: AuthView())
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
 
