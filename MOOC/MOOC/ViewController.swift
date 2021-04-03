@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-class ViewController: UIHostingController<AuthView> {
+class ViewController: UIHostingController<SignInView> {
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder, rootView: AuthView())
+        super.init(coder: aDecoder, rootView: SignInView())
     }
     
     required init() {
-        super.init(rootView: AuthView())
+        super.init(rootView: SignInView())
     }
     
     override func viewDidLoad() {

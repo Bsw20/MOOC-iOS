@@ -6,12 +6,12 @@ struct AuthView: View {
                 TopView()
                 Spacer()
                 
-                IntroImage(image: "LoginImage")
+                ImageView(image: "LoginImage")
 
                 VStack {
-                    BigBoldText(text: "Where self-education begins!")
+                    AuthViewBigBoldText(text: "Where self-education begins!")
 
-                    SubText(text: "Quarantine is the perfect time to spend your day to learn something new everyday anywhere.").padding(
+                    AuthViewSubText(text: "Quarantine is the perfect time to spend your day to learn something new everyday anywhere.").padding(
                         .init(
                             top: 0,
                             leading: 15,
@@ -41,10 +41,10 @@ struct AuthView_Previews: PreviewProvider {
 struct BottomView: View {
     var body : some View {
         VStack{
-            RoundedRectTextView(
+            AuthViewRoundedRectButton(
                 text: "Sign in with apple",
                 image: Image("appleIcon"),
-                backColor: .black)
+                backColor: .black, action: {})
                 .padding(
                     .init(
                         top: 0,
@@ -54,10 +54,10 @@ struct BottomView: View {
                     )
                 )
             
-            RoundedRectTextView(
+            AuthViewRoundedRectButton(
                 text: "Continue with email",
                 image: Image("mailIcon"),
-                backColor: Color("continueWithEmailColor")
+                backColor: Color("continueWithEmailColor"), action: {}
             )
                 .padding(
                     .init(
@@ -67,10 +67,10 @@ struct BottomView: View {
                         trailing: 0)
                 )
             
-            RoundedRectTextView(
+            AuthViewRoundedRectButton(
                 text: "Continue with Facebook",
                 image: Image("facebookIcon"),
-                backColor: Color("continueWithFacebook")
+                backColor: Color("continueWithFacebook"), action: {}
             )
                 .padding(
                     .init(
@@ -89,12 +89,33 @@ struct BottomView: View {
     }
 }
 
-struct IntroImage : View {
-    let image: String
-    var body : some View {
-        Image(image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            
+struct TopView : View{
+    @Environment(\.presentationMode) var presentationMode
+    var body : some View{
+        ZStack{
+            Text("MOOC")
+                .fontWeight(.bold)
+            HStack{
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                })
+                {
+                    Image(systemName: "chevron.backward")
+                        .frame(maxWidth: 40,
+                               maxHeight: 40)
+                        .foregroundColor(Color("headerTextColor"))
+                        .overlay(Circle()
+                                    .strokeBorder(Color("headerTextColor"), lineWidth: 2))
+                }
+                
+                Spacer()
+            }
+            .padding(
+                .init(top: 0,
+                      leading: 15,
+                      bottom: 0,
+                      trailing: 0)
+            )
+        }
     }
 }

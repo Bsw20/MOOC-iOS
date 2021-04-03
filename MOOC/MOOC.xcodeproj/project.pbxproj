@@ -15,6 +15,9 @@
 		6A0124DD2611FE42000DF7E0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124DC2611FE42000DF7E0 /* AuthView.swift */; };
 		6A0124E52612401A000DF7E0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124E42612401A000DF7E0 /* SignInView.swift */; };
 		6A5B35D726177EF300635A72 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35D626177EF300635A72 /* TextViews.swift */; };
+		6A5B35E42617898000635A72 /* SignInTextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35E32617898000635A72 /* SignInTextViews.swift */; };
+		6A5B35E926178B1C00635A72 /* SharedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35E826178B1C00635A72 /* SharedViews.swift */; };
+		6A5B35ED26179D2100635A72 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35EC26179D2000635A72 /* CarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		6A0124DC2611FE42000DF7E0 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		6A0124E42612401A000DF7E0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6A5B35D626177EF300635A72 /* TextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
+		6A5B35E32617898000635A72 /* SignInTextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTextViews.swift; sourceTree = "<group>"; };
+		6A5B35E826178B1C00635A72 /* SharedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViews.swift; sourceTree = "<group>"; };
+		6A5B35EC26179D2000635A72 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,27 +96,38 @@
 		6A0124E12611FE7D000DF7E0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				6A5B35DB26177FBE00635A72 /* LogOrReg */,
-				6A5B35D526177EBE00635A72 /* AuthChoice */,
+				6A5B35E726178B0A00635A72 /* SharedViews */,
+				6A5B35E22617895100635A72 /* SignInViewMaterials */,
+				6A5B35E0261788CB00635A72 /* AuthViewMaterials */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		6A5B35D526177EBE00635A72 /* AuthChoice */ = {
+		6A5B35E0261788CB00635A72 /* AuthViewMaterials */ = {
 			isa = PBXGroup;
 			children = (
-				6A0124DC2611FE42000DF7E0 /* AuthView.swift */,
 				6A5B35D626177EF300635A72 /* TextViews.swift */,
+				6A0124DC2611FE42000DF7E0 /* AuthView.swift */,
 			);
-			path = AuthChoice;
+			path = AuthViewMaterials;
 			sourceTree = "<group>";
 		};
-		6A5B35DB26177FBE00635A72 /* LogOrReg */ = {
+		6A5B35E22617895100635A72 /* SignInViewMaterials */ = {
 			isa = PBXGroup;
 			children = (
 				6A0124E42612401A000DF7E0 /* SignInView.swift */,
+				6A5B35E32617898000635A72 /* SignInTextViews.swift */,
+				6A5B35EC26179D2000635A72 /* CarouselView.swift */,
 			);
-			path = LogOrReg;
+			path = SignInViewMaterials;
+			sourceTree = "<group>";
+		};
+		6A5B35E726178B0A00635A72 /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				6A5B35E826178B1C00635A72 /* SharedViews.swift */,
+			);
+			path = SharedViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,8 +199,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A5B35E42617898000635A72 /* SignInTextViews.swift in Sources */,
+				6A5B35E926178B1C00635A72 /* SharedViews.swift in Sources */,
 				6A0124C82611FDA2000DF7E0 /* ViewController.swift in Sources */,
 				6A0124C42611FDA2000DF7E0 /* AppDelegate.swift in Sources */,
+				6A5B35ED26179D2100635A72 /* CarouselView.swift in Sources */,
 				6A0124DD2611FE42000DF7E0 /* AuthView.swift in Sources */,
 				6A0124C62611FDA2000DF7E0 /* SceneDelegate.swift in Sources */,
 				6A0124E52612401A000DF7E0 /* SignInView.swift in Sources */,
