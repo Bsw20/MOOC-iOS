@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
+#if DEBUG
 struct SignInTextViews: View {
     var body: some View {
         VStack{
-            SignInViewBigBoldText(text: "Welcome to MOOC App!")
-            SignInViewRoundedRectTextView(text: "Create an account", backColor: Color(.black))
+            SignInBigBoldTextView(text: "Welcome to MOOC App!")
+            SignInRoundedRectTextView(text: "Create an account", backColor: Color(.black))
             SignInUnderLinedTextView(text: "I already have an account!")
         }
     }
@@ -22,8 +22,9 @@ struct SignInTextViews_Previews: PreviewProvider {
         SignInTextViews()
     }
 }
+#endif
 
-struct SignInViewBigBoldText : View {
+struct SignInBigBoldTextView : View {
     let text : String
     var body : some View{
         Text(text)
@@ -41,7 +42,7 @@ struct SignInViewBigBoldText : View {
     }
 }
 
-struct SignInViewSubText : View {
+struct SignInSubTextView : View {
     let text : String
     var body : some View{
         Text(text)
@@ -52,7 +53,7 @@ struct SignInViewSubText : View {
     }
 }
 
-struct SignInViewRoundedRectTextView : View{
+struct SignInRoundedRectTextView : View{
     var text : String
     var backColor : Color
     @State var showAuthView: Bool = false
@@ -91,7 +92,7 @@ struct SignInViewRoundedRectTextView : View{
             .padding(.init(top: 0, leading: 15, bottom: 0, trailing: 15))
         }
         .fullScreenCover(isPresented: $showAuthView, content: {
-            AuthView()
+            AuthChoosing()
         })
     }
 }

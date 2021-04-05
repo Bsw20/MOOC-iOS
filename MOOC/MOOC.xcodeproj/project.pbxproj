@@ -12,12 +12,16 @@
 		6A0124C82611FDA2000DF7E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124C72611FDA2000DF7E0 /* ViewController.swift */; };
 		6A0124CD2611FDA8000DF7E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A0124CC2611FDA8000DF7E0 /* Assets.xcassets */; };
 		6A0124D02611FDA8000DF7E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0124CE2611FDA8000DF7E0 /* LaunchScreen.storyboard */; };
-		6A0124DD2611FE42000DF7E0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124DC2611FE42000DF7E0 /* AuthView.swift */; };
+		6A0124DD2611FE42000DF7E0 /* AuthChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124DC2611FE42000DF7E0 /* AuthChoosingView.swift */; };
 		6A0124E52612401A000DF7E0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0124E42612401A000DF7E0 /* SignInView.swift */; };
-		6A5B35D726177EF300635A72 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35D626177EF300635A72 /* TextViews.swift */; };
+		6A1C16EB261BAE2200F88997 /* AuthChoosingButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C16EA261BAE2200F88997 /* AuthChoosingButtons.swift */; };
+		6A47A01D261BB11D0038B475 /* AuthChoosingImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47A01C261BB11D0038B475 /* AuthChoosingImageViews.swift */; };
+		6A47A022261BB1FB0038B475 /* SignInImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47A021261BB1FB0038B475 /* SignInImageViews.swift */; };
+		6A47A04D261BCF330038B475 /* KeyChainErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47A04C261BCF330038B475 /* KeyChainErrors.swift */; };
+		6A47A051261BCF4B0038B475 /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47A050261BCF4B0038B475 /* KeyChainWrapper.swift */; };
+		6A5B35D726177EF300635A72 /* AuthChoosingTextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35D626177EF300635A72 /* AuthChoosingTextViews.swift */; };
 		6A5B35E42617898000635A72 /* SignInTextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35E32617898000635A72 /* SignInTextViews.swift */; };
-		6A5B35E926178B1C00635A72 /* SharedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35E826178B1C00635A72 /* SharedViews.swift */; };
-		6A5B35ED26179D2100635A72 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35EC26179D2000635A72 /* CarouselView.swift */; };
+		6A5B35ED26179D2100635A72 /* SignInCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B35EC26179D2000635A72 /* SignInCarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +32,17 @@
 		6A0124CC2611FDA8000DF7E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A0124CF2611FDA8000DF7E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A0124D12611FDA8000DF7E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A0124DC2611FE42000DF7E0 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		6A0124DC2611FE42000DF7E0 /* AuthChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChoosingView.swift; sourceTree = "<group>"; };
 		6A0124E42612401A000DF7E0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		6A5B35D626177EF300635A72 /* TextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
+		6A1C16EA261BAE2200F88997 /* AuthChoosingButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChoosingButtons.swift; sourceTree = "<group>"; };
+		6A47A01C261BB11D0038B475 /* AuthChoosingImageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChoosingImageViews.swift; sourceTree = "<group>"; };
+		6A47A021261BB1FB0038B475 /* SignInImageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInImageViews.swift; sourceTree = "<group>"; };
+		6A47A04C261BCF330038B475 /* KeyChainErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainErrors.swift; sourceTree = "<group>"; };
+		6A47A050261BCF4B0038B475 /* KeyChainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
+		6A5B35D626177EF300635A72 /* AuthChoosingTextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthChoosingTextViews.swift; sourceTree = "<group>"; };
 		6A5B35E32617898000635A72 /* SignInTextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTextViews.swift; sourceTree = "<group>"; };
-		6A5B35E826178B1C00635A72 /* SharedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViews.swift; sourceTree = "<group>"; };
-		6A5B35EC26179D2000635A72 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		6A5B35EC26179D2000635A72 /* SignInCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCarouselView.swift; sourceTree = "<group>"; };
+		6A748697261A5B3300D43EB1 /* MOOC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MOOC.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +75,8 @@
 		6A0124C22611FDA2000DF7E0 /* MOOC */ = {
 			isa = PBXGroup;
 			children = (
-				6A0124E12611FE7D000DF7E0 /* Auth */,
+				6A47A04A261BCF110038B475 /* Services */,
+				6A74869E261BABC400D43EB1 /* Views */,
 				6A0124DA2611FDE7000DF7E0 /* App */,
 				6A0124C72611FDA2000DF7E0 /* ViewController.swift */,
 				6A0124CE2611FDA8000DF7E0 /* LaunchScreen.storyboard */,
@@ -77,6 +87,7 @@
 		6A0124DA2611FDE7000DF7E0 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6A748697261A5B3300D43EB1 /* MOOC.entitlements */,
 				6A0124DB2611FDFE000DF7E0 /* Delegates */,
 				6A0124D12611FDA8000DF7E0 /* Info.plist */,
 				6A0124CC2611FDA8000DF7E0 /* Assets.xcassets */,
@@ -93,41 +104,68 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		6A0124E12611FE7D000DF7E0 /* Auth */ = {
+		6A1C16E9261BADEB00F88997 /* AdditionalViews */ = {
 			isa = PBXGroup;
 			children = (
-				6A5B35E726178B0A00635A72 /* SharedViews */,
-				6A5B35E22617895100635A72 /* SignInViewMaterials */,
-				6A5B35E0261788CB00635A72 /* AuthViewMaterials */,
+				6A5B35D626177EF300635A72 /* AuthChoosingTextViews.swift */,
+				6A1C16EA261BAE2200F88997 /* AuthChoosingButtons.swift */,
+				6A47A01C261BB11D0038B475 /* AuthChoosingImageViews.swift */,
 			);
-			path = Auth;
+			path = AdditionalViews;
 			sourceTree = "<group>";
 		};
-		6A5B35E0261788CB00635A72 /* AuthViewMaterials */ = {
+		6A47A020261BB1920038B475 /* AdditionalViews */ = {
 			isa = PBXGroup;
 			children = (
-				6A5B35D626177EF300635A72 /* TextViews.swift */,
-				6A0124DC2611FE42000DF7E0 /* AuthView.swift */,
-			);
-			path = AuthViewMaterials;
-			sourceTree = "<group>";
-		};
-		6A5B35E22617895100635A72 /* SignInViewMaterials */ = {
-			isa = PBXGroup;
-			children = (
-				6A0124E42612401A000DF7E0 /* SignInView.swift */,
+				6A5B35EC26179D2000635A72 /* SignInCarouselView.swift */,
 				6A5B35E32617898000635A72 /* SignInTextViews.swift */,
-				6A5B35EC26179D2000635A72 /* CarouselView.swift */,
+				6A47A021261BB1FB0038B475 /* SignInImageViews.swift */,
 			);
-			path = SignInViewMaterials;
+			path = AdditionalViews;
 			sourceTree = "<group>";
 		};
-		6A5B35E726178B0A00635A72 /* SharedViews */ = {
+		6A47A04A261BCF110038B475 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6A5B35E826178B1C00635A72 /* SharedViews.swift */,
+				6A47A04B261BCF1B0038B475 /* KeyChainService */,
 			);
-			path = SharedViews;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6A47A04B261BCF1B0038B475 /* KeyChainService */ = {
+			isa = PBXGroup;
+			children = (
+				6A47A04C261BCF330038B475 /* KeyChainErrors.swift */,
+				6A47A050261BCF4B0038B475 /* KeyChainWrapper.swift */,
+			);
+			path = KeyChainService;
+			sourceTree = "<group>";
+		};
+		6A5B35E0261788CB00635A72 /* AuthChoosingView */ = {
+			isa = PBXGroup;
+			children = (
+				6A1C16E9261BADEB00F88997 /* AdditionalViews */,
+				6A0124DC2611FE42000DF7E0 /* AuthChoosingView.swift */,
+			);
+			path = AuthChoosingView;
+			sourceTree = "<group>";
+		};
+		6A5B35E22617895100635A72 /* SignInView */ = {
+			isa = PBXGroup;
+			children = (
+				6A47A020261BB1920038B475 /* AdditionalViews */,
+				6A0124E42612401A000DF7E0 /* SignInView.swift */,
+			);
+			path = SignInView;
+			sourceTree = "<group>";
+		};
+		6A74869E261BABC400D43EB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6A5B35E0261788CB00635A72 /* AuthChoosingView */,
+				6A5B35E22617895100635A72 /* SignInView */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,14 +238,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A5B35E42617898000635A72 /* SignInTextViews.swift in Sources */,
-				6A5B35E926178B1C00635A72 /* SharedViews.swift in Sources */,
 				6A0124C82611FDA2000DF7E0 /* ViewController.swift in Sources */,
+				6A47A051261BCF4B0038B475 /* KeyChainWrapper.swift in Sources */,
 				6A0124C42611FDA2000DF7E0 /* AppDelegate.swift in Sources */,
-				6A5B35ED26179D2100635A72 /* CarouselView.swift in Sources */,
-				6A0124DD2611FE42000DF7E0 /* AuthView.swift in Sources */,
+				6A5B35ED26179D2100635A72 /* SignInCarouselView.swift in Sources */,
+				6A1C16EB261BAE2200F88997 /* AuthChoosingButtons.swift in Sources */,
+				6A47A022261BB1FB0038B475 /* SignInImageViews.swift in Sources */,
+				6A0124DD2611FE42000DF7E0 /* AuthChoosingView.swift in Sources */,
 				6A0124C62611FDA2000DF7E0 /* SceneDelegate.swift in Sources */,
+				6A47A04D261BCF330038B475 /* KeyChainErrors.swift in Sources */,
+				6A47A01D261BB11D0038B475 /* AuthChoosingImageViews.swift in Sources */,
 				6A0124E52612401A000DF7E0 /* SignInView.swift in Sources */,
-				6A5B35D726177EF300635A72 /* TextViews.swift in Sources */,
+				6A5B35D726177EF300635A72 /* AuthChoosingTextViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,8 +388,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MOOC/App/MOOC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B25KHJDDT4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MOOC/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -366,8 +409,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MOOC/App/MOOC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B25KHJDDT4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MOOC/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (

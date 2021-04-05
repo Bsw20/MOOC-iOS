@@ -1,47 +1,39 @@
 //
-//  TextViews.swift
+//  AuthChoosingButtons.swift
 //  MOOC
 //
-//  Created by Андрей Самаренко on 02.04.2021.
+//  Created by Андрей Самаренко on 05.04.2021.
 //
 
 import SwiftUI
 
-struct AuthViewBigBoldText : View {
-    let text : String
-    var body : some View{
-        Text(text)
-            .font(.title)
-            .fontWeight(.heavy)
-            .foregroundColor(Color("headerTextColor"))
-            .multilineTextAlignment(.leading)
-            .padding(
-                .init(
-                    top: -15,
-                    leading: 15,
-                    bottom: 1.5,
-                    trailing: 15)
+#if DEBUG
+struct AuthChoosingButtons: View {
+    var body: some View {
+        VStack{
+            AuthChoosingRoundedRectButton(
+                text: "Continue with email",
+                image: Image("mailIcon"),
+                backColor: Color("continueWithEmailColor"), action: {}
             )
+        }
     }
 }
 
-struct AuthViewSubText : View {
-    let text : String
-    var body : some View{
-        Text(text)
-            .font(.caption)
-            .fontWeight(.light)
-            .foregroundColor(Color("headerTextColor"))
-            .multilineTextAlignment(.leading)
+struct AuthChoosingButtons_Previews: PreviewProvider {
+    static var previews: some View {
+        AuthChoosingButtons()
     }
 }
+#endif
 
-struct AuthViewRoundedRectButton : View{
-    var text : String
-    var image : Image
-    var backColor : Color
+struct AuthChoosingRoundedRectButton: View{
+    var text: String
+    var image: Image
+    var backColor: Color
     var action: (()->Void)
-    var body : some View{
+    var body: some View {
+        
         Button(action: {
             action()
         })
@@ -73,17 +65,24 @@ struct AuthViewRoundedRectButton : View{
                     )
                 
             }.background(
-                RoundedRectangle(cornerRadius: 13, style: .continuous)
-                    .stroke(Color(.white), lineWidth: 1.5)
+                RoundedRectangle(cornerRadius: 13,
+                                 style: .continuous)
+                    .stroke(Color(.white),
+                            lineWidth: 1.5)
                     .background(
-                        RoundedRectangle(cornerRadius: 13, style: .continuous)
+                        RoundedRectangle(cornerRadius: 13,
+                                         style: .continuous)
                             .fill(backColor)
                     )
                 
             )
-            .padding(.init(top: 0, leading: 15, bottom: 0, trailing: 15))
+            .padding(
+                .init(top: 0,
+                      leading: 15,
+                      bottom: 0,
+                      trailing: 15)
+            )
         }
-        
-        
     }
 }
+
