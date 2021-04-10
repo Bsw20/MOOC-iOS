@@ -21,7 +21,7 @@ struct SignInCarouselView_Previews: PreviewProvider {
 }
 #endif
 
-struct Content : View {
+struct SignInCarouselContentView : View {
     var imageName: String
     var text: SignInSubTextView
     var body: some View {
@@ -49,11 +49,11 @@ struct SignInContentView: View {
     @State private var selection = 0
     
     let contents = [
-        Content(imageName: "CurrentlyInProgress",
+        SignInCarouselContentView(imageName: "CurrentlyInProgress",
                 text: SignInSubTextView(text: "The App is currently in pre-release mode, if you find any bugs - contact us as soon as possible!")),
-        Content(imageName: "IntroImage",
+        SignInCarouselContentView(imageName: "IntroImage",
                 text: SignInSubTextView(text: "MOOC is a developing platform for finding massive open online courses. Join us and find something special just for you!")),
-        Content(imageName: "LoginImage",
+        SignInCarouselContentView(imageName: "LoginImage",
                 text: SignInSubTextView(text: "We can find course based on your interests and wishes, search, like and comment to get courses that you like!"))
     ]
     

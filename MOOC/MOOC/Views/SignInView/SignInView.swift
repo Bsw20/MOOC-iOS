@@ -52,7 +52,7 @@ struct SignInMiddleView: View {
 struct SignInBottomView: View {
     var body: some View {
         VStack{
-            SignInRoundedRectTextView(
+            SignInRoundedRectButton(
                 text: "Create account",
                 backColor: Color(.black))
                 .padding(
@@ -61,7 +61,7 @@ struct SignInBottomView: View {
                           bottom: 0.1,
                           trailing: 0)
                 )
-            SignInUnderLinedTextView(text: "I already have an account")
+            SignInUnderLinedTextButton(text: "I already have an account")
         }.padding(.bottom)
     }
 }

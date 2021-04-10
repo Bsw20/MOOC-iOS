@@ -11,8 +11,8 @@ struct SignInTextViews: View {
     var body: some View {
         VStack{
             SignInBigBoldTextView(text: "Welcome to MOOC App!")
-            SignInRoundedRectTextView(text: "Create an account", backColor: Color(.black))
-            SignInUnderLinedTextView(text: "I already have an account!")
+            SignInRoundedRectButton(text: "Create an account", backColor: Color(.black))
+            SignInUnderLinedTextButton(text: "I already have an account!")
         }
     }
 }
@@ -46,14 +46,14 @@ struct SignInSubTextView : View {
     let text : String
     var body : some View{
         Text(text)
-            .font(.caption)
+            .font(.footnote)
             .fontWeight(.light)
             .foregroundColor(Color("headerTextColor"))
             .multilineTextAlignment(.center)
     }
 }
 
-struct SignInRoundedRectTextView : View{
+struct SignInRoundedRectButton : View{
     var text : String
     var backColor : Color
     @State var showAuthView: Bool = false
@@ -97,14 +97,22 @@ struct SignInRoundedRectTextView : View{
     }
 }
 
-struct SignInUnderLinedTextView : View {
+struct SignInUnderLinedTextButton : View {
+    @State var showAuthInputView: Bool = false
     var text: String
     var body : some View {
-        Text(text)
+        Button(action: {
+            showAuthInputView = true
+        }, label: {
+            Text(text)
             .font(.caption)
             .fontWeight(.light)
             .underline()
             .multilineTextAlignment(.center)
+        })
+        .fullScreenCover(isPresented: $showAuthInputView, content: {
+            AuthInputView()
+        })
     }
 }
 

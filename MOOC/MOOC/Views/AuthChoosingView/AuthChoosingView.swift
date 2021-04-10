@@ -3,11 +3,11 @@ import SwiftUI
 struct AuthChoosing: View {
     var body: some View {
         VStack{
-            TopView()
+            AuthChoosingTopView()
             Spacer()
-            MiddleView()
+            AuthChoosingMiddleView()
             Spacer()
-            BottomView()
+            AuthChoosingBottomView()
         }
         .padding(.bottom)
     }
@@ -26,7 +26,7 @@ struct AuthChoosing_Previews: PreviewProvider {
 }
 #endif
 
-struct TopView : View{
+struct AuthChoosingTopView : View{
     @Environment(\.presentationMode) var presentationMode
     
     var body : some View{
@@ -64,7 +64,7 @@ struct TopView : View{
 }
 
 
-struct MiddleView: View {
+struct AuthChoosingMiddleView: View {
     var body: some View {
         VStack{
             AuthChoosingIntroImageView(image: "LoginImage")
@@ -87,7 +87,7 @@ struct MiddleView: View {
     }
 }
 
-struct BottomView: View {
+struct AuthChoosingBottomView: View {
     var body : some View {
         VStack{
             AuthChoosingRoundedRectButton(
