@@ -8,6 +8,7 @@
 import Foundation
 
 protocol SignValidationTextFieldsProtocol {
+    
     func isValidUserName(userName: String) -> Bool
     func isValidEmail(email: String) -> Bool
     func isValidPassword(password: String) -> Bool

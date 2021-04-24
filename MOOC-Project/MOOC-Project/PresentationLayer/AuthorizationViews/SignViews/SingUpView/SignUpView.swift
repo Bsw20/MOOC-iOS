@@ -61,9 +61,9 @@ struct SignUpMiddleView: View {
                         .minimumScaleFactor(0.5)
                         .padding(.bottom, 10)
                     SignDescriptionTextView(text: "To use our app you have to create an account, it’ll only take few moments")
-                    if UIScreen.screenHeight > 640 {
+//                    if UIScreen.screenHeight > 640 {
                         WelcomePreviewImageView(image: "CurrentlyInProgress")
-                    }
+//                    }
                     
                 }
                 .padding(.horizontal, 12)
@@ -95,12 +95,17 @@ struct SignUpMiddleView: View {
             }
             .padding(.bottom, 15)
             VStack{
-                SignButton(text: "Sign In",
+                SignUp(text: "Sign In",
                            backColor: Color(.black),
                            isEnabled: RootAssembly.serviceAssembly.signValidation.isEnableToContinue(
                             userName: userName,
                             email: email,
-                            password: password)
+                            password: password),
+                           
+                           email: $email,
+                           userName: $userName,
+                           password: $password
+                           
                 )
                 .disabled(!RootAssembly.serviceAssembly.signValidation.isEnableToContinue(
                             userName: userName,

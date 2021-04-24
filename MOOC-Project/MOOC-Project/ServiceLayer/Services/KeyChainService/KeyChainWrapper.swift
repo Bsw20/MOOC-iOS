@@ -10,13 +10,13 @@ import Foundation
 /**
  Class provides interface for interaction with KeyChain data base.
  */
-class KeychainWrapper {
+class KeychainWrapper: KeyChainWrapperProtocol {
     /**
      Function to save password for account in KeyChain Data Base as Generic Password
      */
-    func storeGenericPasswordFor(account: String, service: String, password: String) throws {
+    func storeGenericJWTTokenFor(tokenName: String, service: String, tokenValue: String) throws {
         
-        guard let passwordData = password.data(using: .utf8) else {
+        guard let tokenData = tokenValue.data(using: .utf8) else {
             throw KeychainWrapperError(type: .badData)
         }
         
@@ -25,11 +25,11 @@ class KeychainWrapper {
             // must be encrypted
             kSecClass as String: kSecClassGenericPassword,
             // userName (account name)
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: tokenName,
             // purpose of the password, for example, “user login”
             kSecAttrService as String: service,
             // converted to data password
-            kSecValueData as String: passwordData
+            kSecValueData as String: tokenData
         ]
         
         // execute query and store add password in KeyChain (OSStatus)
@@ -40,10 +40,10 @@ class KeychainWrapper {
         case errSecSuccess:
             break
         case errSecDuplicateItem:
-            try updateGenericPasswordFor(
-                account: account,
+            try updateGenericJWTTokenFor(
+                tokenName: tokenName,
                 service: service,
-                password: password)
+                token: tokenValue)
         default:
             throw KeychainWrapperError(status: status, type: .servicesError)
         }
@@ -52,13 +52,13 @@ class KeychainWrapper {
     /**
      Function to search password for current account
      */
-    func getGenericPasswordFor(account: String, service: String) throws -> String {
+    func getGenericJWTTokenFor(tokenName: String, service: String) throws -> String {
         // creating a query to search
         let query: [String: Any] = [
             // encryption enabled
             kSecClass as String: kSecClassGenericPassword,
             // unique identifier for a password in KeyChain
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: tokenName,
             kSecAttrService as String: service,
             // single item expected
             kSecMatchLimit as String: kSecMatchLimitOne,
@@ -89,8 +89,8 @@ class KeychainWrapper {
         return value
     }
     
-    func updateGenericPasswordFor( account: String, service: String, password: String) throws {
-        guard let passwordData = password.data(using: .utf8) else {
+    func updateGenericJWTTokenFor(tokenName: String, service: String, token: String) throws {
+        guard let tokenData = token.data(using: .utf8) else {
             print("Error converting value to data.")
             // add keyChain error
             return
@@ -100,13 +100,13 @@ class KeychainWrapper {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             // unique id in KeyChain DataBase
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: tokenName,
             kSecAttrService as String: service
         ]
         
         // target attributes to change (dictionary for changes)
         let attributes: [String: Any] = [
-            kSecValueData as String: passwordData
+            kSecValueData as String: tokenData
         ]
         
         // execution of a query
@@ -122,11 +122,11 @@ class KeychainWrapper {
         }
     }
     
-    func deleteGenericPasswordFor(account: String, service: String) throws {
+    func deleteGenericJWTTokenFor(tokenName: String, service: String) throws {
         // creating query to delete stored password
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: tokenName,
             kSecAttrService as String: service
         ]
         

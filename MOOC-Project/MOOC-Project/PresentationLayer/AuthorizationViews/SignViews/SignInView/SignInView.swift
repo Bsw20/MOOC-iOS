@@ -65,56 +65,64 @@ struct AuthInputMiddleView: View {
     @State var password: String = ""
     
     var body: some View {
-        VStack(alignment: .leading){
-            SignBigBoldTextView(text: "Welcome,")
-            SignBoldSubTextView(text: "Sign in to continue!")
-                .padding(.bottom)
-            SignDescriptionTextView(text: "We use JWT-tokens for authorization, so you don't have to worry about the safety of your data.")
-        }
-        .padding(.horizontal, 15)
-        VStack{
-            if UIScreen.screenHeight > 600 {
-                SignImageView(image: "DataImage")
-                    .padding(.all, -15)
+        ScrollView{
+            VStack(alignment: .leading){
+                SignBigBoldTextView(text: "Welcome,")
+                SignBoldSubTextView(text: "Sign in to continue!")
+                    .padding(.bottom)
+                SignDescriptionTextView(text: "We use JWT-tokens for authorization, so you don't have to worry about the safety of your data.")
             }
-            Divider()
-            HStack{
-                SignAlternativeButton(
-                    icon: Image("appleIcon"),
-                    color: Color(.black))
-                    .padding(.leading, 15)
-                SignAlternativeButton(
-                    icon: Image("facebookIcon"),
-                    color: Color("continueWithFacebook"))
-                Spacer()
+            .padding(.horizontal, 15)
+            VStack{
+//                if UIScreen.screenHeight > 600 {
+                    SignImageView(image: "DataImage")
+                        .padding(.all, -15)
+               // }
+                Divider()
+                
+                HStack{
+                    SignAlternativeButton(
+                        icon: Image("appleIcon"),
+                        color: Color(.black))
+                        .padding(.leading, 15)
+                    SignAlternativeButton(
+                        icon: Image("facebookIcon"),
+                        color: Color("continueWithFacebook"))
+                    Spacer()
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                
+                SignCommonTextFieldView(
+                    labelText: "Email",
+                    icon: Image("emailIconForTextField"),
+                    validation: RootAssembly.serviceAssembly.signValidation.isValidEmail(email:),
+                    textContentType: .emailAddress,
+                    fieldValue: $email)
+                    .padding(.bottom, 5)
+                    .padding(.horizontal, 10)
+                
+                SignPasswordTextFieldView(labelText: "Password",
+                                          icon: Image("passwordIconForTextField"),
+                                          fieldValue: $password)
+                    .padding(.horizontal, 10)
+            }.padding(.vertical, 10)
+            Spacer()
+            VStack{
+//                SignUp(text: "Log In",
+//                           backColor: Color(.black),
+//                           isEnabled: RootAssembly.serviceAssembly.signValidation.isValidEmail(email: email)
+//                            && RootAssembly.serviceAssembly.signValidation.isValidPassword(password: password))
+//                    
+//                    .padding(
+//                        .init(top: 0,
+//                              leading: 0,
+//                              bottom: 0.1,
+//                              trailing: 0))
+//                
+                SignUnderlinedTextView(text: "Register")
             }
-            .padding(.vertical, 5)
-            
-            SignCommonTextFieldView(
-                labelText: "Email",
-                icon: Image("emailIconForTextField"),
-                validation: RootAssembly.serviceAssembly.signValidation.isValidEmail(email:),
-                textContentType: .emailAddress,
-                fieldValue: $email)
-                .padding(.bottom, 5)
-            
-            SignPasswordTextFieldView(labelText: "Password",
-                                      icon: Image("passwordIconForTextField"),
-                                      fieldValue: $password)
-        }.padding(.vertical, 10)
-        Spacer()
-        VStack{
-            SignButton(text: "Log In",
-                       backColor: Color(.black),
-                       isEnabled: false)
-                .padding(
-                    .init(top: 0,
-                          leading: 0,
-                          bottom: 0.1,
-                          trailing: 0))
-           SignUnderlinedTextView(text: "Register")
         }
-        .padding(.bottom)
     }
 }
 

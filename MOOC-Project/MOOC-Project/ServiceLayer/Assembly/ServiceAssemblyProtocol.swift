@@ -9,4 +9,6 @@ import Foundation
 
 protocol ServiceAssemblyProtocol {
     var signValidation: SignValidationTextFieldsProtocol {get}
+    var keyChainStoreJWT: KeyChainWrapperProtocol {get}
+    var networkService: NetworkServiceProtocol {get}
 }

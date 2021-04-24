@@ -11,7 +11,7 @@ struct KeychainWrapperError: Error {
   var message: String?
   var type: KeychainErrorType
 
-  enum KeychainErrorType {
+    enum KeychainErrorType {
     case badData
     case servicesError
     case itemNotFound

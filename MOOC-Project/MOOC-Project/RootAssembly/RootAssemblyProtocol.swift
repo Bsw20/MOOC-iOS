@@ -9,4 +9,5 @@ import Foundation
 
 protocol RootAssemblyProtocol {
     static var serviceAssembly: ServiceAssemblyProtocol {get}
+    static var coreAssembly: CoreLayerAssemblyProtocol {get}
 }

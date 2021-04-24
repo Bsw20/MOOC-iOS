@@ -9,4 +9,5 @@ import Foundation
 
 class RootAssembly: RootAssemblyProtocol {
     static var serviceAssembly: ServiceAssemblyProtocol = ServiceAssembly()
+    static var coreAssembly: CoreLayerAssemblyProtocol = CoreLayerAssembly()
 }

@@ -9,4 +9,6 @@ import Foundation
 
 class ServiceAssembly: ServiceAssemblyProtocol {
     var signValidation: SignValidationTextFieldsProtocol  = SignValidationTextFields()
+    var keyChainStoreJWT: KeyChainWrapperProtocol = KeychainWrapper()
+    var networkService: NetworkServiceProtocol = NetworkService()
 }

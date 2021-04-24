@@ -7,29 +7,29 @@
 
 import SwiftUI
 
-struct SignButtons: View {
-    var body: some View {
-        VStack{
-            SignButton(
-                text: "Log In",
-                backColor: Color(.black),
-                isEnabled: false)
-                .padding(
-                    .init(top: 0,
-                          leading: 0,
-                          bottom: 0.1,
-                          trailing: 0))
-            SignAlternativeButton(
-                icon: Image("appleIcon"),
-                color: .black)
-                .padding()
-        }
-    }
-}
+//struct SignButtons: View {
+//    var body: some View {
+//        VStack{
+//            SignUp(
+//                text: "Log In",
+//                backColor: Color(.black),
+//                isEnabled: false)
+//                .padding(
+//                    .init(top: 0,
+//                          leading: 0,
+//                          bottom: 0.1,
+//                          trailing: 0))
+//            SignAlternativeButton(
+//                icon: Image("appleIcon"),
+//                color: .black)
+//                .padding()
+//        }
+//    }
+//}
 
 struct SignButtons_Previews: PreviewProvider {
     static var previews: some View {
-        SignButtons()
+        EmptyView()
     }
 }
 
@@ -56,14 +56,30 @@ struct SignAlternativeButton: View {
     }
 }
 
-struct SignButton: View {
+struct SignUp: View {
     var text : String
     var backColor : Color
     var isEnabled: Bool
     
+    @Binding var email: String
+    @Binding var userName: String
+    @Binding var password: String
+    @Environment(\.presentationMode) var presentationMode
+    
     var body : some View{
         Button(action: {
-            
+            RootAssembly.serviceAssembly.networkService.signInUser(userData: .init(
+                                                                    email: email,
+                                                                    userName: userName,
+                                                                    password: password))
+            { (response: SignUpResponse?, error: NetworkError?) in
+                //error
+                
+                DispatchQueue.main.sync {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                
+            }
         }) {
             HStack{
                 Text(text)
