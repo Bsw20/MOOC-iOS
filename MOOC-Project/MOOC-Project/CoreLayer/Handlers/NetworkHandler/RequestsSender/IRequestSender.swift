@@ -13,7 +13,6 @@ protocol IRequestSender {
     func send<Parser>(
         with body: [String: String]?,
         config: RequestConfig<Parser>,
-                      completonHandler: @escaping (Result<Parser.Response, NetworkError>) -> Void)
+        completonHandler: @escaping (Result<Parser.Response, NetworkError>) -> Void)
     where Parser: IParser
 }
-

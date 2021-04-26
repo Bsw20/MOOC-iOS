@@ -1,0 +1,8 @@
+platform :ios, '14.0'
+
+target 'MOOC-Project' do
+  use_frameworks!
+
+  pod 'SwiftLint'
+  
+end

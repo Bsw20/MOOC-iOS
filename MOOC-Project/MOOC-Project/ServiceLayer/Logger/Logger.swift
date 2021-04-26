@@ -9,7 +9,7 @@ import Foundation
 
 class Logger {
     
-    enum LogType: String{
+    enum LogType: String {
         case error
         case warning
         case success
@@ -21,12 +21,25 @@ class Logger {
     static func logNetWork(description: String, logType: LogType) {
         if CommandLine.arguments.contains(Logger.keyToLogNetWork) {
             switch logType {
-                    case LogType.error:
-                        NSLog("📕 ERROR: \(description)")
-                    case LogType.warning:
-                        NSLog("📙 WARNING: \(description)")
-                    case LogType.success:
-                        NSLog("📗 SUCCESS: \(description)")
+            case LogType.error:
+                NSLog("📕 NETWORK ERROR: \(description)")
+            case LogType.warning:
+                NSLog("📙 NETWORK WARNING: \(description)")
+            case LogType.success:
+                NSLog("📗 NETWORK SUCCESS: \(description)")
+            }
+        }
+    }
+    
+    static func logJWT(description: String, logType: LogType) {
+        if CommandLine.arguments.contains(Logger.keyToLogJWTErrors) {
+            switch logType {
+            case LogType.error:
+                NSLog("📕 JWT ERROR: \(description)")
+            case LogType.warning:
+                NSLog("📙 JWT WARNING: \(description)")
+            case LogType.success:
+                NSLog("📗 JWT SUCCESS: \(description)")
             }
         }
     }

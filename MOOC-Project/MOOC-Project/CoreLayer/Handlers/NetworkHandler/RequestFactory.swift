@@ -11,8 +11,14 @@ struct RequestFactory {
     struct AuthRequests {
         static func newSignUpConfigue() -> RequestConfig<SignUpParser> {
             return RequestConfig<SignUpParser>(
-                request: SignUpRequest(),
+                request: SignRequest(type: .signUp),
                 parser: SignUpParser())
+        }
+        
+        static func newSignInCofigure() -> RequestConfig<SignInParser> {
+            return RequestConfig<SignInParser>(
+                request: SignRequest(type: .signIn),
+                parser: SignInParser())
         }
     }
 }

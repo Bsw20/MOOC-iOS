@@ -8,6 +8,8 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
+    func signUpUser(userData: UserDataModel,
+                    resultHandler: @escaping (NetworkError?) -> Void)
     func signInUser(userData: UserDataModel,
-                    resultHandler: @escaping (SignUpResponse?, NetworkError?) -> Void)
+                    resultHandler: @escaping (NetworkError?) -> Void)
 }

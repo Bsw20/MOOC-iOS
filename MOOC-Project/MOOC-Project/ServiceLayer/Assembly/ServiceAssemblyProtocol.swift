@@ -10,5 +10,6 @@ import Foundation
 protocol ServiceAssemblyProtocol {
     var signValidation: SignValidationTextFieldsProtocol {get}
     var keyChainStoreJWT: KeyChainWrapperProtocol {get}
+    var jwtTokenHandler: JWTTokenHandlerProtocol {get set}
     var networkService: NetworkServiceProtocol {get}
 }

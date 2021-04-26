@@ -8,5 +8,6 @@
 import Foundation
 
 class CoreLayerAssembly: CoreLayerAssemblyProtocol {
-    var signUpRequestSender: IRequestSender = SignUpRequestSender(with: .shared)
+    var signUpRequestSender: IRequestSender = SignUpReqestSender(with: .shared)
+    var signInRequestSender: IRequestSender = SignInRequestSender(with: .shared)
 }

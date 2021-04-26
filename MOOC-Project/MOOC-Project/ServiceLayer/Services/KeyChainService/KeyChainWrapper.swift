@@ -70,7 +70,7 @@ class KeychainWrapper: KeyChainWrapperProtocol {
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         
-        //checking for status of an item
+        // checking for status of an item
         guard status != errSecItemNotFound else {
             throw KeychainWrapperError(type: .itemNotFound)
         }
@@ -111,7 +111,7 @@ class KeychainWrapper: KeyChainWrapperProtocol {
         
         // execution of a query
         let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
-        //checking status
+        // checking status
         guard status != errSecItemNotFound else {
             throw KeychainWrapperError(
                 message: "Matching Item Not Found",
@@ -137,4 +137,3 @@ class KeychainWrapper: KeyChainWrapperProtocol {
         }
     }
 }
-

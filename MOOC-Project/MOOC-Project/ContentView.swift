@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State static var isLoggedIn = false
     var body: some View {
        WelcomeView()
     }

@@ -1,13 +1,13 @@
 //
-//  SignInRequestSender.swift
+//  RequestSender.swift
 //  MOOC-Project
 //
-//  Created by Андрей Самаренко on 26.04.2021.
+//  Created by Андрей Самаренко on 24.04.2021.
 //
 
 import Foundation
 
-class SignUpReqestSender: IRequestSender {
+class SignInRequestSender: IRequestSender {
     
     let session: URLSession
     
@@ -26,7 +26,7 @@ class SignUpReqestSender: IRequestSender {
         guard let urlRequest = config.request.getUrlRequest(
                 bodyArguments: body)
         else {
-            completonHandler(.failure(.badUrl(message: "INCORRECT URL - SIGN UP")))
+            completonHandler(.failure(.badUrl(message: "INCORRECT URL - SIGN IN")))
             return
         }
         
@@ -37,6 +37,8 @@ class SignUpReqestSender: IRequestSender {
                 completonHandler(.failure(.badSession(message: error.localizedDescription)))
                 return
             }
+            
+            print(String(decoding: data ?? Data(), as: UTF8.self))
             
             // parsing response data
             guard
@@ -54,20 +56,16 @@ class SignUpReqestSender: IRequestSender {
                 switch response.statusCode {
                 
                 case 200:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 200 CREATED SUCCESSFULLY", logType: .success)
+                    Logger.logNetWork(description: "RESPONSE-CODE: 200 LOG IN SUCCESSFULLY", logType: .success)
                     completonHandler(.success(parsedModel))
                     
-                case 400:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 400 ALREADY EXISTS", logType: .error)
-                    completonHandler(.failure(.badCode(code: 400)))
-                    
-                case 500:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 500 INNER ERROR", logType: .error)
-                    completonHandler(.failure(.badCode(code: 500)))
+                case 401:
+                    Logger.logNetWork(description: "RESPONSE-CODE: 401 NO USER WITH THIS DATA", logType: .error)
+                    completonHandler(.failure(.badCode(code: 401)))
                     
                 default:
-                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - SIGN UP RESPONSE", logType: .error)
-                    completonHandler(.failure(.unknownError(message: "Unknown error code")))
+                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - SIGN IN RESPONSE", logType: .error)
+                    completonHandler(.failure(.unknownError(message: "UNKNOWN ERROR CODE")))
                 }
             }
         }
