@@ -18,8 +18,8 @@ struct SignIn: View {
     // is still loading (await for result)
     @Binding var animate: Bool
     
-    @State var error: NetworkError?
-    @State var isAlertVisible: Bool = false
+    @Binding var error: NetworkError?
+    @Binding var isAlertVisible: Bool
     
     @Binding var fieldValue: String
     @Binding var password: String
@@ -31,8 +31,15 @@ struct SignIn: View {
                 animate.toggle()
                 model.signInUser(userData: model.createUserData(fieldValue: fieldValue,
                                                                 password: password)) { error in
-                    
-                    self.error = error
+                    if let error = error {
+                        self.error = error
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            presentationMode.wrappedValue.dismiss()
+                            model.changeSessionStatus()
+                        }
+                    }
+                  
                     isAlertVisible.toggle()
                     animate.toggle()
                     
@@ -50,17 +57,19 @@ struct SignIn: View {
                 
             }
             .background(
-                RoundedRectangle(cornerRadius: 13, style: .continuous)
-                    .stroke(Color(.white), lineWidth: 1.5)
+                RoundedRectangle(cornerRadius: 13,
+                                 style: .continuous)
+                    .stroke(Color(.white),
+                            lineWidth: 1.5)
                     .background(
-                        RoundedRectangle(cornerRadius: 13, style: .continuous)
+                        RoundedRectangle(cornerRadius: 13,
+                                         style: .continuous)
                             .fill(model.validateAll(fieldValue: fieldValue,
-                                                    password: password) ? backColor : Color.gray))
+                                                    password: password)
+                                    ? backColor
+                                    : Color.gray))
             )
-            .padding(.init(top: 0, leading: 15, bottom: 0, trailing: 15))
-        }
-        .alert(isPresented: $isAlertVisible) {
-            getAlert(error: $error.wrappedValue)
+            .padding(.horizontal, 15)
         }
     }
 }

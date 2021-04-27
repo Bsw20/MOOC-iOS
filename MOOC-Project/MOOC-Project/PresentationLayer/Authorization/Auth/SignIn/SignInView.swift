@@ -23,11 +23,43 @@ struct SignInView_Previews: PreviewProvider {
 struct SignInView: View {
     
     @State var isLoading: Bool = false
+    @State var isAlertVisible = false
+    
+    @State var error: NetworkError?
     
     var body: some View {
-        VStack {
-            AuthInputTopView()
-            AuthInputMiddleView(isLoading: $isLoading)
+        ZStack {
+            VStack {
+                AuthInputTopView()
+                AuthInputMiddleView(isLoading: $isLoading,
+                                    isAlertVisible: $isAlertVisible,
+                                    error: $error)
+            }
+            .zIndex(0)
+            
+            if isAlertVisible {
+                withAnimation {
+                    getAlertForSignIn(error: error,
+                                      isVisible: $isAlertVisible)
+                        .zIndex(1)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                                if isAlertVisible {
+                                    withAnimation {
+                                        isAlertVisible.toggle()
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+            
+            if isLoading {
+                HUDProgressView(placeHolder: "Please Wait",
+                                show: $isLoading)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(2)
+            }
         }
     }
 }
@@ -64,6 +96,8 @@ struct AuthInputTopView: View {
 struct AuthInputMiddleView: View {
     
     @Binding var isLoading: Bool
+    @Binding var isAlertVisible: Bool
+    @Binding var error: NetworkError?
     
     @State var model: SignInProtocol = SignInModel()
     @State var fieldValue: String = ""
@@ -86,25 +120,22 @@ struct AuthInputMiddleView: View {
                 Divider()
                 
                 HStack {
-                    SignAlternativeButton(
-                        icon: Image("appleIcon"),
-                        color: Color(.black))
+                    SignAlternativeButton(icon: Image("appleIcon"),
+                                          color: Color(.black))
                         .padding(.leading, 15)
                     
-                    SignAlternativeButton(
-                        icon: Image("facebookIcon"),
-                        color: Color("continueWithFacebook"))
+                    SignAlternativeButton(icon: Image("facebookIcon"),
+                                          color: Color("continueWithFacebook"))
                     Spacer()
                 }
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 
-                SignCommonTextFieldView(
-                    labelText: "Email or Username",
-                    icon: Image("emailIconForTextField"),
-                    validation: model.userNameOrEmailValidation(fieldValue:),
-                    textContentType: .emailAddress,
-                    fieldValue: $fieldValue)
+                SignCommonTextFieldView(labelText: "Email or Username",
+                                        icon: Image("emailIconForTextField"),
+                                        validation: model.userNameOrEmailValidation(fieldValue:),
+                                        textContentType: .emailAddress,
+                                        fieldValue: $fieldValue)
                     .padding(.bottom, 5)
                     .padding(.horizontal, 10)
                 
@@ -118,9 +149,11 @@ struct AuthInputMiddleView: View {
             Spacer()
             VStack {
                 SignIn(model: $model,
-                       text: "Sign In",
+                       text: "Sing In",
                        backColor: Color(.black),
                        animate: $isLoading,
+                       error: $error,
+                       isAlertVisible: $isAlertVisible,
                        fieldValue: $fieldValue,
                        password: $password)
                     .disabled(!model.validateAll(fieldValue: fieldValue,

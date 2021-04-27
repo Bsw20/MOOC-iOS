@@ -32,13 +32,6 @@ struct AuthChoosingBigBoldTextView: View {
             .fontWeight(.heavy)
             .foregroundColor(Color("headerTextColor"))
             .multilineTextAlignment(.leading)
-            .padding(
-                .init(
-                    top: -15,
-                    leading: 15,
-                    bottom: 1.5,
-                    trailing: 15)
-            )
     }
 }
 

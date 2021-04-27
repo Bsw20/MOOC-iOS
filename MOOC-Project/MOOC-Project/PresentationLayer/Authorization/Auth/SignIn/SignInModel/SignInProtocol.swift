@@ -12,4 +12,5 @@ protocol SignInProtocol {
     func createUserData(fieldValue: String, password: String) -> UserDataModel
     func signInUser(userData: UserDataModel, resultHandler: @escaping (NetworkError?) -> Void)
     func validateAll(fieldValue: String, password: String) -> Bool
+    func changeSessionStatus()
 }

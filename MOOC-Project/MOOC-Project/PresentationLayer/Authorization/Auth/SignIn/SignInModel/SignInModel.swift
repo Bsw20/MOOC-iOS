@@ -34,4 +34,8 @@ class SignInModel: SignInProtocol {
         return userNameOrEmailValidation(fieldValue: fieldValue)
             && RootAssembly.serviceAssembly.signValidation.isValidPassword(password: password)
     }
+    
+    func changeSessionStatus() {
+        RootAssembly.serviceAssembly.sessionService.setCurrentSessionValue(for: "status", value: true)
+    }
 }

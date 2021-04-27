@@ -10,4 +10,5 @@ import Foundation
 protocol CoreLayerAssemblyProtocol {
     var signUpRequestSender: IRequestSender {get}
     var signInRequestSender: IRequestSender {get}
+    var sessionSaveHandler: SessionSaveHandlerProtocol {get}
 }

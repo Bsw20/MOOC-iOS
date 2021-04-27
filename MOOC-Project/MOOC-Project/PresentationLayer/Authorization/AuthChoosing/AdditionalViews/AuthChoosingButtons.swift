@@ -28,23 +28,20 @@ struct AuthChoosingButtons_Previews: PreviewProvider {
 #endif
 
 struct AuthChoosingRoundedRectButton: View {
+    
     var text: String
     var image: Image
     var backColor: Color
+    
+    // action by tappind the button
     var action: (() -> Void)
+    
     var body: some View {
         
-        Button(action: {
-            action()}) {
+        Button(action: { action() }) {
             HStack {
                 image
-                    .padding(
-                        .init(
-                            top: 10,
-                            leading: 10,
-                            bottom: 10,
-                            trailing: 10)
-                    )
+                    .padding(.all, 10)
                 Text(text)
                     .fontWeight(.bold)
                     .font(.callout)
@@ -54,14 +51,6 @@ struct AuthChoosingRoundedRectButton: View {
                         minHeight: 38, maxHeight: 50,
                         alignment: .leading
                     )
-                    .padding(
-                        .init(
-                            top: 0,
-                            leading: 0,
-                            bottom: 0,
-                            trailing: 0)
-                    )
-                
             }.background(
                 RoundedRectangle(cornerRadius: 13,
                                  style: .continuous)
@@ -72,14 +61,9 @@ struct AuthChoosingRoundedRectButton: View {
                                          style: .continuous)
                             .fill(backColor)
                     )
-                
             )
-            .padding(
-                .init(top: 0,
-                      leading: 15,
-                      bottom: 0,
-                      trailing: 15)
-            )
+            .padding(.vertical, 0)
+            .padding(.horizontal, 15)
         }
     }
 }

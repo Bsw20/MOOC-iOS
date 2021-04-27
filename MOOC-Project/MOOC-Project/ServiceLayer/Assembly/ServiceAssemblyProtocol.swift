@@ -12,4 +12,5 @@ protocol ServiceAssemblyProtocol {
     var keyChainStoreJWT: KeyChainWrapperProtocol {get}
     var jwtTokenHandler: JWTTokenHandlerProtocol {get set}
     var networkService: NetworkServiceProtocol {get}
+    var sessionService: SessionServiceProtocol {get}
 }

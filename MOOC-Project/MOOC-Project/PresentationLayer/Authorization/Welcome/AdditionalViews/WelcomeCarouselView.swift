@@ -3,7 +3,7 @@
 //  MOOC
 //
 //  Created by Андрей Самаренко on 02.04.2021.
-//
+//  (Refactored)
 
 import SwiftUI
 
@@ -27,34 +27,36 @@ struct WelcomeCarouselContentView: View {
     var body: some View {
         VStack {
             WelcomePreviewImageView(image: imageName)
-                .padding(.init(
-                            top: -20,
-                            leading: 0,
-                            bottom: -20,
-                            trailing: 0)
-                )
+                .padding(.vertical, -20)
+                .padding(.horizontal, 0)
             text
-                .padding(.init(
-                    top: 0,
-                    leading: 8,
-                    bottom: 0,
-                    trailing: 8
-                ))
+                .padding(.vertical, 0)
+                .padding(.horizontal, 8)
         }
+        
     }
 }
 
+/*
+ Carousel View on the WelcomView settings
+ */
 struct WelcomeContentView: View {
+    // timer for swapping views
     public let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    
+    // current selection
     @State private var selection = 0
     
     let contents = [
         WelcomeCarouselContentView(imageName: "CurrentlyInProgress",
-                text: WelcomeSubTextView(text: "The App is currently in pre-release mode, if you find any bugs - contact us as soon as possible!")),
+                                   text: WelcomeSubTextView(text: "The App is currently in pre-release mode,"
+                                                                + " if you find any bugs - contact us as soon as possible!")),
         WelcomeCarouselContentView(imageName: "IntroImage",
-                text: WelcomeSubTextView(text: "MOOC is a developing platform for finding massive open online courses. Join us and find something special just for you!")),
+                                   text: WelcomeSubTextView(text: "MOOC is a developing platform for finding massive open online courses. "
+                                                                + "Join us and find something special just for you!")),
         WelcomeCarouselContentView(imageName: "LoginImage",
-                text: WelcomeSubTextView(text: "We can find course based on your interests and wishes, search, like and comment to get courses that you like!"))
+                                   text: WelcomeSubTextView(text: "We can find course based on your interests and wishes,"
+                                                                + " search, like and comment to get courses that you like!"))
     ]
     
     var body: some View {
@@ -71,7 +73,6 @@ struct WelcomeContentView: View {
                     selection = selection < 2 ? selection + 1 : 0
                 }
             })
-            Divider()
         }
     }
 }

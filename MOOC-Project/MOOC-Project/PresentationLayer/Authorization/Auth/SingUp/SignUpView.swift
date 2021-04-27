@@ -15,18 +15,48 @@ struct SignUpView_Previews: PreviewProvider {
 
 struct SignUpView: View {
     
+    // if still processing
     @State var isLoading: Bool = false
     
+    // alert if error occuried or success
+    @State var isAlertVisible = false
+    
+    // occuried error while interacting with server
+    @State var error: NetworkError?
+    
     var body: some View {
+        
         ZStack {
             VStack(alignment: .center) {
-                SignUpMiddleView(isAnimating: $isLoading)
+                SignUpMiddleView(isAlertVisible: $isAlertVisible,
+                                 error: $error,
+                                 isAnimating: $isLoading)
             }
+            .zIndex(0)
             .padding(.top, 5)
             
+            if isAlertVisible {
+                withAnimation {
+                    getAlertForSignUp(error: error,
+                                      isVisible: $isAlertVisible)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                                if isAlertVisible {
+                                    withAnimation {
+                                        isAlertVisible.toggle()
+                                    }
+                                }
+                            }
+                        }
+                        .zIndex(1)
+                }   
+            }
+            
             if isLoading {
-                HUDProgressView(placeHolder: "Please Wait", show: $isLoading)
+                HUDProgressView(placeHolder: "Please Wait",
+                                show: $isLoading)
                     .edgesIgnoringSafeArea(.all)
+                    .zIndex(2)
             }
         }
     }
@@ -34,6 +64,7 @@ struct SignUpView: View {
 
 struct SignUpMiddleView: View {
     
+    // model to interact with services
     @State var model: SignUpProtocol = SignUpModel()
     
     // stored data to register new user
@@ -41,28 +72,28 @@ struct SignUpMiddleView: View {
     @State var password: String = ""
     @State var userName: String = ""
     
+    @Binding var isAlertVisible: Bool
+    @Binding var error: NetworkError?
     @Binding var isAnimating: Bool
     
     var body: some View {
+        
         ScrollView {
+            
             VStack(alignment: .leading) {
-                SignBigBoldTextView(
-                    text: "Welcome,")
                 
-                SignBoldSubTextView(
-                    text: "Let's create new account!")
+                SignBigBoldTextView(text: "Welcome,")
+                
+                SignBoldSubTextView(text: "Let's create new account!")
                     .minimumScaleFactor(0.5)
                     .padding(.bottom, 10)
                 
-                SignDescriptionTextView(
-                    text: "To use our app you have to create an account, it’ll only take few moments")
+                SignDescriptionTextView(text: "To use our app you have to create an account, it’ll only take few moments")
                 // if UIScreen.screenHeight > 640 { }
-                
-                    WelcomePreviewImageView(
-                        image: "CurrentlyInProgress")
-                }
-                .padding(.horizontal, 12)
-                .padding(.bottom, 5)
+                WelcomePreviewImageView(image: "CurrentlyInProgress")
+            }
+            .padding(.horizontal, 12)
+            .padding(.bottom, 5)
             
             Spacer()
             
@@ -93,21 +124,19 @@ struct SignUpMiddleView: View {
             
             // button to send registration request
             VStack {
-                
-                SignUp(
-                    model: $model,
-                    text: "Sign In",
-                    backColor: Color(.black),
-                    animate: $isAnimating,
-                    email: $email,
-                    userName: $userName,
-                    password: $password
-                )
-                .disabled(!model.validateAll(
-                            email: email,
-                            userName: userName,
-                            password: password))
-                .padding(.bottom, 2)
+                SignUp(model: $model,
+                       error: $error,
+                       isLoading: $isAnimating,
+                       isAlertVisible: $isAlertVisible,
+                       text: "Sign Up",
+                       backColor: Color(.black),
+                       email: $email,
+                       userName: $userName,
+                       password: $password)
+                    .disabled(!model.validateAll(email: email,
+                                                 userName: userName,
+                                                 password: password))
+                    .padding(.bottom, 2)
                 
                 SignUnderlinedTextView(text: "Register")
             }

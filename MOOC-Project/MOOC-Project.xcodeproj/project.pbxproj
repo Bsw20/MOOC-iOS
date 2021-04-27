@@ -17,6 +17,10 @@
 		6A4B2795262C4EBA00EFF317 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B2794262C4EBA00EFF317 /* Preview Assets.xcassets */; };
 		6A4B2798262C4EBA00EFF317 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B2796262C4EBA00EFF317 /* LaunchScreen.storyboard */; };
 		6A4B27A2262C4F1400EFF317 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B27A1262C4F1400EFF317 /* Assets.xcassets */; };
+		6A4FBB852638639300F414BE /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4FBB842638639300F414BE /* SessionService.swift */; };
+		6A4FBB8A263863F300F414BE /* SessionSaveHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4FBB89263863F300F414BE /* SessionSaveHandler.swift */; };
+		6A4FBB8F2638672F00F414BE /* SessionSaveHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4FBB8E2638672E00F414BE /* SessionSaveHandlerProtocol.swift */; };
+		6A4FBB922638680600F414BE /* SessionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4FBB912638680600F414BE /* SessionServiceProtocol.swift */; };
 		6A600FF72636EB3B0008251E /* SignInParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A600FF62636EB3B0008251E /* SignInParser.swift */; };
 		6A600FFB2636EBC30008251E /* SignUpRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A600FFA2636EBC30008251E /* SignUpRequestSender.swift */; };
 		6A600FFE2636FA220008251E /* JWTTokenHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A600FFD2636FA220008251E /* JWTTokenHandlerProtocol.swift */; };
@@ -35,6 +39,7 @@
 		6A785B4A262C72F20080C10D /* SigntTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A785B3A262C72F20080C10D /* SigntTextView.swift */; };
 		6A785B4B262C72F20080C10D /* SignUpButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A785B3B262C72F20080C10D /* SignUpButtons.swift */; };
 		6A785B4C262C72F20080C10D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A785B3C262C72F20080C10D /* SignInView.swift */; };
+		6A7E8D6026388B3F009E5C3B /* WelcomeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E8D5F26388B3F009E5C3B /* WelcomeButtons.swift */; };
 		6A84E20E263346E4004E936A /* IParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E20D263346E4004E936A /* IParser.swift */; };
 		6A84E2142634A90D004E936A /* SignUpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2132634A90D004E936A /* SignUpParser.swift */; };
 		6A84E2182634A9DB004E936A /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2172634A9DB004E936A /* IRequestSender.swift */; };
@@ -46,6 +51,7 @@
 		6A84E2312634DA4C004E936A /* RequestConfigue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2302634DA4C004E936A /* RequestConfigue.swift */; };
 		6A84E23A2634DD71004E936A /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2392634DD71004E936A /* UserDataModel.swift */; };
 		6A84E2602635A717004E936A /* HUDProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E25F2635A717004E936A /* HUDProgressView.swift */; };
+		6A9E58DB263841C3003BBECB /* SignCustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9E58DA263841C3003BBECB /* SignCustomAlert.swift */; };
 		6AA43A33262C803A0011E3E2 /* UIScreen+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA43A32262C80390011E3E2 /* UIScreen+Frame.swift */; };
 		6AA43A37262CB4C50011E3E2 /* SignValidationTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA43A36262CB4C50011E3E2 /* SignValidationTextFields.swift */; };
 		6AA43A40262CB6150011E3E2 /* ServiceAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA43A3F262CB6150011E3E2 /* ServiceAssemblyProtocol.swift */; };
@@ -76,6 +82,10 @@
 		6A4B2797262C4EBA00EFF317 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A4B2799262C4EBA00EFF317 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A4B27A1262C4F1400EFF317 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A4FBB842638639300F414BE /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		6A4FBB89263863F300F414BE /* SessionSaveHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSaveHandler.swift; sourceTree = "<group>"; };
+		6A4FBB8E2638672E00F414BE /* SessionSaveHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSaveHandlerProtocol.swift; sourceTree = "<group>"; };
+		6A4FBB912638680600F414BE /* SessionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceProtocol.swift; sourceTree = "<group>"; };
 		6A600FF62636EB3B0008251E /* SignInParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInParser.swift; sourceTree = "<group>"; };
 		6A600FFA2636EBC30008251E /* SignUpRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestSender.swift; sourceTree = "<group>"; };
 		6A600FFD2636FA220008251E /* JWTTokenHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenHandlerProtocol.swift; sourceTree = "<group>"; };
@@ -94,6 +104,7 @@
 		6A785B3A262C72F20080C10D /* SigntTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigntTextView.swift; sourceTree = "<group>"; };
 		6A785B3B262C72F20080C10D /* SignUpButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpButtons.swift; sourceTree = "<group>"; };
 		6A785B3C262C72F20080C10D /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		6A7E8D5F26388B3F009E5C3B /* WelcomeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeButtons.swift; sourceTree = "<group>"; };
 		6A84E20D263346E4004E936A /* IParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IParser.swift; sourceTree = "<group>"; };
 		6A84E2132634A90D004E936A /* SignUpParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpParser.swift; sourceTree = "<group>"; };
 		6A84E2172634A9DB004E936A /* IRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
@@ -105,6 +116,7 @@
 		6A84E2302634DA4C004E936A /* RequestConfigue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfigue.swift; sourceTree = "<group>"; };
 		6A84E2392634DD71004E936A /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		6A84E25F2635A717004E936A /* HUDProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDProgressView.swift; sourceTree = "<group>"; };
+		6A9E58DA263841C3003BBECB /* SignCustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignCustomAlert.swift; sourceTree = "<group>"; };
 		6AA43A32262C80390011E3E2 /* UIScreen+Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Frame.swift"; sourceTree = "<group>"; };
 		6AA43A36262CB4C50011E3E2 /* SignValidationTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignValidationTextFields.swift; sourceTree = "<group>"; };
 		6AA43A3F262CB6150011E3E2 /* ServiceAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssemblyProtocol.swift; sourceTree = "<group>"; };
@@ -216,6 +228,24 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		6A4FBB832638636D00F414BE /* SessionService */ = {
+			isa = PBXGroup;
+			children = (
+				6A4FBB842638639300F414BE /* SessionService.swift */,
+				6A4FBB912638680600F414BE /* SessionServiceProtocol.swift */,
+			);
+			path = SessionService;
+			sourceTree = "<group>";
+		};
+		6A4FBB88263863D800F414BE /* SessionSaveHandler */ = {
+			isa = PBXGroup;
+			children = (
+				6A4FBB89263863F300F414BE /* SessionSaveHandler.swift */,
+				6A4FBB8E2638672E00F414BE /* SessionSaveHandlerProtocol.swift */,
+			);
+			path = SessionSaveHandler;
+			sourceTree = "<group>";
+		};
 		6A785B21262C72F20080C10D /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,20 +277,20 @@
 		6A785B26262C72F20080C10D /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				6A785B27262C72F20080C10D /* WelcomeView */,
-				6A785B2D262C72F20080C10D /* AuthChoosingView */,
+				6A785B27262C72F20080C10D /* Welcome */,
+				6A785B2D262C72F20080C10D /* AuthChoosing */,
 				6A785B33262C72F20080C10D /* Auth */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		6A785B27262C72F20080C10D /* WelcomeView */ = {
+		6A785B27262C72F20080C10D /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
 				6A785B28262C72F20080C10D /* AdditionalViews */,
 				6A785B2C262C72F20080C10D /* WelcomeView.swift */,
 			);
-			path = WelcomeView;
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		6A785B28262C72F20080C10D /* AdditionalViews */ = {
@@ -269,17 +299,18 @@
 				6A785B29262C72F20080C10D /* WelcomeCarouselView.swift */,
 				6A785B2A262C72F20080C10D /* WelcomeImageViews.swift */,
 				6A785B2B262C72F20080C10D /* WelcomeTextViews.swift */,
+				6A7E8D5F26388B3F009E5C3B /* WelcomeButtons.swift */,
 			);
 			path = AdditionalViews;
 			sourceTree = "<group>";
 		};
-		6A785B2D262C72F20080C10D /* AuthChoosingView */ = {
+		6A785B2D262C72F20080C10D /* AuthChoosing */ = {
 			isa = PBXGroup;
 			children = (
 				6A785B2E262C72F20080C10D /* AdditionalViews */,
 				6A785B32262C72F20080C10D /* AuthChoosingView.swift */,
 			);
-			path = AuthChoosingView;
+			path = AuthChoosing;
 			sourceTree = "<group>";
 		};
 		6A785B2E262C72F20080C10D /* AdditionalViews */ = {
@@ -329,6 +360,7 @@
 				6A785B3A262C72F20080C10D /* SigntTextView.swift */,
 				6A84E25F2635A717004E936A /* HUDProgressView.swift */,
 				6AA7DC5D26361240000AC318 /* SignImageViews.swift */,
+				6A9E58DA263841C3003BBECB /* SignCustomAlert.swift */,
 			);
 			path = AdditionalViews;
 			sourceTree = "<group>";
@@ -438,6 +470,7 @@
 		6AA43A3C262CB5F90011E3E2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6A4FBB832638636D00F414BE /* SessionService */,
 				6A84E2212634B167004E936A /* NetworkService */,
 				6AA43A4E262CC3780011E3E2 /* JWTService */,
 				6AA43A3B262CB5D30011E3E2 /* SignValidation */,
@@ -502,6 +535,7 @@
 		6AF5D09626332DC400C165BE /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				6A4FBB88263863D800F414BE /* SessionSaveHandler */,
 				6AF5D0A026332E6700C165BE /* NetworkHandler */,
 			);
 			path = Handlers;
@@ -681,6 +715,7 @@
 				6A84E21F2634B0BB004E936A /* RequestFactory.swift in Sources */,
 				6AA7DC5E26361240000AC318 /* SignImageViews.swift in Sources */,
 				6A785B42262C72F20080C10D /* WelcomeTextViews.swift in Sources */,
+				6A4FBB852638639300F414BE /* SessionService.swift in Sources */,
 				6A785B45262C72F20080C10D /* AuthChoosingButtons.swift in Sources */,
 				6A84E21B2634AA08004E936A /* SignInRequestSender.swift in Sources */,
 				6A84E2142634A90D004E936A /* SignUpParser.swift in Sources */,
@@ -692,11 +727,13 @@
 				6A600FF72636EB3B0008251E /* SignInParser.swift in Sources */,
 				6A84E2602635A717004E936A /* HUDProgressView.swift in Sources */,
 				6A4B278C262C4EB600EFF317 /* AppDelegate.swift in Sources */,
+				6A4FBB8F2638672F00F414BE /* SessionSaveHandlerProtocol.swift in Sources */,
 				6A253AE22636E866003353E0 /* SignRequest.swift in Sources */,
 				6AF5D0AA2633352800C165BE /* Logger.swift in Sources */,
 				6AA43A49262CB6C10011E3E2 /* RootAssembly.swift in Sources */,
 				6A785B4A262C72F20080C10D /* SigntTextView.swift in Sources */,
 				6A785B47262C72F20080C10D /* AuthChoosingView.swift in Sources */,
+				6A9E58DB263841C3003BBECB /* SignCustomAlert.swift in Sources */,
 				6A785B3F262C72F20080C10D /* KeyChainWrapper.swift in Sources */,
 				6AA43A44262CB6670011E3E2 /* ServiceAssembly.swift in Sources */,
 				6A785B4B262C72F20080C10D /* SignUpButtons.swift in Sources */,
@@ -720,14 +757,17 @@
 				6A785B49262C72F20080C10D /* SignTextFields.swift in Sources */,
 				6A785B4C262C72F20080C10D /* SignInView.swift in Sources */,
 				6AA43A4C262CB6D00011E3E2 /* RootAssemblyProtocol.swift in Sources */,
+				6A4FBB922638680600F414BE /* SessionServiceProtocol.swift in Sources */,
 				6A785B48262C72F20080C10D /* SignUpView.swift in Sources */,
 				6A4B278E262C4EB600EFF317 /* SceneDelegate.swift in Sources */,
 				6A84E2262634B201004E936A /* NetworkService.swift in Sources */,
 				6A4B2790262C4EB600EFF317 /* ContentView.swift in Sources */,
 				6A785B40262C72F20080C10D /* WelcomeCarouselView.swift in Sources */,
 				6A36AE6D2635EE4E0033660C /* SignUpModel.swift in Sources */,
+				6A4FBB8A263863F300F414BE /* SessionSaveHandler.swift in Sources */,
 				6A84E2232634B184004E936A /* NetworkServiceProtocol.swift in Sources */,
 				6A600FFE2636FA220008251E /* JWTTokenHandlerProtocol.swift in Sources */,
+				6A7E8D6026388B3F009E5C3B /* WelcomeButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

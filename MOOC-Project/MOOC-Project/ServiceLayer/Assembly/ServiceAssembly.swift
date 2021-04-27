@@ -12,4 +12,5 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     lazy var keyChainStoreJWT: KeyChainWrapperProtocol = KeychainWrapper()
     lazy var jwtTokenHandler: JWTTokenHandlerProtocol = JWTTokenHandler()
     lazy var networkService: NetworkServiceProtocol = NetworkService()
+    lazy var sessionService: SessionServiceProtocol = SessionService()
 }

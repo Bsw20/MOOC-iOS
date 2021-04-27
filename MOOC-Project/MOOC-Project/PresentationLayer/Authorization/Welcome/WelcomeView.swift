@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
-    var body : some View {
-        VStack {
-            WelcomeTopView()
-            WelcomeMiddleView()
-            WelcomeBottomView()
-        }
-    }
-}
 #if DEBUG
 struct WelcomeViewPreview: PreviewProvider {
     static var previews: some View {
@@ -29,15 +20,31 @@ struct WelcomeViewPreview: PreviewProvider {
 }
 #endif
 
+struct WelcomeView: View {
+    
+    @State var isAuthChoosingViewEnabled: Bool = false
+    @State var isAuthInputViewEnabled: Bool = false
+    
+    var body : some View {
+        VStack {
+            WelcomeTopView()
+            Spacer()
+            WelcomeMiddleView()
+            Spacer()
+            Divider()
+            WelcomeBottomView(isAuthChoosingViewEnabled: $isAuthChoosingViewEnabled,
+                              isAuthInputViewEnabled: $isAuthInputViewEnabled)
+        }
+    }
+}
+
 struct WelcomeTopView: View {
     var body : some View {
         VStack {
             Text("MOOC")
                 .fontWeight(.bold)
-                .padding(.init(top: 0,
-                               leading: 0,
-                               bottom: 4,
-                               trailing: 0))
+                .padding(.horizontal, 0)
+                .padding(.vertical, 4)
             WelcomeBigBoldTextView(text: "Welcome to\nMOOC!")
         }
     }
@@ -50,18 +57,18 @@ struct WelcomeMiddleView: View {
 }
 
 struct WelcomeBottomView: View {
+    
+    @Binding var isAuthChoosingViewEnabled: Bool
+    @Binding var isAuthInputViewEnabled: Bool
+    
     var body: some View {
         VStack {
             WelcomeRoundedRectButton(
+                showAuthView: $isAuthChoosingViewEnabled,
                 text: "Create account",
                 backColor: Color(.black))
-                .padding(
-                    .init(top: 0,
-                          leading: 0,
-                          bottom: 0.1,
-                          trailing: 0)
-                )
-            WelcomeUnderLinedTextButton(text: "I already have an account")
+            WelcomeUnderLinedTextButton(text: "I already have an account",
+                                        showAuthInputView: $isAuthInputViewEnabled)
         }.padding(.bottom)
     }
 }

@@ -16,7 +16,7 @@ class SignUpModel: SignUpProtocol {
     func validateEmail(email: String) -> Bool {
         return RootAssembly.serviceAssembly.signValidation.isValidEmail(email: email)
     }
-
+    
     func validateAll(email: String,
                      userName: String,
                      password: String) -> Bool {
@@ -25,7 +25,7 @@ class SignUpModel: SignUpProtocol {
             email: email,
             password: password)
     }
-
+    
     func signUpUser(userData: UserDataModel,
                     resultHandler: @escaping (NetworkError?) -> Void) {
         RootAssembly.serviceAssembly.networkService.signUpUser(
@@ -34,5 +34,9 @@ class SignUpModel: SignUpProtocol {
                 resultHandler(error)
             }
         }
+    }
+    
+    func changeSessionStatus() {
+        RootAssembly.serviceAssembly.sessionService.setCurrentSessionValue(for: "status", value: true)
     }
 }

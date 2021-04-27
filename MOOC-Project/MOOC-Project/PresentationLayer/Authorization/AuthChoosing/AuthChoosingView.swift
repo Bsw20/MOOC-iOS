@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AuthChoosing: View {
+    
     var body: some View {
         VStack {
             AuthChoosingTopView()
@@ -20,13 +21,15 @@ struct AuthChoosing_Previews: PreviewProvider {
             AuthChoosing()
                 .environment(\.sizeCategory, .extraLarge)
             AuthChoosing()
-                .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+                .preferredColorScheme(.dark)
         }
     }
 }
 #endif
 
 struct AuthChoosingTopView: View {
+    
+    // to enable dismiss from current view
     @Environment(\.presentationMode) var presentationMode
     
     var body : some View {
@@ -35,28 +38,20 @@ struct AuthChoosingTopView: View {
                 .fontWeight(.bold)
             
             HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()}) {
+                Button(action: { presentationMode.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.backward")
                         .frame(maxWidth: 40,
                                maxHeight: 40)
                         .foregroundColor(Color("headerTextColor"))
                         .overlay(Circle()
-                                    .strokeBorder(
-                                        Color("headerTextColor"),
-                                        lineWidth: 2)
-                        )
+                                    .strokeBorder(Color("headerTextColor"),
+                                                  lineWidth: 2))
                 }
                 
                 Spacer()
             }
-            .padding(
-                .init(top: 0,
-                      leading: 15,
-                      bottom: 0,
-                      trailing: 0
-                )
-            )
+            .padding(.leading, 15)
+            .padding(.top, 5)
         }
     }
 }
@@ -65,62 +60,41 @@ struct AuthChoosingMiddleView: View {
     var body: some View {
         VStack {
             AuthChoosingIntroImageView(image: "LoginImage")
-            
             AuthChoosingBigBoldTextView(text: "Where self-education begins!")
+                .padding(.horizontal, 15)
+                .padding(.top, -15)
+                .padding(.bottom, 1.5)
             
             AuthChoosingSubTextView(
                 text: "Quarantine is the perfect time to spend your day to learn something new everyday anywhere.")
-                .padding(
-                    .init(
-                        top: 0,
-                        leading: 15,
-                        bottom: 0,
-                        trailing: 15
-                    )
-                )
-            
+                .padding(.horizontal, 15)
         }
-        
     }
 }
 
 struct AuthChoosingBottomView: View {
+    // for email-button
     @State var emailRegistrationViewIsPresented = false
+    
     var body : some View {
-        VStack {
+        VStack(spacing: 5) {
+            
             AuthChoosingRoundedRectButton(
                 text: "Sign up with apple",
                 image: Image("appleIcon"),
                 // button action here
-                backColor: .black, action: {})
-                .padding(
-                    .init(
-                        top: 0,
-                        leading: 0,
-                        bottom: 0.1,
-                        trailing: 0
-                    )
-                )
-            
+                backColor: .black,
+                action: {})
+                
             AuthChoosingRoundedRectButton(
                 text: "Continue with email",
                 image: Image("mailIcon"),
-                backColor: Color("continueWithEmailColor"), action: {
-                    emailRegistrationViewIsPresented = true
-                }
-            )
+                backColor: Color("continueWithEmailColor"),
+                action: { emailRegistrationViewIsPresented.toggle()})
             .sheet(isPresented: $emailRegistrationViewIsPresented, content: {
                 SignUpView()
             })
-            .padding(
-                .init(
-                    top: 0,
-                    leading: 0,
-                    bottom: 0.1,
-                    trailing: 0
-                )
-            )
-            
+
             AuthChoosingRoundedRectButton(
                 text: "Continue with Facebook",
                 image: Image("facebookIcon"),
@@ -128,20 +102,8 @@ struct AuthChoosingBottomView: View {
                 // button action here
                 action: {}
             )
-            .padding(
-                .init(
-                    top: 0,
-                    leading: 0,
-                    bottom: 0.1,
-                    trailing: 0
-                )
-            )
-        }.padding(
-            .init(
-                top: 5,
-                leading: 0,
-                bottom: 10,
-                trailing: 0)
-        )
+        }
+        .padding(.top, 5)
+        .padding(.bottom, 10)
     }
 }

@@ -8,10 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State static var isLoggedIn = false
+    @State var isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
     var body: some View {
-       WelcomeView()
+        VStack {
+            if isLoggedIn {
+                EmptyView()
+            } else {
+                WelcomeView()
+            }
+        }
+        .animation(.spring())
+        .onAppear {
+            RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status"){
+                self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
+                
+            }
+        }
     }
+}
+
+prefix func ! (value: Binding<Bool>) -> Binding<Bool> {
+    Binding<Bool>(
+        get: { !value.wrappedValue },
+        set: { value.wrappedValue = !$0 }
+    )
 }
 
 struct ContentView_Previews: PreviewProvider {

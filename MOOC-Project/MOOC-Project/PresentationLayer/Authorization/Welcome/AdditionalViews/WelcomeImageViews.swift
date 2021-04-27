@@ -3,7 +3,6 @@
 //  MOOC
 //
 //  Created by Андрей Самаренко on 06.04.2021.
-//
 
 import SwiftUI
 

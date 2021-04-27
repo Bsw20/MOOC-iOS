@@ -10,4 +10,6 @@ import Foundation
 class CoreLayerAssembly: CoreLayerAssemblyProtocol {
     var signUpRequestSender: IRequestSender = SignUpReqestSender(with: .shared)
     var signInRequestSender: IRequestSender = SignInRequestSender(with: .shared)
+    
+    var sessionSaveHandler: SessionSaveHandlerProtocol = SessionSaveHandler()
 }

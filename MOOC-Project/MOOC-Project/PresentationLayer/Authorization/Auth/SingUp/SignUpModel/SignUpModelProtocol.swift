@@ -13,7 +13,7 @@ protocol SignUpProtocol {
     func validateAll(email: String,
                      userName: String,
                      password: String) -> Bool
-    
     func signUpUser(userData: UserDataModel,
                     resultHandler: @escaping (NetworkError?) -> Void)
+    func changeSessionStatus()
 }
