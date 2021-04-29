@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,7 @@
 		6A785B4B262C72F20080C10D /* SignUpButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A785B3B262C72F20080C10D /* SignUpButtons.swift */; };
 		6A785B4C262C72F20080C10D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A785B3C262C72F20080C10D /* SignInView.swift */; };
 		6A7E8D6026388B3F009E5C3B /* WelcomeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E8D5F26388B3F009E5C3B /* WelcomeButtons.swift */; };
+		6A7E8D642638B2DA009E5C3B /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 6A7E8D632638B2DA009E5C3B /* FacebookLogin */; };
 		6A84E20E263346E4004E936A /* IParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E20D263346E4004E936A /* IParser.swift */; };
 		6A84E2142634A90D004E936A /* SignUpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2132634A90D004E936A /* SignUpParser.swift */; };
 		6A84E2182634A9DB004E936A /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2172634A9DB004E936A /* IRequestSender.swift */; };
@@ -143,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A7E8D642638B2DA009E5C3B /* FacebookLogin in Frameworks */,
 				56510A1AA739225432414326 /* Pods_MOOC_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,6 +617,9 @@
 			dependencies = (
 			);
 			name = "MOOC-Project";
+			packageProductDependencies = (
+				6A7E8D632638B2DA009E5C3B /* FacebookLogin */,
+			);
 			productName = "MOOC-Project";
 			productReference = 6A4B2788262C4EB600EFF317 /* MOOC-Project.app */;
 			productType = "com.apple.product-type.application";
@@ -642,6 +647,9 @@
 				Base,
 			);
 			mainGroup = 6A4B277F262C4EB600EFF317;
+			packageReferences = (
+				6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 6A4B2789262C4EB600EFF317 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -916,7 +924,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "SamarenkoAndrew.MOOC-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MOOC-PROJ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -938,7 +946,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "SamarenkoAndrew.MOOC-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MOOC-PROJ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -967,6 +975,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A7E8D632638B2DA009E5C3B /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6A4B2780262C4EB600EFF317 /* Project object */;
 }

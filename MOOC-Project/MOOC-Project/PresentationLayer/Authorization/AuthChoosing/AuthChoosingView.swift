@@ -1,4 +1,5 @@
 import SwiftUI
+import FBSDKLoginKit
 
 struct AuthChoosing: View {
     
@@ -73,6 +74,8 @@ struct AuthChoosingMiddleView: View {
 }
 
 struct AuthChoosingBottomView: View {
+    
+    @State var manager = LoginManager()
     // for email-button
     @State var emailRegistrationViewIsPresented = false
     
@@ -100,7 +103,23 @@ struct AuthChoosingBottomView: View {
                 image: Image("facebookIcon"),
                 backColor: Color("continueWithFacebook"),
                 // button action here
-                action: {}
+                action: {
+                    /*
+                    manager.logIn(permissions: ["public_profile", "email"], from: nil) { (res, err) in
+                        if let err = err {
+                            print(err.localizedDescription)
+                            return
+                        }
+                        
+                        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email"])
+                        
+                        request.start { (_, res, _) in
+                            guard let profileData = res as? [String: Any] else {
+                                return
+                            }
+                        }
+                    }*/
+                }
             )
         }
         .padding(.top, 5)

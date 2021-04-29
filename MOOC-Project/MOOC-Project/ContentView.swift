@@ -19,19 +19,12 @@ struct ContentView: View {
         }
         .animation(.spring())
         .onAppear {
-            RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status"){
+            RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status") {
                 self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
                 
             }
         }
     }
-}
-
-prefix func ! (value: Binding<Bool>) -> Binding<Bool> {
-    Binding<Bool>(
-        get: { !value.wrappedValue },
-        set: { value.wrappedValue = !$0 }
-    )
 }
 
 struct ContentView_Previews: PreviewProvider {
