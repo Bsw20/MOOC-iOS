@@ -11,6 +11,7 @@ protocol IRequestSender {
     
     /*The main function to send request to the server and get response*/
     func send<Parser>(
+        with head: [String: String]?,
         with body: [String: String]?,
         config: RequestConfig<Parser>,
         completonHandler: @escaping (Result<Parser.Response, NetworkError>) -> Void)

@@ -21,6 +21,8 @@ class NetworkService: NetworkServiceProtocol {
         }
         
         RootAssembly.coreAssembly.signUpRequestSender.send(
+            with:
+                ["content-type": "application/json"],
             with: [
                 "email": email,
                 "username": userName,
@@ -31,9 +33,64 @@ class NetworkService: NetworkServiceProtocol {
             
             switch result {
             case .success:
-                resultHandler(nil)
+                self.signInUser(userData: userData, resultHandler: resultHandler)
             case .failure(let error):
                 resultHandler(error)
+            }
+        }
+    }
+    
+    func getCourses(arguments: [String: String],
+                    resultHandler: @escaping (CoursesResponse?, NetworkError?) -> Void) {
+        
+        let courseRequestConfigue = RequestFactory.CourseRequests.newCoursesConfigue()
+        
+        RootAssembly.coreAssembly.courseRequestSender.send(
+            with: ["content-type": "application/json"],
+            with: arguments,
+            config: courseRequestConfigue) {  (result: Result<CoursesResponse, NetworkError>) in
+            switch result {
+            case .success(let response):
+                resultHandler(response, nil)
+            case .failure(let error):
+                resultHandler(nil, error)
+            }
+        }
+    }
+    
+    func refreshToken(resultHandler: @escaping () -> Void) {
+        let resfreshConfigue = RequestFactory.AuthRequests.newTokenRefreshConfigure()
+        
+        let headers = ["content-type": "application/json",
+                        "x-refresh-token": RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .refreshToken) ?? "NONE"]
+        
+        RootAssembly.coreAssembly.tokenRequestSender.send(
+            with: headers,
+            with: nil,
+            config: resfreshConfigue) { (result: Result<RefreshTokenResponse, NetworkError>) in
+            
+            switch result {
+            case .success(let response):
+                
+                guard
+                    let accessToken = response.accessToken,
+                    let refreshToken = response.refreshToken
+                else {
+                    Logger.logNetWork(description: "NO TOKENS RECEIVED", logType: .error)
+                    return
+                }
+                
+                RootAssembly.serviceAssembly.jwtTokenHandler.updateToken(tokenType: .accessToken,
+                                                                         tokenValue: accessToken)
+                RootAssembly.serviceAssembly.jwtTokenHandler.updateToken(tokenType: .refreshToken,
+                                                                         tokenValue: refreshToken)
+                
+                resultHandler()
+                
+            case .failure(let error):
+                Logger.logNetWork(description: "FAILED TO REFRESH TOKEN\nDESCRIPTION:\(error.localizedDescription)",
+                                  logType: .error)
+                RootAssembly.serviceAssembly.sessionService.setCurrentSessionValue(for: "status", value: false)
             }
         }
     }
@@ -58,6 +115,8 @@ class NetworkService: NetworkServiceProtocol {
         }
         
         RootAssembly.coreAssembly.signInRequestSender.send(
+            with:
+                ["content-type": "application/json"],
             with: body,
             config: signInRequestConfigue) { (result: Result<SignInResponse, NetworkError>) in
             
@@ -77,6 +136,46 @@ class NetworkService: NetworkServiceProtocol {
                 resultHandler(error)
             }
             
+        }
+    }
+    
+    func getActualCategories(resultHandler: @escaping ([Category]?, NetworkError?) -> Void) {
+        
+        let categoriesConfigue = RequestFactory.CategoriesRequests.newCategoriesConfigue()
+        let headers = ["content-type": "application/json"]
+        
+        RootAssembly.coreAssembly.categoriesRequestSender.send(
+            with: headers,
+            with: nil,
+            config: categoriesConfigue) { (result: Result<[Category], NetworkError>) in
+            switch result {
+            case .success(let response):
+                Logger.logNetWork(description: "categories received successfully", logType: .success)
+                resultHandler(response, nil)
+            case .failure(let error):
+                Logger.logNetWork(description: "can't receive categories", logType: .error)
+                resultHandler(nil, error)
+            }
+        }
+    }
+    
+    func logOut() {
+        let logOutConfigue = RequestFactory.AuthRequests.newLogOutConfigure()
+        let headers = ["content-type": "application/json",
+                       "x-refresh-token": RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .refreshToken) ?? "NONE"]
+        
+        RootAssembly.coreAssembly.logOutRequestSender.send(
+            with: headers,
+            with: nil,
+            config: logOutConfigue) { (result: Result<LogOutResponse, NetworkError>) in
+            
+            switch result {
+            case .success:
+                Logger.logNetWork(description: "LOG OUT SUCCESSFULLY", logType: .success)
+            case .failure(let error):
+                Logger.logNetWork(description: "ERROR OCCURIED: \(error.localizedDescription)", logType: .warning)
+            }
+            RootAssembly.serviceAssembly.sessionService.setCurrentSessionValue(for: "status", value: false)
         }
     }
 }

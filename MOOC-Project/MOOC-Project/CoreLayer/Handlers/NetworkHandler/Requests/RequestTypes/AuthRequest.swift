@@ -7,20 +7,22 @@
 
 import Foundation
 
-enum SignRequestType: String {
+enum AuthRequestType: String {
     case signIn = "signin"
     case signUp = "signup"
+    case refreshToken = "refresh-token"
+    case logout = "logout"
 }
 
 /*
  Base class for all sign-requests
  */
-class SignRequest: IRequest {
+class AuthRequest: IRequest {
     
     private var baseURL: String = "https://mooc.ij.je/auth/"
-    private var type: SignRequestType
+    private var type: AuthRequestType
     
-    init(type: SignRequestType) {
+    init(type: AuthRequestType) {
         self.type = type
     }
     
@@ -28,15 +30,17 @@ class SignRequest: IRequest {
      Setting up a post-request to send auth-info to the server.
      */
     private func setRequestConfigue(url: URL,
+                                    headArguments: [String: String]?,
                                     bodyArguments: [String: String]?)
     -> URLRequest {
         
         var request = URLRequest(url: url, timeoutInterval: 5)
         
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = [
-            "content-type": "application/json"
-        ]
+        
+        if let headArguments = headArguments {
+            request.allHTTPHeaderFields = headArguments
+        }
         
         if let bodyArguments = bodyArguments {
             request.httpBody = try? JSONSerialization.data(withJSONObject: bodyArguments, options: .prettyPrinted)
@@ -46,8 +50,12 @@ class SignRequest: IRequest {
         return request
     }
     
-    func getUrlRequest(bodyArguments: [String: String]?) -> URLRequest? {
+    func getUrlRequest(headArguments: [String: String]?,
+                       bodyArguments: [String: String]?) -> URLRequest? {
+        
         guard let url = URL(string: baseURL + type.rawValue) else {return nil}
-        return setRequestConfigue(url: url, bodyArguments: bodyArguments)
+        return setRequestConfigue(url: url,
+                                  headArguments: headArguments,
+                                  bodyArguments: bodyArguments)
     }
 }

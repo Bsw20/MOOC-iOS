@@ -18,7 +18,8 @@ class SignInParser: IParser {
         do {
             return  try JSONDecoder().decode(SignInResponse.self, from: data)
         } catch {
-            print(error.localizedDescription)
+            Logger.logNetWork(description: "FAILED TO PARSE SIGN IN RESPONSE: \n\(error.localizedDescription)",
+                              logType: .error)
             return nil
         }
     }

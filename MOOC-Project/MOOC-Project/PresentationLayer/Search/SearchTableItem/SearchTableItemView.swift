@@ -7,9 +7,148 @@
 
 import SwiftUI
 
+struct SearchTableItemView: View {
+    
+    var data: SearchCellDataModel
+    
+    var body: some View {
+        VStack {
+            VStack {
+                HStack {
+                    
+                    RemoteImage(url: data.vendorIcon)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 40,
+                               maxHeight: 40)
+                    
+                    Text(data.vendorName)
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                        .fontWeight(.regular)
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.top, 2)
+                .padding(.horizontal, 15)
+                
+                Spacer()
+                HStack {
+                    Text(data.courseName)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .lineLimit(2)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                .padding(.horizontal, 10)
+             
+            }
+            .frame(maxWidth: .infinity, maxHeight: 180)
+            .padding(.all, 5)
+            .background(
+                
+                ZStack {
+                    RemoteImage(url: data.courseImage)
+                        .centerCropped()
+                        .overlay(Color(.black)
+                                    .cornerRadius(13,
+                                                  corners: [.topLeft, .topRight])
+                                    .opacity(0.7))
+                    
+                }
+                .clipped())
+            
+            VStack(alignment: .leading) {
+            HStack {
+                StarsView(rating: CGFloat(data.courseRating), maxRating: 5)
+                
+                Text("(\(data.countViews))")
+                    .font(.headline)
+                    .foregroundColor(Color(red: 102 / 255.0,
+                                           green: 102 / 255.0,
+                                           blue: 102 / 255.0))
+                    .fontWeight(.thin)
+                    .lineLimit(1)
+                
+                Spacer()
+                if let amount = data.price.amount,
+                   let currency = data.price.currency {
+                    Text("\(String(format: "%.2f", amount)) \(currency)")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 102 / 255.0,
+                                               green: 102 / 255.0,
+                                               blue: 102 / 255.0))
+                        .fontWeight(.thin)
+                        .lineLimit(1)
+                } else {
+                    Text("FREE")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 102 / 255.0,
+                                               green: 102 / 255.0,
+                                               blue: 102 / 255.0))
+                        .fontWeight(.thin)
+                        .lineLimit(1)
+                }
+                
+            }
+            .padding(.horizontal, 15)
+            
+            Text(data.shortDescription)
+                .font(.headline)
+                .foregroundColor(Color(red: 102 / 255.0, 
+                                       green: 102 / 255.0,
+                                       blue: 102 / 255.0))
+                .fontWeight(.light)
+                .lineLimit(3)
+                .multilineTextAlignment(.leading)
+                .frame(alignment: .leading)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 10)
+            }
+        }
+        .background(RoundedRectangle(cornerRadius: 13,
+                                      style: .continuous)
+                        .fill(Color(.white))
+                        .shadow(radius: 6))
+        .frame(maxWidth: .infinity, minHeight: 220, maxHeight: 220)
+    }
+}
+
+struct SearchTableItemView_Previews: PreviewProvider {
+    static var previews: some View {
+       SearchTableItemView(
+        data: SearchCellDataModel(id: "someId",
+            vendorName: "Udemy",
+                                  vendorIcon: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
+                                  courseName: "Геоданные в натуральной среде",
+                                  courseRating: 3.5,
+                                  courseImage: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
+                                  price: Price(amount: 5,
+                                               currency: "US"),
+                                  shortDescription: "Becomeirvrimnvinrvinrivnrivnirnvrivnj", countViews: 15)
+       )
+    }
+}
+
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
+        clipShape(
+            RoundedCorner(radius: radius, corners: corners)
+        )
+    }
+}
+
+extension View {
+    func centerCropped() -> some View {
+        GeometryReader { geo in
+            self
+            .scaledToFill()
+            .frame(width: geo.size.width, height: geo.size.height)
+                .cornerRadius(13)
+            .clipped()
+        }
     }
 }
 
@@ -24,92 +163,65 @@ struct RoundedCorner: Shape {
     }
 }
 
-struct SearchTableItemView: View {
+struct StarsView: View {
+    let rating: CGFloat
+    let maxRating: CGFloat
+    
+    private let size: CGFloat = 20
     var body: some View {
-        VStack {
-            VStack {
-                HStack {
-                    
-                    Image("companyIcon")
-                        .resizable()
-                        .frame(maxWidth: 40, maxHeight: 40)
-                    
-                    Text("OpenEdu")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-                        .fontWeight(.regular)
-                        .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                .padding(.top, 2)
-                .padding(.horizontal, 15)
-                
-                Spacer()
-                HStack {
-                    Text("Методы и алгоритмы теории графов")
-                        .font(.headline)
-                        .fontWeight(.medium)
-                        .lineLimit(2)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                .padding(.horizontal, 15)
-
-                
-            }
-            .frame(maxWidth: .infinity, maxHeight: 180)
-            .padding(.all, 5)
-            .background(
-                ZStack {
-                    Image("courseDefaultImage")
-                        .resizable()
-                        .overlay(Color(.black)
-                                    .cornerRadius(13, corners: [.topLeft, .topRight])
-                                    .opacity(0.7)
-                                    )
-                }
-                .clipped())
-            
-            HStack {
-                ForEach(0..<5) { _ in
-                    Image("fullStar")
-                        .resizable()
-                        .frame(maxWidth: 15, maxHeight: 15)
-                }
-                Text("(14)")
-                    .font(.headline)
-                    .foregroundColor(Color(red: 102 / 255.0, green: 102 / 255.0, blue: 102 / 255.0))
-                    .fontWeight(.thin)
-                    .lineLimit(1)
-                
-                Spacer()
-                Text("12$")
-                    .font(.headline)
-                    .foregroundColor(Color(red: 102 / 255.0, green: 102 / 255.0, blue: 102 / 255.0))
-                    .fontWeight(.thin)
-                    .lineLimit(1)
-            }
-            .padding(.horizontal, 15)
-            Text("Become an expert in modelling, lighting, rendering and post production in 3ds Max, V-Ray and Photoshop")
-                .font(.headline)
-                .foregroundColor(Color(red: 102 / 255.0, green: 102 / 255.0, blue: 102 / 255.0))
-                .fontWeight(.light)
-                .lineLimit(3)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 10)
+        let text = HStack(spacing: 5) {
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: size, height: size, alignment: .center)
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: size, height: size, alignment: .center)
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: size, height: size, alignment: .center)
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: size, height: size, alignment: .center)
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: size, height: size, alignment: .center)
         }
-        .background(RoundedRectangle(cornerRadius: 13,
-                                      style: .continuous)
-                        .fill(Color(.white))
-                        .shadow(radius: 6))
-        .frame(maxWidth: .infinity, maxHeight: 220)
-        .padding(.horizontal, 20)
+        
+        ZStack {
+            text
+            HStack(content: {
+                GeometryReader(content: { geometry in
+                    HStack(spacing: 0, content: {
+                        
+                        let width1 = self.valueForWidth(geometry.size.width, value: rating)
+                        let width2 = self.valueForWidth(geometry.size.width, value: (maxRating - rating))
+                        
+                        Rectangle()
+                            .frame(width: width1, height: geometry.size.height,
+                                   alignment: .center)
+                            .foregroundColor(Color(red: 234 / 255.0,
+                                                   green: 198 / 255.0,
+                                                   blue: 91 / 255.0))
+                        
+                        Rectangle()
+                            .frame(width: width2,
+                                   height: geometry.size.height, alignment: .center)
+                            .foregroundColor(Color(red: 225 / 255.0,
+                                                   green: 225 / 255.0, blue: 224 / 255.0))
+                    })
+                })
+                .frame(width: size * maxRating + 20,
+                       height: size + 20,
+                       alignment: .trailing)
+            })
+            .mask(
+                text
+            )
+        }
+        .frame(width: size * maxRating + 20, height: size, alignment: .leading)
     }
-}
-
-struct SearchTableItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchTableItemView()
+    
+    func valueForWidth(_ width: CGFloat, value: CGFloat) -> CGFloat {
+        value * width / maxRating
     }
 }

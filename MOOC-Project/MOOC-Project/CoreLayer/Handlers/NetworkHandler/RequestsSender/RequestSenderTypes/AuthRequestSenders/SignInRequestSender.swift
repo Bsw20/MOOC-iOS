@@ -16,6 +16,7 @@ class SignInRequestSender: IRequestSender {
     }
     
     func send<Parser>(
+        with head: [String: String]?,
         with body: [String: String]?,
         config: RequestConfig<Parser>,
         completonHandler: @escaping (Result<Parser.Response, NetworkError>) -> Void)
@@ -24,6 +25,7 @@ class SignInRequestSender: IRequestSender {
         
         /*URL validation*/
         guard let urlRequest = config.request.getUrlRequest(
+                headArguments: head,
                 bodyArguments: body)
         else {
             completonHandler(.failure(.badUrl(message: "INCORRECT URL - SIGN IN")))
@@ -38,7 +40,7 @@ class SignInRequestSender: IRequestSender {
                 return
             }
             
-            print(String(decoding: data ?? Data(), as: UTF8.self))
+            // print(String(decoding: data ?? Data(), as: UTF8.self))
             
             // parsing response data
             guard

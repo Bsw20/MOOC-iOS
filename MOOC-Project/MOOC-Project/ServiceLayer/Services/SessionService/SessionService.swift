@@ -15,10 +15,7 @@ class SessionService: SessionServiceProtocol {
     
     func setCurrentSessionValue(for observerName: String, value: Bool) {
         RootAssembly.coreAssembly.sessionSaveHandler.setCurrentSessionStatus(status: value)
-        print(getCurrentSessionValue())
         NotificationCenter.default.post(name: NSNotification.Name(observerName), object: nil)
-        print(getCurrentSessionValue())
-       
     }
     
     func enableObserver(for observerName: String, handler: @escaping () -> Void) {

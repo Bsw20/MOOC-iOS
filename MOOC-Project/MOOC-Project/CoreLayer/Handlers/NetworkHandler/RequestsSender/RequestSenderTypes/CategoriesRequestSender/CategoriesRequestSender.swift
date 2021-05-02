@@ -1,13 +1,13 @@
 //
-//  SignInRequestSender.swift
+//  CategoriesRequest.swift
 //  MOOC-Project
 //
-//  Created by Андрей Самаренко on 26.04.2021.
+//  Created by Андрей Самаренко on 01.05.2021.
 //
 
 import Foundation
 
-class SignUpReqestSender: IRequestSender {
+class CategoriesRequestSender: IRequestSender {
     
     let session: URLSession
     
@@ -16,6 +16,7 @@ class SignUpReqestSender: IRequestSender {
     }
     
     func send<Parser>(
+        with head: [String: String]?,
         with body: [String: String]?,
         config: RequestConfig<Parser>,
         completonHandler: @escaping (Result<Parser.Response, NetworkError>) -> Void)
@@ -24,9 +25,10 @@ class SignUpReqestSender: IRequestSender {
         
         /*URL validation*/
         guard let urlRequest = config.request.getUrlRequest(
+                headArguments: head,
                 bodyArguments: body)
         else {
-            completonHandler(.failure(.badUrl(message: "INCORRECT URL - SIGN UP")))
+            completonHandler(.failure(.badUrl(message: "INCORRECT URL - CATEGORIES REQUEST")))
             return
         }
         
@@ -37,6 +39,8 @@ class SignUpReqestSender: IRequestSender {
                 completonHandler(.failure(.badSession(message: error.localizedDescription)))
                 return
             }
+            
+            // print(String(decoding: data ?? Data(), as: UTF8.self))
             
             // parsing response data
             guard
@@ -54,23 +58,16 @@ class SignUpReqestSender: IRequestSender {
                 switch response.statusCode {
                 
                 case 200:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 200 CREATED SUCCESSFULLY", logType: .success)
+                    Logger.logNetWork(description: "RESPONSE-CODE: 200 CATEGORIES RECEIVED SUCCESSFULLY", logType: .success)
                     completonHandler(.success(parsedModel))
                     
-                case 400:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 400 ALREADY EXISTS", logType: .error)
-                    completonHandler(.failure(.badCode(code: 400)))
-                    
-                case 500:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 500 INNER ERROR", logType: .error)
-                    completonHandler(.failure(.badCode(code: 500)))
-                    
                 default:
-                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - SIGN UP RESPONSE", logType: .error)
-                    completonHandler(.failure(.unknownError(message: "Unknown error code")))
+                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - CATEGORIES RESPONSE", logType: .error)
+                    completonHandler(.failure(.unknownError(message: "UNKNOWN ERROR CODE")))
                 }
             }
         }
         task.resume()
     }
 }
+
