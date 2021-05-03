@@ -40,24 +40,6 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getCourses(arguments: [String: String],
-                    resultHandler: @escaping (CoursesResponse?, NetworkError?) -> Void) {
-        
-        let courseRequestConfigue = RequestFactory.CourseRequests.newCoursesConfigue()
-        
-        RootAssembly.coreAssembly.courseRequestSender.send(
-            with: ["content-type": "application/json"],
-            with: arguments,
-            config: courseRequestConfigue) {  (result: Result<CoursesResponse, NetworkError>) in
-            switch result {
-            case .success(let response):
-                resultHandler(response, nil)
-            case .failure(let error):
-                resultHandler(nil, error)
-            }
-        }
-    }
-    
     func refreshToken(resultHandler: @escaping () -> Void) {
         let resfreshConfigue = RequestFactory.AuthRequests.newTokenRefreshConfigure()
         
@@ -136,26 +118,6 @@ class NetworkService: NetworkServiceProtocol {
                 resultHandler(error)
             }
             
-        }
-    }
-    
-    func getActualCategories(resultHandler: @escaping ([Category]?, NetworkError?) -> Void) {
-        
-        let categoriesConfigue = RequestFactory.CategoriesRequests.newCategoriesConfigue()
-        let headers = ["content-type": "application/json"]
-        
-        RootAssembly.coreAssembly.categoriesRequestSender.send(
-            with: headers,
-            with: nil,
-            config: categoriesConfigue) { (result: Result<[Category], NetworkError>) in
-            switch result {
-            case .success(let response):
-                Logger.logNetWork(description: "categories received successfully", logType: .success)
-                resultHandler(response, nil)
-            case .failure(let error):
-                Logger.logNetWork(description: "can't receive categories", logType: .error)
-                resultHandler(nil, error)
-            }
         }
     }
     

@@ -70,4 +70,3 @@ class CategoriesRequestSender: IRequestSender {
         task.resume()
     }
 }
-

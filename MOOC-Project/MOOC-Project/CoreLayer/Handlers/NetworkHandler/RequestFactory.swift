@@ -34,11 +34,16 @@ struct RequestFactory {
         }
     }
     
-    struct CourseRequests {
+    struct CoursesRequests {
         static func newCoursesConfigue() -> RequestConfig<CoursesParser> {
             return RequestConfig<CoursesParser>(
-                request: CourseRequest(),
+                request: CoursesRequest(),
                 parser: CoursesParser())
+        }
+        static func newCourseConfigue() -> RequestConfig<CourseParser> {
+            return RequestConfig<CourseParser>(
+                request: CourseRequest(),
+                parser: CourseParser())
         }
     }
     
@@ -49,4 +54,5 @@ struct RequestFactory {
                     parser: CategoriesParser())
         }
     }
+    
 }

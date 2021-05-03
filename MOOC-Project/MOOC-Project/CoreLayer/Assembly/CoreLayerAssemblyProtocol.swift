@@ -12,8 +12,9 @@ protocol CoreLayerAssemblyProtocol {
     var signInRequestSender: IRequestSender {get}
     var tokenRequestSender: IRequestSender {get}
     var logOutRequestSender: IRequestSender {get}
-    var courseRequestSender: IRequestSender {get}
+    var coursesRequestSender: IRequestSender {get}
     var categoriesRequestSender: IRequestSender {get}
+    var courseRequestSender: IRequestSender {get}
 
     var sessionSaveHandler: SessionSaveHandlerProtocol {get}
 }

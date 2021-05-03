@@ -48,14 +48,9 @@
 		6A7A087F263D6537005A681E /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A087E263D6537005A681E /* RefreshTokenResponse.swift */; };
 		6A7A0882263D72A7005A681E /* LogOutParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0881263D72A6005A681E /* LogOutParser.swift */; };
 		6A7A0885263D7306005A681E /* LogOutRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0884263D7306005A681E /* LogOutRequestSender.swift */; };
-		6A7A0888263D7B3B005A681E /* CourseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0887263D7B3B005A681E /* CourseRequest.swift */; };
+		6A7A0888263D7B3B005A681E /* CoursesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0887263D7B3B005A681E /* CoursesRequest.swift */; };
 		6A7A088B263D7FAC005A681E /* CoursesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A088A263D7FAC005A681E /* CoursesParser.swift */; };
-		6A7A0892263D86EC005A681E /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0891263D86EC005A681E /* Course.swift */; };
-		6A7A0896263D872E005A681E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0895263D872E005A681E /* Category.swift */; };
-		6A7A0899263D8740005A681E /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A0898263D8740005A681E /* Rating.swift */; };
-		6A7A089C263D8768005A681E /* Authors+Venders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A089B263D8768005A681E /* Authors+Venders.swift */; };
-		6A7A089F263D8782005A681E /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A089E263D8782005A681E /* Price.swift */; };
-		6A7A08A5263D8E84005A681E /* CourseRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08A4263D8E83005A681E /* CourseRequestSender.swift */; };
+		6A7A08A5263D8E84005A681E /* CoursesRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08A4263D8E83005A681E /* CoursesRequestSender.swift */; };
 		6A7A08AC263DBF7D005A681E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08AB263DBF7D005A681E /* SearchTextField.swift */; };
 		6A7A08B4263DE253005A681E /* ChipDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08B3263DE253005A681E /* ChipDataModel.swift */; };
 		6A7A08B7263DEB89005A681E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08B6263DEB89005A681E /* SearchModel.swift */; };
@@ -64,7 +59,7 @@
 		6A7A08C3263DEEE2005A681E /* CategoriesRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A08C2263DEEE2005A681E /* CategoriesRequestSender.swift */; };
 		6A7CBC97263EF6F000C384C2 /* SearchFullPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CBC96263EF6EF00C384C2 /* SearchFullPage.swift */; };
 		6A7E8D6026388B3F009E5C3B /* WelcomeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E8D5F26388B3F009E5C3B /* WelcomeButtons.swift */; };
-		6A7E8D642638B2DA009E5C3B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6A7E8D632638B2DA009E5C3B /* SwiftPackageProductDependency */; };
+		6A7E8D642638B2DA009E5C3B /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 6A7E8D632638B2DA009E5C3B /* FacebookLogin */; };
 		6A84E20E263346E4004E936A /* IParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E20D263346E4004E936A /* IParser.swift */; };
 		6A84E2142634A90D004E936A /* SignUpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2132634A90D004E936A /* SignUpParser.swift */; };
 		6A84E2182634A9DB004E936A /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84E2172634A9DB004E936A /* IRequestSender.swift */; };
@@ -87,6 +82,12 @@
 		6AA7DC57263611D2000AC318 /* SignInProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7DC56263611D2000AC318 /* SignInProtocol.swift */; };
 		6AA7DC5B263611EB000AC318 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7DC5A263611EB000AC318 /* SignInModel.swift */; };
 		6AA7DC5E26361240000AC318 /* SignImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7DC5D26361240000AC318 /* SignImageViews.swift */; };
+		6AAC414326401B8B006BC4F2 /* CourseParsedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC414226401B8B006BC4F2 /* CourseParsedDataModel.swift */; };
+		6AAC414726401EDC006BC4F2 /* CourseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC414626401EDC006BC4F2 /* CourseRequest.swift */; };
+		6AAC414B2640202E006BC4F2 /* CourseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC414A2640202E006BC4F2 /* CourseParser.swift */; };
+		6AAC414F2640206F006BC4F2 /* GeneralCourseResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC414E2640206F006BC4F2 /* GeneralCourseResponseDataModel.swift */; };
+		6AAC415726402508006BC4F2 /* CourseRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC415626402508006BC4F2 /* CourseRequestSender.swift */; };
+		6AAC415D264027FB006BC4F2 /* NetworkService+Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC415C264027FB006BC4F2 /* NetworkService+Courses.swift */; };
 		6AC420E9263D613A00320D4E /* TokenRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC420E8263D613A00320D4E /* TokenRequestSender.swift */; };
 		6AF5D09926332E1700C165BE /* CoreLayerAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5D09826332E1700C165BE /* CoreLayerAssemblyProtocol.swift */; };
 		6AF5D09D26332E3700C165BE /* CoreLayerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5D09C26332E3700C165BE /* CoreLayerAssembly.swift */; };
@@ -139,14 +140,9 @@
 		6A7A087E263D6537005A681E /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
 		6A7A0881263D72A6005A681E /* LogOutParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutParser.swift; sourceTree = "<group>"; };
 		6A7A0884263D7306005A681E /* LogOutRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutRequestSender.swift; sourceTree = "<group>"; };
-		6A7A0887263D7B3B005A681E /* CourseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRequest.swift; sourceTree = "<group>"; };
+		6A7A0887263D7B3B005A681E /* CoursesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesRequest.swift; sourceTree = "<group>"; };
 		6A7A088A263D7FAC005A681E /* CoursesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesParser.swift; sourceTree = "<group>"; };
-		6A7A0891263D86EC005A681E /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		6A7A0895263D872E005A681E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		6A7A0898263D8740005A681E /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
-		6A7A089B263D8768005A681E /* Authors+Venders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Authors+Venders.swift"; sourceTree = "<group>"; };
-		6A7A089E263D8782005A681E /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
-		6A7A08A4263D8E83005A681E /* CourseRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRequestSender.swift; sourceTree = "<group>"; };
+		6A7A08A4263D8E83005A681E /* CoursesRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesRequestSender.swift; sourceTree = "<group>"; };
 		6A7A08AB263DBF7D005A681E /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		6A7A08B3263DE253005A681E /* ChipDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipDataModel.swift; sourceTree = "<group>"; };
 		6A7A08B6263DEB89005A681E /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -177,6 +173,12 @@
 		6AA7DC56263611D2000AC318 /* SignInProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocol.swift; sourceTree = "<group>"; };
 		6AA7DC5A263611EB000AC318 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		6AA7DC5D26361240000AC318 /* SignImageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignImageViews.swift; sourceTree = "<group>"; };
+		6AAC414226401B8B006BC4F2 /* CourseParsedDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseParsedDataModel.swift; sourceTree = "<group>"; };
+		6AAC414626401EDC006BC4F2 /* CourseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRequest.swift; sourceTree = "<group>"; };
+		6AAC414A2640202E006BC4F2 /* CourseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseParser.swift; sourceTree = "<group>"; };
+		6AAC414E2640206F006BC4F2 /* GeneralCourseResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCourseResponseDataModel.swift; sourceTree = "<group>"; };
+		6AAC415626402508006BC4F2 /* CourseRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRequestSender.swift; sourceTree = "<group>"; };
+		6AAC415C264027FB006BC4F2 /* NetworkService+Courses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Courses.swift"; sourceTree = "<group>"; };
 		6AC420E8263D613A00320D4E /* TokenRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestSender.swift; sourceTree = "<group>"; };
 		6AF5D09826332E1700C165BE /* CoreLayerAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLayerAssemblyProtocol.swift; sourceTree = "<group>"; };
 		6AF5D09C26332E3700C165BE /* CoreLayerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLayerAssembly.swift; sourceTree = "<group>"; };
@@ -194,7 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A7E8D642638B2DA009E5C3B /* BuildFile in Frameworks */,
+				6A7E8D642638B2DA009E5C3B /* FacebookLogin in Frameworks */,
 				56510A1AA739225432414326 /* Pods_MOOC_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,22 +463,9 @@
 		6A7A088F263D8695005A681E /* CoursesParser */ = {
 			isa = PBXGroup;
 			children = (
-				6A7A0890263D86A6005A681E /* AdditionalDataModels */,
 				6A7A088A263D7FAC005A681E /* CoursesParser.swift */,
 			);
 			path = CoursesParser;
-			sourceTree = "<group>";
-		};
-		6A7A0890263D86A6005A681E /* AdditionalDataModels */ = {
-			isa = PBXGroup;
-			children = (
-				6A7A0891263D86EC005A681E /* Course.swift */,
-				6A7A0895263D872E005A681E /* Category.swift */,
-				6A7A0898263D8740005A681E /* Rating.swift */,
-				6A7A089B263D8768005A681E /* Authors+Venders.swift */,
-				6A7A089E263D8782005A681E /* Price.swift */,
-			);
-			path = AdditionalDataModels;
 			sourceTree = "<group>";
 		};
 		6A7A08A1263D88B5005A681E /* AuthRequestSenders */ = {
@@ -493,7 +482,8 @@
 		6A7A08A3263D88C3005A681E /* CoursesRequestSenders */ = {
 			isa = PBXGroup;
 			children = (
-				6A7A08A4263D8E83005A681E /* CourseRequestSender.swift */,
+				6A7A08A4263D8E83005A681E /* CoursesRequestSender.swift */,
+				6AAC415626402508006BC4F2 /* CourseRequestSender.swift */,
 			);
 			path = CoursesRequestSenders;
 			sourceTree = "<group>";
@@ -553,8 +543,8 @@
 		6A84E2212634B167004E936A /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				6AAC415B264027C9006BC4F2 /* NetworkServiceParts */,
 				6A84E2222634B184004E936A /* NetworkServiceProtocol.swift */,
-				6A84E2252634B201004E936A /* NetworkService.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -580,6 +570,8 @@
 		6A84E22D2634D9E5004E936A /* ParserTypes */ = {
 			isa = PBXGroup;
 			children = (
+				6AAC414D2640204D006BC4F2 /* AdditionalDataModels */,
+				6AAC41492640201A006BC4F2 /* CourseParser */,
 				6A7A08BC263DEE29005A681E /* CategoriesParser */,
 				6A7A088F263D8695005A681E /* CoursesParser */,
 				6A7A088D263D866D005A681E /* AuthParsers */,
@@ -591,8 +583,9 @@
 			isa = PBXGroup;
 			children = (
 				6A253AE12636E866003353E0 /* AuthRequest.swift */,
-				6A7A0887263D7B3B005A681E /* CourseRequest.swift */,
+				6A7A0887263D7B3B005A681E /* CoursesRequest.swift */,
 				6A7A08B9263DEDE0005A681E /* CategoriesReuest.swift */,
+				6AAC414626401EDC006BC4F2 /* CourseRequest.swift */,
 			);
 			path = RequestTypes;
 			sourceTree = "<group>";
@@ -616,6 +609,7 @@
 		6A84E2382634DD61004E936A /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				6AAC413F26401B0A006BC4F2 /* DetailedCourseInfo */,
 				6A84E2392634DD71004E936A /* UserDataModel.swift */,
 				6A7A08B3263DE253005A681E /* ChipDataModel.swift */,
 				6A37AEA7263EB8100051DBC7 /* SearchCellDataModel.swift */,
@@ -686,6 +680,39 @@
 				6AA7DC5A263611EB000AC318 /* SignInModel.swift */,
 			);
 			path = SignInModel;
+			sourceTree = "<group>";
+		};
+		6AAC413F26401B0A006BC4F2 /* DetailedCourseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				6AAC414226401B8B006BC4F2 /* CourseParsedDataModel.swift */,
+			);
+			path = DetailedCourseInfo;
+			sourceTree = "<group>";
+		};
+		6AAC41492640201A006BC4F2 /* CourseParser */ = {
+			isa = PBXGroup;
+			children = (
+				6AAC414A2640202E006BC4F2 /* CourseParser.swift */,
+			);
+			path = CourseParser;
+			sourceTree = "<group>";
+		};
+		6AAC414D2640204D006BC4F2 /* AdditionalDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				6AAC414E2640206F006BC4F2 /* GeneralCourseResponseDataModel.swift */,
+			);
+			path = AdditionalDataModels;
+			sourceTree = "<group>";
+		};
+		6AAC415B264027C9006BC4F2 /* NetworkServiceParts */ = {
+			isa = PBXGroup;
+			children = (
+				6A84E2252634B201004E936A /* NetworkService.swift */,
+				6AAC415C264027FB006BC4F2 /* NetworkService+Courses.swift */,
+			);
+			path = NetworkServiceParts;
 			sourceTree = "<group>";
 		};
 		6AF5D094263322D100C165BE /* CoreLayer */ = {
@@ -781,7 +808,7 @@
 			);
 			name = "MOOC-Project";
 			packageProductDependencies = (
-				6A7E8D632638B2DA009E5C3B /* SwiftPackageProductDependency */,
+				6A7E8D632638B2DA009E5C3B /* FacebookLogin */,
 			);
 			productName = "MOOC-Project";
 			productReference = 6A4B2788262C4EB600EFF317 /* MOOC-Project.app */;
@@ -811,7 +838,7 @@
 			);
 			mainGroup = 6A4B277F262C4EB600EFF317;
 			packageReferences = (
-				6A7E8D622638B2DA009E5C3B /* RemoteSwiftPackageReference */,
+				6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 6A4B2789262C4EB600EFF317 /* Products */;
 			projectDirPath = "";
@@ -883,6 +910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A600FFB2636EBC30008251E /* SignUpRequestSender.swift in Sources */,
+				6AAC414326401B8B006BC4F2 /* CourseParsedDataModel.swift in Sources */,
 				6A7CBC97263EF6F000C384C2 /* SearchFullPage.swift in Sources */,
 				6A84E21F2634B0BB004E936A /* RequestFactory.swift in Sources */,
 				6AA7DC5E26361240000AC318 /* SignImageViews.swift in Sources */,
@@ -890,10 +918,12 @@
 				6A785B42262C72F20080C10D /* WelcomeTextViews.swift in Sources */,
 				6A4FBB852638639300F414BE /* SessionService.swift in Sources */,
 				6A7A08B4263DE253005A681E /* ChipDataModel.swift in Sources */,
+				6AAC415726402508006BC4F2 /* CourseRequestSender.swift in Sources */,
 				6A785B45262C72F20080C10D /* AuthChoosingButtons.swift in Sources */,
+				6AAC415D264027FB006BC4F2 /* NetworkService+Courses.swift in Sources */,
 				6A84E21B2634AA08004E936A /* SignInRequestSender.swift in Sources */,
 				6A84E2142634A90D004E936A /* SignUpParser.swift in Sources */,
-				6A7A0888263D7B3B005A681E /* CourseRequest.swift in Sources */,
+				6A7A0888263D7B3B005A681E /* CoursesRequest.swift in Sources */,
 				6A7A0882263D72A7005A681E /* LogOutParser.swift in Sources */,
 				6A785B3E262C72F20080C10D /* KeyChainErrors.swift in Sources */,
 				6AF5D0AF26333F5500C165BE /* IRequest.swift in Sources */,
@@ -906,7 +936,6 @@
 				6A7A087F263D6537005A681E /* RefreshTokenResponse.swift in Sources */,
 				6A4FBB8F2638672F00F414BE /* SessionSaveHandlerProtocol.swift in Sources */,
 				6A070008263B3DF4002B84B5 /* SearchTableItemView.swift in Sources */,
-				6A7A089C263D8768005A681E /* Authors+Venders.swift in Sources */,
 				6A7A08BE263DEE42005A681E /* CategoriesParser.swift in Sources */,
 				6A253AE22636E866003353E0 /* AuthRequest.swift in Sources */,
 				6AF5D0AA2633352800C165BE /* Logger.swift in Sources */,
@@ -924,22 +953,22 @@
 				6AA43A40262CB6150011E3E2 /* ServiceAssemblyProtocol.swift in Sources */,
 				6AF5D09926332E1700C165BE /* CoreLayerAssemblyProtocol.swift in Sources */,
 				6A785B44262C72F20080C10D /* AuthChoosingImageViews.swift in Sources */,
-				6A7A0899263D8740005A681E /* Rating.swift in Sources */,
 				6A7A0885263D7306005A681E /* LogOutRequestSender.swift in Sources */,
 				6AA7DC57263611D2000AC318 /* SignInProtocol.swift in Sources */,
 				6A84E23A2634DD71004E936A /* UserDataModel.swift in Sources */,
 				6A7A08BA263DEDE0005A681E /* CategoriesReuest.swift in Sources */,
 				6AF5D09D26332E3700C165BE /* CoreLayerAssembly.swift in Sources */,
 				6A070002263B3BFC002B84B5 /* SearchMainView.swift in Sources */,
-				6A7A089F263D8782005A681E /* Price.swift in Sources */,
-				6A7A0896263D872E005A681E /* Category.swift in Sources */,
+				6AAC414B2640202E006BC4F2 /* CourseParser.swift in Sources */,
+				6AAC414726401EDC006BC4F2 /* CourseRequest.swift in Sources */,
 				6A785B43262C72F20080C10D /* WelcomeView.swift in Sources */,
 				6A84E2312634DA4C004E936A /* RequestConfigue.swift in Sources */,
 				6A785B41262C72F20080C10D /* WelcomeImageViews.swift in Sources */,
 				6A1483812635FB13008BF165 /* SignUpModelProtocol.swift in Sources */,
 				6AF5D0A226332ECF00C165BE /* JWTTokenHandler.swift in Sources */,
-				6A7A08A5263D8E84005A681E /* CourseRequestSender.swift in Sources */,
+				6A7A08A5263D8E84005A681E /* CoursesRequestSender.swift in Sources */,
 				6A84E2182634A9DB004E936A /* IRequestSender.swift in Sources */,
+				6AAC414F2640206F006BC4F2 /* GeneralCourseResponseDataModel.swift in Sources */,
 				6AA43A33262C803A0011E3E2 /* UIScreen+Frame.swift in Sources */,
 				6AA43A37262CB4C50011E3E2 /* SignValidationTextFields.swift in Sources */,
 				6A785B49262C72F20080C10D /* SignTextFields.swift in Sources */,
@@ -962,7 +991,6 @@
 				6A84E2232634B184004E936A /* NetworkServiceProtocol.swift in Sources */,
 				6A600FFE2636FA220008251E /* JWTTokenHandlerProtocol.swift in Sources */,
 				6A7E8D6026388B3F009E5C3B /* WelcomeButtons.swift in Sources */,
-				6A7A0892263D86EC005A681E /* Course.swift in Sources */,
 				6A7A08AC263DBF7D005A681E /* SearchTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1165,7 +1193,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6A7E8D622638B2DA009E5C3B /* RemoteSwiftPackageReference */ = {
+		6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1176,9 +1204,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6A7E8D632638B2DA009E5C3B /* SwiftPackageProductDependency */ = {
+		6A7E8D632638B2DA009E5C3B /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6A7E8D622638B2DA009E5C3B /* RemoteSwiftPackageReference */;
+			package = 6A7E8D622638B2DA009E5C3B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */

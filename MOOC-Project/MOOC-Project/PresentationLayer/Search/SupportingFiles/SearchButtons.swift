@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchButtons: View {
     var body: some View {
         SearchRoundedRectButton(text: "Load more",
-                                action:{})
+                                action: {})
     }
 }
 
@@ -28,7 +28,8 @@ struct SearchRoundedRectButton: View {
     
     var body: some View {
         
-        Button(action: { action() }) {
+        Button(action: { action() },
+               label: {
                 Text(text.uppercased())
                     .fontWeight(.black)
                     .font(.callout)
@@ -38,7 +39,7 @@ struct SearchRoundedRectButton: View {
                         minHeight: 38, maxHeight: 50,
                         alignment: .center
                     )
-            }.background(
+            }).background(
                 RoundedRectangle(cornerRadius: 13,
                                  style: .continuous)
                     .stroke(Color(.black),

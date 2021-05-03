@@ -19,9 +19,9 @@
 import Foundation
 
 class CategoriesParser: IParser {
-    func parse(data: Data) -> [Category]? {
+    func parse(data: Data) -> [CourseResponseCategoryDataModel]? {
         do {
-            return  try JSONDecoder().decode([Category].self, from: data)
+            return  try JSONDecoder().decode([CourseResponseCategoryDataModel].self, from: data)
         } catch {
             Logger.logNetWork(description: "failed to load categories - categories parser", logType: .error)
         }

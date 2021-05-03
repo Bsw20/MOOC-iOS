@@ -9,15 +9,14 @@ import Foundation
 
 class CategoriesRequest: IRequest {
     
-    private var baseURL: String = "https://mooc.ij.je/categories/"
-   
+    var baseURL: String = "https://api.mooc.ij.je/categories/"
     
     /**
      Setting up a post-request to send auth-info to the server.
      */
-    private func setRequestConfigue(url: URL,
-                                    headArguments: [String: String]?,
-                                    bodyArguments: [String: String]?)
+    func setRequestConfigue(url: URL,
+                            headArguments: [String: String]?,
+                            bodyArguments: [String: String]?)
     -> URLRequest {
         
         var request = URLRequest(url: url, timeoutInterval: 5)

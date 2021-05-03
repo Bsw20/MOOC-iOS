@@ -7,20 +7,55 @@
 
 import SwiftUI
 
-struct SearchFullPage: View {
+struct Preview: View {
     
+    var model: SearchModel
+    var id: String
+    
+    @State private var result: Result<GeneralParsedCourseDataModel, NetworkError>?
+    
+    var body: some View {
+        switch result {
+        case .success (let result):
+            SearchFullPage(data: result)
+        case .failure(let error):
+            EmptyView()
+        case nil:
+            ProgressView().onAppear(perform: {
+                loadCourse()
+            })
+        }
+    }
+    
+    private func loadCourse() {
+        RootAssembly.serviceAssembly.networkService.getCourse(id: id) { innerRes in
+            switch innerRes {
+            case .success(let response):
+                guard let parsed = model.parseCourse(from: response) else { self.result = .failure(.badCode(code: 13))
+                    return
+                }
+                result = .success(parsed)
+            case .failure(let error):
+                self.result = .failure(error)
+            }
+        }
+    }
+}
+
+
+struct SearchFullPage: View {
+    @State var data: GeneralParsedCourseDataModel
     var body: some View {
         VStack {
             ScrollView {
                 ZStack {
                     VStack {
                         ZStack(alignment: .center) {
-                            Image("courseDefaultImage")
-                                .resizable()
+                            RemoteImage(url: data.course.previewImageLink)
                                 .overlay(Color(.black).opacity(0.7))
                                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
                                 .zIndex(0)
-                            Text("Методы и алгоритмы теории графов")
+                            Text(data.course.courseName)
                                 .fontWeight(.bold)
                                 .lineLimit(3)
                                 .font(.title2)
@@ -36,27 +71,28 @@ struct SearchFullPage: View {
                             VStack(spacing: 10) {
                                 HStack {
                                     CardHeadlineTextView(text: "Цена:")
-                                    CardContentTextView(text: "100$")
+                                    CardContentTextView(text: "\(data.course.price.amount) \(data.course.price.currency)")
                                     Spacer()
                                     Image(systemName: "heart")
                                         .resizable()
-                                        .frame(minWidth: 30,
-                                               minHeight: 25)
+                                        .frame(minWidth: 25, maxWidth: 25,
+                                               minHeight: 20, maxHeight: 20)
                                         .aspectRatio(contentMode: .fit)
                                         .foregroundColor(.gray)
                                     Image(systemName: "eye.slash")
                                         .resizable()
-                                        .frame(minWidth: 40,
-                                               minHeight: 25)
+                                        .frame(minWidth: 30, maxWidth: 30,
+                                               minHeight: 20, maxHeight: 20)
                                         .aspectRatio(contentMode: .fit)
                                         .foregroundColor(.gray)
                                 }
+                                
                                 HStack {
                                     CardHeadlineTextView(text: "Язык:")
-                                    CardContentTextView(text: "RU")
+                                    CardContentTextView(text: "\(data.course.courseLanguages.first ?? "unknown")")
                                     Spacer()
                                 }
-                                VStack(alignment: .leading){
+                                VStack(alignment: .leading) {
                                     HStack {
                                         CardHeadlineTextView(text: "Категории:")
                                         Spacer()
@@ -67,10 +103,9 @@ struct SearchFullPage: View {
                             .padding(.horizontal, 15)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                ContentChipsContent(chips: [.init(titleKey: "Гуманитарные науки"), .init(titleKey: "Тактическая типография")])
+                                ContentChipsContent(chips: convertToChips(array: data.course.categories))
                                     .frame(maxHeight: .infinity)
                             }
-                            .padding(.top, -10)
                             .frame(maxWidth: .infinity)
                             Divider()
                             
@@ -79,13 +114,12 @@ struct SearchFullPage: View {
                                     CardHeadlineTextView(text: "Платформа")
                                     
                                     HStack(alignment: .center) {
-                                        Image("companyIcon")
-                                            .resizable()
+                                        RemoteImage(url: data.course.vendor.icon)
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: 30,
-                                                   maxHeight: 30)
+                                            .frame(maxWidth: 20,
+                                                   maxHeight: 20)
                                         
-                                        Text("OpenEdu")
+                                        Text(data.course.vendor.name)
                                             .font(.body)
                                             .foregroundColor(.black)
                                             .fontWeight(.regular)
@@ -93,16 +127,15 @@ struct SearchFullPage: View {
                                     }
                                 }
                                 Spacer()
-                                VStack (alignment: .trailing) {
+                                VStack(alignment: .trailing) {
                                     CardHeadlineTextView(text: "Автор")
                                     HStack {
-                                        Image("companyIcon")
-                                            .resizable()
+                                        RemoteImage(url: data.course.author.icon)
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: 30,
-                                                   maxHeight: 30)
+                                            .frame(maxWidth: 20,
+                                                   maxHeight: 20)
                                         
-                                        Text("OpenEdu")
+                                        Text(data.course.author.name)
                                             .font(.body)
                                             .foregroundColor(.black)
                                             .fontWeight(.regular)
@@ -112,17 +145,17 @@ struct SearchFullPage: View {
                             }.padding(.horizontal, 15)
                             
                             Divider()
-                            VStack(alignment: .leading, spacing: 5){
+                            VStack(alignment: .leading, spacing: 5) {
                                 CardHeadlineTextView(text: "Рейтинг")
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        RatingHeading(text: "Рейтинг openEdu: ")
-                                        StarsView(rating: CGFloat(3), maxRating: 5)
+                                        RatingHeading(text: "Рейтинг \(data.course.vendor.name): ")
+                                        StarsView(rating: CGFloat(data.course.rating.external.averageScore), maxRating: 5)
                                     }
                                     Spacer()
                                     VStack(alignment: .trailing) {
                                         RatingHeading(text: "Внутренний рейтинг: ")
-                                        StarsView(rating: CGFloat(4.5), maxRating: 5)
+                                        StarsView(rating: CGFloat(data.course.rating.inner.averageScore), maxRating: 5)
                                     }
                                 }
                             }.padding(.horizontal, 15)
@@ -133,12 +166,10 @@ struct SearchFullPage: View {
                                     Spacer()
                                 }
                                 
-                                Text("some description "
-                                + "jrnvejonvjoenvejvnjoenvnerovn")
+                                Text(data.course.description)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize(horizontal: false, vertical: true)
                                     .frame(maxHeight: .infinity)
-                               
                                 
                             }.padding(.horizontal, 15)
                         }.background(RoundedRectangle(cornerRadius: 25.0)
@@ -148,26 +179,25 @@ struct SearchFullPage: View {
                     }
                     .zIndex(1)
                 }
-            }.ignoresSafeArea(.all)
-            Spacer()
-            Group {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    ZStack {
-                        Rectangle()
-                         .fill(Color(red: 52/255.0,
-                                     green: 152/255.0,
-                                     blue: 219/255.0))
-                         .frame(maxHeight: 55)
-                            .zIndex(0)
-                        Text("Перейти на страницу курса")
-                            .fontWeight(.bold)
-                            .font(.title3)
-                            .foregroundColor(.white)
-                    }
-                   
-                })
             }
-            .frame(alignment: .bottom)
+            .padding(.bottom, -5)
+            .ignoresSafeArea(.all)
+            Button(action: {}, label: {
+                ZStack {
+                    Rectangle()
+                        .fill(Color(red: 52 / 255.0,
+                                    green: 152 / 255.0,
+                                    blue: 219 / 255.0))
+                        .frame(maxHeight: 55)
+                        .zIndex(0)
+                    Text("Перейти на страницу курса")
+                        .fontWeight(.bold)
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .zIndex(1)
+                }
+                
+            })
         }.ignoresSafeArea(.all)
     }
 }
@@ -203,8 +233,30 @@ struct RatingHeading: View {
 }
 
 struct SearchFullPage_Previews: PreviewProvider {
+    
+    static var data: GeneralParsedCourseDataModel =
+        .init(isFavourite: false,
+              isViewed: true,
+              course: .init(courseLanguages: ["ru"],
+                            id: "122",
+                            courseName: "Экономика",
+                            description: "Этот курс вводного уровня включает важнейшие и наиболее связанные с повседневной жи\n\n\njvnjr\n\n\nvjnrnv",
+                            shortDescription: "jrnjrnvjrrnvnrjvnjnrvjnvjnvnjnjvsjvr",
+                            categories: [.init(id: 1, name: .init(ru: "Наука", en: "Наука")), .init(id: 1, name: .init(ru: "Наука", en: "Наука"))],
+                            link: "https://openedu.ru/course/hse/ECONOM",
+                            previewImageLink: "https://cdn.openedu.ru/f1367c/CACHE/images/cover/logo-hs" +
+                                "e-econom/3f82e83fd046c44136c727ae1f3a37cc.png",
+                            rating: .init(external: .init(averageScore: 4, countReviews: 10), inner: .init(averageScore: 4.4, countReviews: 12)),
+                            countViews: 15,
+                            vendor: .init(id: "openedu", name: "OpenEdu", link: "https://openedu.ru/", icon: "https://api.mooc.ij.je/public_files/img/vendors/openedu.png"),
+                            author: .init(name: "НИУ ВШЭ",
+                                          link: "https://openedu.ru/university/hse/",
+                                          icon: "https://cdn.openedu.ru/f1367c/university-icon/vse_vuIWGR2.png"),
+                            duration: "10w",
+                            price: .init(amount: 15000, currency: "RU")))
+    
     static var previews: some View {
-        SearchFullPage()
+        SearchFullPage(data: data)
     }
 }
 
@@ -227,6 +279,13 @@ struct ContentChips: View {
     }
 }
 
+func convertToChips(array: [CourseParsedCategoryDataModel]) -> [ContentChipsDataModel] {
+    var chips: [ContentChipsDataModel] = []
+    for category in array {
+        chips.append(.init(titleKey: category.name.ru))
+    }
+    return chips
+}
 
 struct ContentChipsContent: View {
     @State var chips: [ContentChipsDataModel]

@@ -18,8 +18,8 @@ enum AuthRequestType: String {
  Base class for all sign-requests
  */
 class AuthRequest: IRequest {
-    
-    private var baseURL: String = "https://mooc.ij.je/auth/"
+   
+    private var baseURL: String = "https://api.mooc.ij.je/auth/"
     private var type: AuthRequestType
     
     init(type: AuthRequestType) {
@@ -29,9 +29,9 @@ class AuthRequest: IRequest {
     /**
      Setting up a post-request to send auth-info to the server.
      */
-    private func setRequestConfigue(url: URL,
-                                    headArguments: [String: String]?,
-                                    bodyArguments: [String: String]?)
+    func setRequestConfigue(url: URL,
+                            headArguments: [String: String]?,
+                            bodyArguments: [String: String]?)
     -> URLRequest {
         
         var request = URLRequest(url: url, timeoutInterval: 5)

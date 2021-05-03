@@ -12,7 +12,7 @@ struct SearchTextField: View {
     var icon: Image
     var categoriesIcon: Image
     var search: ((String, [Int], Int, Int) -> Void)
-    
+            
     @Binding var model: SearchModel
     @State var textToFind: String = ""
     @State private var showCategories: Bool = false
@@ -29,7 +29,7 @@ struct SearchTextField: View {
                         withAnimation {
                             search(textToFind, [1], 1, 5)
                         }
-                    }) {
+                    }, label: {
                         icon
                             .resizable()
                             .scaledToFit()
@@ -40,7 +40,7 @@ struct SearchTextField: View {
                             .foregroundColor(Color("textFieldColor"))
                             .padding(.horizontal, 10)
                         
-                    }
+                    })
                         TextField(labelText, text: $textToFind)
                             .font(Font.body.weight(.medium))
                             .autocapitalization(.none)
@@ -49,9 +49,14 @@ struct SearchTextField: View {
                         
                         Button(action: {
                             withAnimation {
+                                model.receiveCategories(result: { result in
+                                    
+                                })
                                 showCategories.toggle()
+                                
                             }
-                        }) {
+                        },
+                        label: {
                             categoriesIcon
                                 .resizable()
                                 .scaledToFit()
@@ -61,7 +66,7 @@ struct SearchTextField: View {
                                 )
                                 .foregroundColor(Color("textFieldColor"))
                                 .padding(.horizontal, 10)
-                        }
+                        })
                 }.background(
                     RoundedRectangle(cornerRadius: 20,
                                      style: .continuous)
@@ -72,7 +77,7 @@ struct SearchTextField: View {
             
             if showCategories {
                     ScrollView {
-                        
+                       
                     }
             }
         }

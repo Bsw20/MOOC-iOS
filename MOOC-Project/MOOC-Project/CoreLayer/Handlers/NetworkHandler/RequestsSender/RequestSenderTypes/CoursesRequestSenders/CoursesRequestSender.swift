@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class CourseRequestSender: IRequestSender {
+class CoursesRequestSender: IRequestSender {
     
     let session: URLSession
     
@@ -27,7 +27,7 @@ class CourseRequestSender: IRequestSender {
                 headArguments: head,
                 bodyArguments: body)
         else {
-            completonHandler(.failure(.badUrl(message: "INCORRECT URL - COURSE REQUEST")))
+            completonHandler(.failure(.badUrl(message: "INCORRECT URL - COURSES REQUEST")))
             return
         }
         
@@ -55,16 +55,13 @@ class CourseRequestSender: IRequestSender {
             // receiving statusCode
             if let response = response as? HTTPURLResponse {
                 switch response.statusCode {
-                case 401:
-                    Logger.logNetWork(description: "RESPONSE-CODE 401 HAVE TO LOG IN", logType: .error)
-                    completonHandler(.failure(.badCode(code: 401)))
                 
                 case 200:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 200 COURSE RECEIVED SUCCESSFULLY", logType: .success)
+                    Logger.logNetWork(description: "RESPONSE-CODE: 200 COURSES RECEIVED SUCCESSFULLY", logType: .success)
                     completonHandler(.success(parsedModel))
                     
                 default:
-                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - COURSE RESPONSE", logType: .error)
+                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - COURSES RESPONSE", logType: .error)
                     completonHandler(.failure(.unknownError(message: "UNKNOWN ERROR CODE")))
                 }
             }

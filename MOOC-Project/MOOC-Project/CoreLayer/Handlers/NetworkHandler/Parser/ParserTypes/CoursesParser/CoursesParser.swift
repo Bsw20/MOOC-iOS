@@ -8,8 +8,9 @@
 import Foundation
 
 struct CoursesResponse: Decodable {
+    var previousPage: String?
     var nextPage: String?
-    var courses: [Course]
+    var courses: [CourseResponseShortDataModel]
     var countPages: Int
 }
 
@@ -18,9 +19,8 @@ class CoursesParser: IParser {
         do {
             return  try JSONDecoder().decode(CoursesResponse.self, from: data)
         } catch {
-            Logger.logNetWork(description: "FAILED TO PARSE COURSE RESPONSE: \n\(error.localizedDescription)",
-                              logType: .error)
-            return nil
+            Logger.logNetWork(description: "failed to load courses - courses parser", logType: .error)
         }
+        return nil
     }
 }

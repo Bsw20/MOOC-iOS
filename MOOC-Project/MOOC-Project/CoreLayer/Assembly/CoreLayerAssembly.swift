@@ -8,12 +8,14 @@
 import Foundation
 
 class CoreLayerAssembly: CoreLayerAssemblyProtocol {
+    
     var signUpRequestSender: IRequestSender = SignUpReqestSender(with: .shared)
     var signInRequestSender: IRequestSender = SignInRequestSender(with: .shared)
     var tokenRequestSender: IRequestSender = TokenRequestSender(with: .shared)
     var logOutRequestSender: IRequestSender = LogOutRequestSender(with: .shared)
-    var courseRequestSender: IRequestSender = CourseRequestSender(with: .shared)
+    var coursesRequestSender: IRequestSender = CoursesRequestSender(with: .shared)
     var categoriesRequestSender: IRequestSender = CategoriesRequestSender(with: .shared)
-    
+    var courseRequestSender: IRequestSender  = CourseRequestSender(with: .shared)
+
     var sessionSaveHandler: SessionSaveHandlerProtocol = SessionSaveHandler()
 }

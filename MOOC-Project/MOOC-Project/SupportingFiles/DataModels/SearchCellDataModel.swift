@@ -14,7 +14,7 @@ struct SearchCellDataModel: Identifiable {
     var courseName: String
     var courseRating: Double
     var courseImage: String
-    var price: Price
+    var price: CourseParsedPriceDataModel
     var shortDescription: String
     var countViews: Int
 }
@@ -30,10 +30,11 @@ struct RemoteImage: View {
 
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
-                fatalError("Invalid URL: \(url)")
+                Logger.logNetWork(description: "Invalid URL: \(url)", logType: .error)
+                return
             }
 
-            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+            URLSession.shared.dataTask(with: parsedURL) { data, _, _ in
                 if let data = data, data.count > 0 {
                     self.data = data
                     self.state = .success
@@ -59,7 +60,7 @@ struct RemoteImage: View {
 
     init(url: String,
          loading: Image = Image(systemName: "photo"),
-         failure: Image = Image(systemName: "multiply.circle")) {
+         failure: Image = Image(systemName: "photo")) {
         _loader = StateObject(wrappedValue: Loader(url: url))
         self.loading = loading
         self.failure = failure

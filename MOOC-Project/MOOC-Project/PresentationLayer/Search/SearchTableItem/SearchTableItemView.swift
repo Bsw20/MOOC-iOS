@@ -9,19 +9,19 @@ import SwiftUI
 
 struct SearchTableItemView: View {
     
-    var data: SearchCellDataModel
+    var data: CourseParsedShortDataModel
     
     var body: some View {
         VStack {
             VStack {
                 HStack {
                     
-                    RemoteImage(url: data.vendorIcon)
+                    RemoteImage(url: data.vendor.icon)
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 40,
                                maxHeight: 40)
                     
-                    Text(data.vendorName)
+                    Text(data.vendor.name)
                         .font(.subheadline)
                         .foregroundColor(.white)
                         .fontWeight(.regular)
@@ -50,7 +50,7 @@ struct SearchTableItemView: View {
             .background(
                 
                 ZStack {
-                    RemoteImage(url: data.courseImage)
+                    RemoteImage(url: data.previewImageLink)
                         .centerCropped()
                         .overlay(Color(.black)
                                     .cornerRadius(13,
@@ -62,9 +62,9 @@ struct SearchTableItemView: View {
             
             VStack(alignment: .leading) {
             HStack {
-                StarsView(rating: CGFloat(data.courseRating), maxRating: 5)
+                StarsView(rating: CGFloat(data.rating.external.averageScore), maxRating: 5)
                 
-                Text("(\(data.countViews))")
+                Text("(\(data.rating.external.countReviews))")
                     .font(.headline)
                     .foregroundColor(Color(red: 102 / 255.0,
                                            green: 102 / 255.0,
@@ -116,21 +116,21 @@ struct SearchTableItemView: View {
     }
 }
 
-struct SearchTableItemView_Previews: PreviewProvider {
-    static var previews: some View {
-       SearchTableItemView(
-        data: SearchCellDataModel(id: "someId",
-            vendorName: "Udemy",
-                                  vendorIcon: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
-                                  courseName: "Геоданные в натуральной среде",
-                                  courseRating: 3.5,
-                                  courseImage: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
-                                  price: Price(amount: 5,
-                                               currency: "US"),
-                                  shortDescription: "Becomeirvrimnvinrvinrivnrivnirnvrivnj", countViews: 15)
-       )
-    }
-}
+// struct SearchTableItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//       SearchTableItemView(
+//        data: SearchCellDataModel(id: "someId",
+//            vendorName: "Udemy",
+//                                  vendorIcon: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
+//                                  courseName: "Геоданные в натуральной среде",
+//                                  courseRating: 3.5,
+//                                  courseImage: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
+//                                  price: .init(amount: 5,
+//                                               currency: "US"),
+//                                  shortDescription: "Becomeirvrimnvinrvinrivnrivnirnvrivnj", countViews: 15)
+//       )
+//    }
+// }
 
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {

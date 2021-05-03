@@ -6,7 +6,7 @@ struct SignAlternativeButton: View {
     var color: Color
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: {}, label: {
             ZStack {
                 Circle()
                     .stroke(Color(.white),
@@ -20,7 +20,7 @@ struct SignAlternativeButton: View {
                     )
                 icon
             }
-        }
+        })
     }
 }
 
@@ -63,7 +63,7 @@ struct SignUp: View {
                     }
                     isAlertVisible.toggle()
                     isLoading.toggle()
-                }}) {
+                }}, label: {
             HStack {
                 Text(text)
                     .fontWeight(.bold)
@@ -91,6 +91,6 @@ struct SignUp: View {
                     )
             )
             .padding(.horizontal, 15)
-        }
+        })
     }
 }

@@ -53,7 +53,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-includeJWTLog"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-includeNetWorkLog"

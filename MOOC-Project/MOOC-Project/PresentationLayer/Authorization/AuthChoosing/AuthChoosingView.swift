@@ -39,7 +39,7 @@ struct AuthChoosingTopView: View {
                 .fontWeight(.bold)
             
             HStack {
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Button(action: { presentationMode.wrappedValue.dismiss() }, label: {
                     Image(systemName: "chevron.backward")
                         .frame(maxWidth: 40,
                                maxHeight: 40)
@@ -47,7 +47,7 @@ struct AuthChoosingTopView: View {
                         .overlay(Circle()
                                     .strokeBorder(Color("headerTextColor"),
                                                   lineWidth: 2))
-                }
+                })
                 
                 Spacer()
             }
