@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct SearchTextField: View {
+    
     var labelText: String
     var icon: Image
     var categoriesIcon: Image
     var search: ((String, [Int], Int, Int) -> Void)
-            
-    @Binding var model: SearchModel
+    
     @State var textToFind: String = ""
-    @State private var showCategories: Bool = false
+    
+    @Binding var categories: [TouchableChip]
+    @Binding var model: SearchModel
+    @Binding var showCategories: Bool
     
     var body: some View {
         VStack {
@@ -27,7 +30,7 @@ struct SearchTextField: View {
                 HStack {
                     Button(action: {
                         withAnimation {
-                            search(textToFind, [1], 1, 5)
+                            search(textToFind, getCategories(categories: categories), 1, 5)
                         }
                     }, label: {
                         icon
@@ -41,32 +44,33 @@ struct SearchTextField: View {
                             .padding(.horizontal, 10)
                         
                     })
-                        TextField(labelText, text: $textToFind)
-                            .font(Font.body.weight(.medium))
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-                            .modifier(SignTextFieldClearButton(text: $textToFind))
-                        
-                        Button(action: {
-                            withAnimation {
-                                model.receiveCategories(result: { result in
-                                    
-                                })
-                                showCategories.toggle()
-                                
+                    TextField(labelText, text: $textToFind)
+                        .font(Font.body.weight(.medium))
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .modifier(SignTextFieldClearButton(text: $textToFind))
+                    
+                    Button(action: {
+                        withAnimation {
+                            if categories.isEmpty {
+                                model.receiveCategories { result in
+                                    self.categories = result
+                                }
                             }
-                        },
-                        label: {
-                            categoriesIcon
-                                .resizable()
-                                .scaledToFit()
-                                .frame(
-                                    minWidth: 20, maxWidth: 20,
-                                    minHeight: 40, maxHeight: 40
-                                )
-                                .foregroundColor(Color("textFieldColor"))
-                                .padding(.horizontal, 10)
-                        })
+                            showCategories.toggle()
+                        }
+                    },
+                    label: {
+                        categoriesIcon
+                            .resizable()
+                            .scaledToFit()
+                            .frame(
+                                minWidth: 20, maxWidth: 20,
+                                minHeight: 40, maxHeight: 40
+                            )
+                            .foregroundColor(Color("textFieldColor"))
+                            .padding(.horizontal, 10)
+                    })
                 }.background(
                     RoundedRectangle(cornerRadius: 20,
                                      style: .continuous)
@@ -74,13 +78,45 @@ struct SearchTextField: View {
                 )
             }
             .padding(.horizontal, 12)
-            
-            if showCategories {
-                    ScrollView {
-                       
-                    }
-            }
         }
-       
+    }
+}
+
+func getCategories(categories: [TouchableChip]) -> [Int] {
+
+    let indexes = categories.enumerated().filter {
+        $0.element.isSelected
+        }.map { $0.offset }
+    
+    let result = indexes.isEmpty ? Array(0..<categories.count) : indexes
+    return result
+}
+
+struct SearchTextFieldPreview: PreviewProvider {
+    @State static var searchModel = SearchModel()
+    @State static var categories: [TouchableChip] = []
+    @State static var show: Bool = false
+    static var previews: some View {
+        VStack {
+        SearchTextField(
+            labelText: "Find something new...",
+            icon: Image(systemName: "magnifyingglass"),
+            categoriesIcon: Image(systemName: "slider.horizontal.3"),
+            search: { search, categories, page, pageSize in
+                searchModel.searchRequest(with: search,
+                                          categories: categories,
+                                          pageNumber: page,
+                                          pageSize: pageSize) { response, _  in
+                    
+                    guard response != nil else {
+                        return
+                    }
+                }
+            },
+            categories: $categories,
+                model: $searchModel,
+            showCategories: $show)
+            ChipsInnerContent(categories: $categories)
+        }
     }
 }

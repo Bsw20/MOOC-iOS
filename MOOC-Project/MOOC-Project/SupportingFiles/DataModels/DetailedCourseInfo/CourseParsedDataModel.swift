@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // general data model
 struct GeneralParsedCourseDataModel {

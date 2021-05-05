@@ -15,6 +15,11 @@ protocol CoreLayerAssemblyProtocol {
     var coursesRequestSender: IRequestSender {get}
     var categoriesRequestSender: IRequestSender {get}
     var courseRequestSender: IRequestSender {get}
+    var favouritesInteractionRequestSender: IRequestSender {get}
+    var viewedInteractionRequestSender: IRequestSender {get}
+    var reviewsRequestSender: IRequestSender {get}
+
 
     var sessionSaveHandler: SessionSaveHandlerProtocol {get}
+    var informationSaveHandler: InformationSavingHandlerProtocol {get}
 }

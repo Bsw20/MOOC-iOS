@@ -15,7 +15,6 @@ struct SearchTableItemView: View {
         VStack {
             VStack {
                 HStack {
-                    
                     RemoteImage(url: data.vendor.icon)
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 40,
@@ -75,7 +74,7 @@ struct SearchTableItemView: View {
                 Spacer()
                 if let amount = data.price.amount,
                    let currency = data.price.currency {
-                    Text("\(String(format: "%.2f", amount)) \(currency)")
+                    Text(amount == 0 ? "Бесплатно" : "\(String(format: "%.2f", amount)) \(currency)")
                         .font(.headline)
                         .foregroundColor(Color(red: 102 / 255.0,
                                                green: 102 / 255.0,
@@ -115,22 +114,6 @@ struct SearchTableItemView: View {
         .frame(maxWidth: .infinity, minHeight: 220, maxHeight: 220)
     }
 }
-
-// struct SearchTableItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       SearchTableItemView(
-//        data: SearchCellDataModel(id: "someId",
-//            vendorName: "Udemy",
-//                                  vendorIcon: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
-//                                  courseName: "Геоданные в натуральной среде",
-//                                  courseRating: 3.5,
-//                                  courseImage: "https://cf.geekdo-images.com/thumb/img/sD_qvrzIbvfobJj0ZDAaq-TnQPs=/fit-in/200x150/pic2649952.jpg",
-//                                  price: .init(amount: 5,
-//                                               currency: "US"),
-//                                  shortDescription: "Becomeirvrimnvinrvinrivnrivnirnvrivnj", countViews: 15)
-//       )
-//    }
-// }
 
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {

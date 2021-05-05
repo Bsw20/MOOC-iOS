@@ -14,8 +14,14 @@ protocol NetworkServiceProtocol {
                     resultHandler: @escaping (NetworkError?) -> Void)
     func refreshToken(resultHandler: @escaping () -> Void)
     func getCourses(arguments: [String: String],
-                    resultHandler: @escaping (CoursesResponse?, NetworkError?) -> Void)
+                    resultHandler: @escaping (GeneralParsedCoursesDataModel?, NetworkError?) -> Void)
     func getActualCategories(resultHandler: @escaping ([CourseResponseCategoryDataModel]?, NetworkError?) -> Void)
-    func getCourse(id: String, resultHandler: @escaping(Result<GeneralCourseResponse, NetworkError>) -> Void)
+    func getCourse(id: String, resultHandler: @escaping (Result<GeneralParsedCourseDataModel?, NetworkError>) -> Void)
+    func deleteFromFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func addToFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func deleteFromViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func addToViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func getReviewsToCourse(courseId: String, resultHandler: @escaping(Result<CourseReviewsParsedDataModel?, NetworkError>) -> Void)
+    
     func logOut()
 }

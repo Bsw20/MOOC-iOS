@@ -13,7 +13,7 @@ struct ContentChipsDataModel: Identifiable {
 }
 
 struct TouchableChip: Identifiable {
-    var id: Int
-    var name: String
-    @State var isTapped: Bool
+    let id = UUID()
+    var isSelected: Bool
+    let titleKey: String
 }

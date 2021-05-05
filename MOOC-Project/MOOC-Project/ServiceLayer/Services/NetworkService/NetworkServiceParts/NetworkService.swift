@@ -106,13 +106,18 @@ class NetworkService: NetworkServiceProtocol {
             case .success(let response):
                 guard
                     let accessToken = response.accessToken,
-                    let refreshToken = response.refreshToken
+                    let refreshToken = response.refreshToken,
+                    let user = response.user,
+                    let email = user.email,
+                    let name = user.username
                 else {
-                    resultHandler(.badDataWhileParsing(message: "NO TOKENS"))
+                    resultHandler(.badDataWhileParsing(message: "NO TOKENS or DATA"))
                     return
                 }
                 RootAssembly.serviceAssembly.jwtTokenHandler.updateToken(tokenType: .accessToken, tokenValue: accessToken)
                 RootAssembly.serviceAssembly.jwtTokenHandler.updateToken(tokenType: .refreshToken, tokenValue: refreshToken)
+                RootAssembly.serviceAssembly.informationService.saveData(email: email, login: name)
+                
                 resultHandler(nil)
             case .failure(let error):
                 resultHandler(error)

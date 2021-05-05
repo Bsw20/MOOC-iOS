@@ -30,7 +30,7 @@ struct RemoteImage: View {
 
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
-                Logger.logNetWork(description: "Invalid URL: \(url)", logType: .error)
+                Logger.logNetWork(description: "Invalid image URL: \(url)", logType: .error)
                 return
             }
 

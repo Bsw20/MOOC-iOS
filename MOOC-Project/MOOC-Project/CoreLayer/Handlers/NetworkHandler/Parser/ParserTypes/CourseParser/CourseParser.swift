@@ -18,7 +18,7 @@ struct GeneralCourseResponse: Decodable {
 class CourseParser: IParser {
     func parse(data: Data) -> GeneralCourseResponse? {
         do {
-            print(String(decoding: data, as: UTF8.self))
+            // print(String(decoding: data, as: UTF8.self))
             return  try JSONDecoder().decode(GeneralCourseResponse.self, from: data)
         } catch {
             return nil

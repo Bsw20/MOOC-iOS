@@ -29,7 +29,7 @@ extension NetworkService {
         }
     }
 
-    func getCourse(id: String, resultHandler: @escaping (Result<GeneralCourseResponse, NetworkError>) -> Void) {
+    func getCourse(id: String, resultHandler: @escaping (Result<GeneralParsedCourseDataModel?, NetworkError>) -> Void) {
         let courseRequestConfigue = RequestFactory.CoursesRequests.newCourseConfigue()
         
         RootAssembly.coreAssembly.courseRequestSender.send(
@@ -41,7 +41,7 @@ extension NetworkService {
             switch result {
             
             case .success(let response):
-                resultHandler(.success(response))
+                resultHandler(.success(self.parseCourse(from: response)))
                 
             case .failure(let error):
                 switch error {
@@ -56,13 +56,88 @@ extension NetworkService {
                 default:
                     resultHandler(.failure(error))
                 }
-                
             }
         }
     }
     
+    private func parseCourse(from response: GeneralCourseResponse) -> GeneralParsedCourseDataModel? {
+        guard
+            let isViewed = response.isViewed,
+            let isLiked = response.isFavourite
+            else {
+            return nil
+        }
+        
+        guard
+            let course = response.course,
+            let courseName = course.courseName,
+            let id = course.id,
+            let shortDescription = course.shortDescription,
+            let link = course.link,
+            let previewImageLink = course.previewImageLink,
+            let duration = course.duration else {return nil}
+        
+        var categories: [CourseParsedCategoryDataModel] = []
+        
+        for category in course.categories {
+            guard
+                let id = category.id,
+                let ruName = category.name.ru,
+                let enName = category.name.en else {continue}
+            categories.append(.init(id: id,
+                                    name: .init(ru: ruName, en: enName)))
+        }
+        
+        guard let exAverageScore = course.rating.external.averageScore,
+              let exCountReviews = course.rating.external.countReviews,
+              let inAverageScore = course.rating.inner.averageScore,
+              let inCountReviews = course.rating.inner.countReviews else {return nil}
+        
+        guard let vId = course.vendor.id,
+              let vIcon = course.vendor.icon,
+              let vLink = course.vendor.link,
+              let vName = course.vendor.name else {return nil}
+        
+        guard let aIcon = course.author.icon,
+              let aName = course.author.name,
+              let aLink = course.author.link else {return nil}
+        
+        guard let priceAmount = course.price.amount,
+              let priceCurrency = course.price.currency else {return nil}
+        
+        guard let countViews = course.countViews,
+              let decription = course.description else {return nil}
+        
+        return
+            .init(isFavourite: isLiked,
+                  isViewed: isViewed,
+                  course: .init(courseLanguages: course.courseLanguages,
+                                id: id,
+                                courseName: courseName,
+                                description: decription,
+                                shortDescription: shortDescription,
+                                categories: categories,
+                                link: link,
+                                previewImageLink: previewImageLink,
+                                rating: .init(external: .init(averageScore: exAverageScore,
+                                                              countReviews: exCountReviews),
+                                              inner: .init(averageScore: inAverageScore,
+                                                           countReviews: inCountReviews)),
+                                countViews: countViews,
+                                vendor: .init(id: vId,
+                                              name: vName,
+                                              link: vLink,
+                                              icon: vIcon),
+                                author: .init(name: aName,
+                                              link: aLink,
+                                              icon: aIcon),
+                                duration: duration,
+                                price: .init(amount: priceAmount,
+                                             currency: priceCurrency)))
+    }
+
     func getCourses(arguments: [String: String],
-                    resultHandler: @escaping (CoursesResponse?, NetworkError?) -> Void) {
+                    resultHandler: @escaping (GeneralParsedCoursesDataModel?, NetworkError?) -> Void) {
         
         let courseRequestConfigue = RequestFactory.CoursesRequests.newCoursesConfigue()
         
@@ -72,10 +147,83 @@ extension NetworkService {
             config: courseRequestConfigue) {  (result: Result<CoursesResponse, NetworkError>) in
             switch result {
             case .success(let response):
-                resultHandler(response, nil)
+                resultHandler(self.parseCourses(from: response), nil)
             case .failure(let error):
                 resultHandler(nil, error)
             }
         }
     }
+    
+    private func parseCourses(from response: CoursesResponse?) -> GeneralParsedCoursesDataModel? {
+        guard let response = response else {
+            return nil
+        }
+        
+        var models: [CourseParsedShortDataModel] = []
+        
+        for course in response.courses {
+            guard
+                let courseName = course.courseName,
+                let id = course.id,
+                let shortDescription = course.shortDescription,
+                let link = course.link,
+                let previewImageLink = course.previewImageLink,
+                let duration = course.duration else {continue}
+            
+            var categories: [CourseParsedCategoryDataModel] = []
+            
+            for category in course.categories {
+                guard
+                    let id = category.id,
+                    let ruName = category.name.ru,
+                    let enName = category.name.en else {continue}
+                categories.append(.init(id: id,
+                                        name: .init(ru: ruName, en: enName)))
+            }
+            
+            guard let exAverageScore = course.rating.external.averageScore,
+                  let exCountReviews = course.rating.external.countReviews,
+                  let inAverageScore = course.rating.inner.averageScore,
+                  let inCountReviews = course.rating.inner.countReviews else {continue}
+            
+            guard let vId = course.vendor.id,
+                  let vIcon = course.vendor.icon,
+                  let vLink = course.vendor.link,
+                  let vName = course.vendor.name else {continue}
+            
+            guard let aIcon = course.author.icon,
+                  let aName = course.author.name,
+                  let aLink = course.author.link else {continue}
+            
+            guard let priceAmount = course.price.amount,
+                  let priceCurrency = course.price.currency else {continue}
+            
+            models.append(.init(courseLanguages: course.courseLanguages,
+                                courseName: courseName,
+                                id: id,
+                                shortDescription: shortDescription,
+                                categories: categories,
+                                link: link,
+                                previewImageLink: previewImageLink,
+                                rating: .init(external: .init(averageScore: exAverageScore,
+                                                              countReviews: exCountReviews),
+                                              inner: .init(averageScore: inAverageScore,
+                                                           countReviews: inCountReviews)),
+                                vendor: .init(id: vId,
+                                              name: vName,
+                                              link: vLink,
+                                              icon: vIcon),
+                                author: .init(name: aName,
+                                              link: aLink,
+                                              icon: aIcon),
+                                duration: duration,
+                                price: .init(amount: priceAmount,
+                                             currency: priceCurrency)))
+        }
+        return .init(previousPage: response.previousPage,
+                     nextPage: response.nextPage,
+                     courses: models,
+                     countPages: response.countPages)
+    }
+
 }

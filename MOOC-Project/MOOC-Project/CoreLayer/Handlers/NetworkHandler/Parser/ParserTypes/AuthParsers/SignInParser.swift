@@ -10,7 +10,13 @@ import Foundation
 struct SignInResponse: Decodable {
     let accessToken: String?
     let refreshToken: String?
+    let user: UserResponse?
     let error: String?
+}
+
+struct UserResponse: Decodable {
+    var username: String?
+    var email: String?
 }
 
 class SignInParser: IParser {    

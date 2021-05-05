@@ -46,7 +46,6 @@ class AuthRequest: IRequest {
             request.httpBody = try? JSONSerialization.data(withJSONObject: bodyArguments, options: .prettyPrinted)
         }
         
-        // print(String(decoding: request.httpBody ?? Data(), as: UTF8.self))
         return request
     }
     

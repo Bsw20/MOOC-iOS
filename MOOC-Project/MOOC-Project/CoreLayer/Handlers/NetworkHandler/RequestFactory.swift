@@ -55,4 +55,37 @@ struct RequestFactory {
         }
     }
     
+    struct FavouritesRequests {
+        static func newDeleteFromFavouritesConfigue() -> RequestConfig<FavouriteResponseInteractionParser> {
+            return RequestConfig<FavouriteResponseInteractionParser>(
+                request: FavouriteRequest(type: .delete),
+                parser: FavouriteResponseInteractionParser())
+        }
+        static func newAddToFavouritesConfigue() -> RequestConfig<FavouriteResponseInteractionParser> {
+            return RequestConfig<FavouriteResponseInteractionParser>(
+                request: FavouriteRequest(type: .post),
+                parser: FavouriteResponseInteractionParser())
+        }
+    }
+    
+    struct ViewsRequests {
+        static func newDeleteFromViewedConfigue() -> RequestConfig<ViewedResponseInteractionParser> {
+            return RequestConfig<ViewedResponseInteractionParser>(
+                request: ViewedRequest(type: .delete),
+                parser: ViewedResponseInteractionParser())
+        }
+        static func newAddToViewedConfigue() -> RequestConfig<ViewedResponseInteractionParser> {
+            return RequestConfig<ViewedResponseInteractionParser>(
+                request: ViewedRequest(type: .post),
+                parser: ViewedResponseInteractionParser())
+        }
+    }
+    
+    struct ReviewsRequests {
+        static func newGetReviewsForCourseConfigue() -> RequestConfig<ReviewsResponseParser> {
+            return RequestConfig<ReviewsResponseParser>(
+                request: ReviewsRequest(type: .get),
+                parser: ReviewsResponseParser())
+        }
+    }
 }

@@ -13,4 +13,5 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     lazy var jwtTokenHandler: JWTTokenHandlerProtocol = JWTTokenHandler()
     lazy var networkService: NetworkServiceProtocol = NetworkService()
     lazy var sessionService: SessionServiceProtocol = SessionService()
+    lazy var informationService: InformationServiceProtocol = InformationService()
 }
