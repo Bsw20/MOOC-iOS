@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchMainView: View {
     
+    @Binding var showBottomBar: Bool
     @State var isSearchBarHidden = false
     @State var showCategories = false
     
@@ -19,7 +20,6 @@ struct SearchMainView: View {
     @State var currentQuery: SearchQueryDataModel?
     
     var body: some View {
-        NavigationView {
             VStack(spacing: 10) {
                 if !isSearchBarHidden {
                     SearchTextField(
@@ -68,12 +68,14 @@ struct SearchMainView: View {
                             withAnimation {
                                 DispatchQueue.main.async {
                                     isSearchBarHidden = true
+                                    showBottomBar = false
                                 }
                             }
                         } else if yAxis > 0 && isSearchBarHidden {
                             withAnimation {
                                 DispatchQueue.main.async {
                                     isSearchBarHidden = false
+                                    showBottomBar = true
                                 }
                             }
                         }
@@ -115,12 +117,12 @@ struct SearchMainView: View {
                     .frame(maxHeight: .infinity)
             }
             .navigationBarHidden(true)
-        }
     }
 }
 
 struct SearchMainView_Previews: PreviewProvider {
+    @State static var showBottomBar = true
     static var previews: some View {
-        SearchMainView()
+        SearchMainView(showBottomBar: $showBottomBar)
     }
 }
