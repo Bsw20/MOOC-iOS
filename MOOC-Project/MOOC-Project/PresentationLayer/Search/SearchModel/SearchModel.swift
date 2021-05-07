@@ -80,6 +80,13 @@ class SearchModel {
         }
     }
     
+    func checkReviewForOwnerShip(userName: String) -> Bool {
+        guard let login = RootAssembly.serviceAssembly.informationService.getData()?.login,
+              login == userName
+              else {return false}
+        return true
+    }
+    
     func addToFavourites(id: String, result: @escaping(NetworkError?) -> Void) {
         RootAssembly.serviceAssembly.networkService.addToFavourites(id: id, resultHandler: result)
     }
@@ -94,6 +101,14 @@ class SearchModel {
     
     func deleteFromViewed(id: String, result: @escaping(NetworkError?) -> Void) {
         RootAssembly.serviceAssembly.networkService.deleteFromViewed(id: id, resultHandler: result)
+    }
+    
+    func deleteReview(reviewId: String, result: @escaping(NetworkError?) -> Void) {
+        RootAssembly.serviceAssembly.networkService.deleteReviewForCourse(reviewId: reviewId, resultHandler: result)
+    }
+    
+    func addReview(id: String, rating: Double, text: String, result: @escaping(NetworkError?) -> Void) {
+        RootAssembly.serviceAssembly.networkService.addReviewForCourse(id: id, rating: rating, text: text, resultHandler: result)
     }
     
     private func getCategories(categories: [Int]) -> String {

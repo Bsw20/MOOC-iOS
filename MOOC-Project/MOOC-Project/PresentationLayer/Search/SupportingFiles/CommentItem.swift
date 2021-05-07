@@ -14,6 +14,8 @@ func getStrDate(from date: Date) -> String {
 }
 
 struct CommentItem: View {
+    @Binding var model: SearchModel
+    var refresh: () -> Void
     var data: CourseReviewParsedDataModel
     @State var isEditable: Bool
     @State var showFull: Bool = false
@@ -33,13 +35,21 @@ struct CommentItem: View {
                     .fontWeight(.medium)
                 Spacer()
                 if isEditable {
-                    Image(systemName: "xmark.circle")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(minWidth: 30,
-                               maxWidth: 30,
-                               minHeight: 30,
-                               maxHeight: 30)
+                    Button(action: { model.deleteReview(reviewId: data.id) { error in
+                        if let error = error {
+                            // TODO. обработчик
+                            return
+                        }
+                        refresh()
+                    } }, label: {
+                        Image(systemName: "xmark.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(minWidth: 30,
+                                   maxWidth: 30,
+                                   minHeight: 30,
+                                   maxHeight: 30)
+                    })
                 }
             }
             VStack(alignment: .leading, content: {
@@ -72,12 +82,13 @@ struct CommentItem: View {
 }
 
 struct CommentItem_Previews: PreviewProvider {
+    @State static var model: SearchModel = SearchModel()
     static var data: CourseReviewParsedDataModel = .init(rating: 2.3,
                                                          text: "Очень плохо",
                                                          creationDate: Date(),
                                                          user: .init(userName: "TooManyQuestions"),
                                                          id: "rovntejov")
     static var previews: some View {
-        CommentItem(data: data, isEditable: false)
+        CommentItem(model: $model, refresh: {}, data: data, isEditable: false)
     }
 }

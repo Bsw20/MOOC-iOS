@@ -18,6 +18,7 @@ protocol CoreLayerAssemblyProtocol {
     var favouritesInteractionRequestSender: IRequestSender {get}
     var viewedInteractionRequestSender: IRequestSender {get}
     var reviewsRequestSender: IRequestSender {get}
+    var reviewsInteractionRequestSender: IRequestSender {get}
 
 
     var sessionSaveHandler: SessionSaveHandlerProtocol {get}

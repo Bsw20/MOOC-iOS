@@ -59,4 +59,3 @@ class ViewedRequest: IRequest {
                                   bodyArguments: nil)
     }
 }
-

@@ -50,28 +50,6 @@ struct SearchMainView: View {
                         categories: $categories,
                             model: $searchModel,
                             showCategories: $showCategories)
-                            .onAppear(perform: {
-                                // TODO. заменить чем то осмысленным
-                                searchModel.searchRequest(with: "",
-                                                          categories: [1],
-                                                          pageNumber: 1,
-                                                          pageSize: 5) { response, _ in
-                                    
-                                    guard let response = response else {
-                                        return
-                                    }
-                                    
-                                    DispatchQueue.main.sync {
-                                        self.cells = response.courses
-                                        self.currentQuery = SearchQueryDataModel(
-                                            currentPage: 1,
-                                            categories: [1],
-                                            strQuery: "",
-                                            maxPage: response.countPages,
-                                            pageSize: 5)
-                                    }
-                                }
-                            })
                             .padding(.top, 5)
                     }
                     ScrollView(.vertical, showsIndicators: false) {

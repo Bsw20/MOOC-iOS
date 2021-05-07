@@ -21,7 +21,10 @@ protocol NetworkServiceProtocol {
     func addToFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
     func deleteFromViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
     func addToViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func deleteReviewForCourse(reviewId: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func addReviewForCourse(id: String, rating: Double, text: String, resultHandler: @escaping(NetworkError?) -> Void)
     func getReviewsToCourse(courseId: String, resultHandler: @escaping(Result<CourseReviewsParsedDataModel?, NetworkError>) -> Void)
+    
     
     func logOut()
 }

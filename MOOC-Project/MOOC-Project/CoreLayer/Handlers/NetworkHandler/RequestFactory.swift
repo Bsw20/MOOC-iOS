@@ -87,5 +87,17 @@ struct RequestFactory {
                 request: ReviewsRequest(type: .get),
                 parser: ReviewsResponseParser())
         }
+        
+        static func newDeleteReview() -> RequestConfig<ReviewsIntercationResponseParser> {
+            return RequestConfig<ReviewsIntercationResponseParser>(
+                request: ReviewsRequest(type: .delete),
+                parser: ReviewsIntercationResponseParser())
+        }
+        
+        static func newAddReview() -> RequestConfig<ReviewsIntercationResponseParser> {
+            return RequestConfig<ReviewsIntercationResponseParser>(
+                request: ReviewsRequest(type: .post),
+                parser: ReviewsIntercationResponseParser())
+        }
     }
 }

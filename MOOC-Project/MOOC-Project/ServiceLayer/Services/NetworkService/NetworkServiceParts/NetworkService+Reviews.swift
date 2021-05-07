@@ -23,6 +23,62 @@ extension NetworkService {
         }
     }
     
+    func deleteReviewForCourse(reviewId: String, resultHandler: @escaping(NetworkError?) -> Void) {
+        let deleteConfigue = RequestFactory.ReviewsRequests.newDeleteReview()
+        
+        RootAssembly.coreAssembly.reviewsInteractionRequestSender.send(
+            with: ["content-type": "application/json",
+                   "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"],
+            with: ["reviewId": reviewId],
+            config: deleteConfigue) { result in
+            switch result {
+            case .success:
+                resultHandler(nil)
+            case .failure(let error):
+                switch error {
+                case .badCode(let code):
+                    if code == 401 {
+                        self.refreshToken(resultHandler: {
+                            self.deleteReviewForCourse(reviewId: reviewId, resultHandler: resultHandler)
+                        })
+                    } else {
+                        resultHandler(error)
+                    }
+                default:
+                    resultHandler(error)
+                }
+            }
+        }
+    }
+        func addReviewForCourse(id: String, rating: Double, text: String, resultHandler: @escaping(NetworkError?) -> Void) {
+            let addConfigue = RequestFactory.ReviewsRequests.newAddReview()
+            RootAssembly.coreAssembly.reviewsInteractionRequestSender.send(
+                with: ["content-type": "application/json",
+                       "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"],
+                with: ["id": id,
+                    "rating": String(rating),
+                       "text": text],
+                config: addConfigue) { result in
+                switch  result {
+                case .success:
+                    resultHandler(nil)
+                case .failure(let error):
+                    switch error {
+                    case .badCode(let code):
+                        if code == 401 {
+                            self.refreshToken(resultHandler: {
+                                self.addReviewForCourse(id: id, rating: rating, text: text, resultHandler: resultHandler)
+                            })
+                        } else {
+                            resultHandler(error)
+                        }
+                    default:
+                        resultHandler(error)
+                    }
+                }
+            }
+        }
+        
     private func parseReviews(from response: ReviewsResponse?) -> CourseReviewsParsedDataModel? {
         guard let response = response else {
             return nil

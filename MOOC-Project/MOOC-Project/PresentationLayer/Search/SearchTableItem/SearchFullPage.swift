@@ -8,246 +8,109 @@
 import SwiftUI
 
 struct Preview: View {
+    @State var isAlertVisible: Bool = false
+    @State var isLoading: Bool = false
+    @State var isShowingReview: Bool = false
+    
     @Binding var model: SearchModel
     var id: String
     @State private var result: Result<GeneralParsedCourseDataModel, NetworkError>?
     
     var body: some View {
-        switch result {
-        case .success (let result):
-                SearchFullPage(model: $model, data: result)
-        case .failure:
-            // заменить на предупреждение
-            EmptyView()
-        case nil:
-            ProgressView().onAppear(perform: {
-                loadCourse()
-            })
+        ZStack {
+            switch result {
+            case .success (let innerResult):
+                SearchFullPage(isShowing: $isShowingReview,
+                               model: $model,
+                               refresh: {
+                                self.result = nil
+                               },
+                               data: innerResult)
+                        .zIndex(1)
+                if isShowingReview {
+                    CreateReviewAlertView(model: $model,
+                                          isShowing: $isShowingReview,
+                                          action: {
+                                            self.result = nil
+                                          },
+                                          data: innerResult)
+                        .zIndex(2)
+                }
+            default:
+                HUDProgressView(placeHolder: "Please Wait",
+                                show: $isLoading)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(2)
+                    .onAppear(perform: {
+                        isLoading.toggle()
+                    loadCourse()
+                })
+            }
+            
+            if isLoading {
+                HUDProgressView(placeHolder: "Please Wait",
+                                show: $isLoading)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(2)
+            }
         }
     }
     
     private func loadCourse() {
         model.receiveCourseDetails(id: id) { result in
-            self.result = result
+            DispatchQueue.main.sync {
+                self.result = result
+                isLoading.toggle()
+            }
+           
         }
     }
 }
 
 struct SearchFullPage: View {
+    
+    @Binding var isShowing: Bool
     @State var isUpperHidden = false
     @Binding var model: SearchModel
     @Environment(\.presentationMode) var presentationMode
 
-    @State var data: GeneralParsedCourseDataModel
+    var refresh: (() -> Void)
+    var data: GeneralParsedCourseDataModel
     
     @Environment(\.openURL) var openURL
     
     var body: some View {
         VStack {
             ScrollView {
-                ZStack {
-                    VStack {
-                        ZStack(alignment: .center) {
-                            RemoteImage(url: data.course.previewImageLink)
-                                .centerCropped()
-                                .overlay(Color(.black).opacity(0.7))
-                                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
-                                .zIndex(0)
-                                .ignoresSafeArea()
-                                Text(data.course.courseName)
-                                    .fontWeight(.bold)
-                                    .lineLimit(3)
-                                    .font(.title2)
-                                    .foregroundColor(.white)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal, 5)
-                        }
-                        
-                        VStack {
-                            VStack(spacing: 10) {
-                                HStack {
-                                    CardHeadlineTextView(text: "Цена:")
-                                    CardContentTextView(
-                                        text: data.course.price.amount == 0
-                                            ? "Бесплатно"
-                                            : "\(data.course.price.amount) \(data.course.price.currency)")
-                                    Spacer()
-                                    Button(action: {
-                                        if data.isFavourite {
-                                            model.deleteFromFavourites(id: data.course.id) { error in
-                                                if let error = error {
-                                                    print(error)
-                                                    return
-                                                } else {
-                                                    data.isFavourite.toggle()
-                                                }
-                                            }
-                                        } else {
-                                            model.addToFavourites(id: data.course.id) { error in
-                                                if let error = error {
-                                                    print(error)
-                                                    return
-                                                } else {
-                                                    data.isFavourite.toggle()
-                                                }
-                                            }
-                                        }
-                                             
-                                    }, label: {
-                                        Image(systemName: data.isFavourite ? "heart.fill" : "heart")
-                                            .resizable()
-                                            .frame(minWidth: 25, maxWidth: 25,
-                                                   minHeight: 20, maxHeight: 20)
-                                            .foregroundColor(data.isFavourite ? Color(red: 52 / 255.0,
-                                                                                      green: 152 / 255.0,
-                                                                                      blue: 219 / 255.0) : .gray)
-                                            .aspectRatio(contentMode: .fit)
-
-                                    })
-                                    Button(action: {
-                                        if data.isViewed {
-                                            model.deleteFromViewed(id: data.course.id) { error in
-                                                if let error = error {
-                                                    print(error)
-                                                    return
-                                                } else {
-                                                    data.isViewed.toggle()
-                                                }
-                                            }
-                                        } else {
-                                            model.addToViewed(id: data.course.id) { error in
-                                                if let error = error {
-                                                    print(error)
-                                                    return
-                                                } else {
-                                                    data.isViewed.toggle()
-                                                }
-                                            }
-                                        }
-                                    }, label: {
-                                        Image(systemName: data.isViewed ? "eye" : "eye.slash")
-                                            .resizable()
-                                            .frame(minWidth: 30, maxWidth: 30,
-                                                   minHeight: 20, maxHeight: 20)
-                                            .aspectRatio(contentMode: .fit)
-                                            .foregroundColor(data.isViewed ? Color(red: 52 / 255.0,
-                                                                                   green: 152 / 255.0,
-                                                                                   blue: 219 / 255.0) : .gray)
-                                    })
-                                }
-                                HStack {
-                                    CardHeadlineTextView(text: "Язык:")
-                                    CardContentTextView(text: "\(data.course.courseLanguages.first ?? "unknown")")
-                                    Spacer()
-                                }
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        CardHeadlineTextView(text: "Категории:")
-                                        Spacer()
-                                    }
-                                }
-                            }
-                            .padding(.top, 20)
-                            .padding(.horizontal, 15)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                ContentChipsContent(chips: convertToChips(array: data.course.categories))
-                            }
-                            .frame(maxWidth: .infinity)
-                            Divider()
-                            
-                            VStack {
-                                HStack {
-                                    CardHeadlineTextView(text: "Платформа")
-                                    Spacer()
-                                    CardHeadlineTextView(text: "Автор")
-                                    }
-                                .padding(.bottom, 5)
-                                HStack {
-                                    HStack(alignment: .center) {
-                                        RemoteImage(url: data.course.vendor.icon)
-                                            .centerCropped()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: 20,
-                                                   maxHeight: 20)
-                                        
-                                        Text(data.course.vendor.name)
-                                            .font(.body)
-                                            .foregroundColor(.black)
-                                            .fontWeight(.regular)
-                                            .multilineTextAlignment(.leading)
-                                    }
-                                    Spacer()
-                                    HStack {
-                                        RemoteImage(url: data.course.author.icon)
-                                            .centerCropped()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: 20,
-                                                   maxHeight: 20)
-                                        
-                                        Text(data.course.author.name)
-                                            .font(.body)
-                                            .foregroundColor(.black)
-                                            .fontWeight(.regular)
-                                            .multilineTextAlignment(.leading)
-                                    }
-                                }
-                            }.padding(.horizontal, 15)
-                            
-                            Divider()
-                            VStack(alignment: .leading, spacing: 5) {
-                                CardHeadlineTextView(text: "Рейтинг")
-                                    .padding(.bottom, 5)
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        RatingHeading(text: "Рейтинг \(data.course.vendor.name): ")
-                                        StarsView(rating: CGFloat(data.course.rating.external.averageScore), maxRating: 5)
-                                    }
-                                    Spacer()
-                                    VStack(alignment: .trailing) {
-                                        RatingHeading(text: "Внутренний рейтинг: ")
-                                        StarsView(rating: CGFloat(data.course.rating.inner.averageScore), maxRating: 5)
-                                    }
-                                }
-                            }.padding(.horizontal, 15)
-                            Divider()
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    CardHeadlineTextView(text: "Описание:")
-                                    Spacer()
-                                }.padding(.bottom, 5)
-                                
-                                Text(data.course.description)
-                                    .multilineTextAlignment(.leading)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                            }.padding(.horizontal, 15)
-                            Divider()
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    CardHeadlineTextView(text: "Комментрии:")
-                                    Image(systemName: "pencil.circle")
-                                        .resizable()
-                                        .frame(minWidth: 30, maxWidth: 30,
-                                               minHeight: 30, maxHeight: 30)
-                                        .foregroundColor(.black)
-                                        .aspectRatio(contentMode: .fit)
-                                    Spacer()
-                                }
-                                .padding(.bottom, 5)
-                                CommentsList(data: $data, model: $model)
-                            }
-                            .padding(.bottom, 10)
-                            .padding(.horizontal, 15)
-                        }
-                        .background(RoundedRectangle(cornerRadius: 25.0)
-                                        .fill(Color.white))
-                        .padding(.top, -30)
+            ZStack {
+                VStack {
+                    ZStack(alignment: .center) {
+                        RemoteImage(url: data.course.previewImageLink)
+                            .centerCropped()
+                            .overlay(Color(.black).opacity(0.7))
+                            .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                            .zIndex(0)
+                            .ignoresSafeArea()
+                        Text(data.course.courseName)
+                            .fontWeight(.bold)
+                            .lineLimit(3)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 5)
                     }
+                    
+                    FullPageContentView(refresh: refresh, isShowing: $isShowing, model: $model,
+                                        data: data)
+                        .background(RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color.white))
+                        .offset(y: -30)
                 }
+               
             }
             .padding(.bottom, -5)
             .ignoresSafeArea(.all)
+            }
             Button(action: {
                 if let link = URL(string: data.course.link) {
                     openURL(link)
@@ -276,8 +139,11 @@ struct SearchFullPage: View {
 }
 
 struct CommentsList: View {
-    @Binding var data: GeneralParsedCourseDataModel
+    var refresh: () -> Void
+    @State var ownCommentIsShowing: Bool = true
+    var data: GeneralParsedCourseDataModel
     @Binding var model: SearchModel
+    
     @State private var commentsResult: Result<CourseReviewsParsedDataModel, NetworkError>?
     
     var body: some View {
@@ -288,7 +154,10 @@ struct CommentsList: View {
             } else {
                 VStack(alignment: .center) {
                     ForEach(result.reviews) { review in
-                        CommentItem(data: review, isEditable: false)
+                        CommentItem(model: $model,
+                                    refresh: refresh,
+                                    data: review,
+                                    isEditable: model.checkReviewForOwnerShip(userName: review.user.userName))
                     }
                 }
             }
@@ -362,11 +231,11 @@ struct SearchFullPage_Previews: PreviewProvider {
                                           icon: "https://cdn.openedu.ru/f1367c/university-icon/vse_vuIWGR2.png"),
                             duration: "10w",
                             price: .init(amount: 15000, currency: "RU")))
-    
+    @State static var isShowing: Bool = false
     static var previews: some View {
         SearchFullPage(
-            model: $model,
-            data: data)
+            isShowing: $isShowing, model: $model,
+            refresh: {}, data: data)
     }
 }
 
@@ -410,4 +279,203 @@ struct ContentChipsContent: View {
         .padding(.vertical, 2)
     }
     
+}
+
+struct FullPageContentView: View {
+    var refresh: (() -> Void)
+    @Environment(\.openURL) var openURL
+    @Binding var isShowing: Bool
+    @Binding var model: SearchModel
+    @State var data: GeneralParsedCourseDataModel
+    var body: some View {
+            VStack {
+                VStack(spacing: 10) {
+                    HStack {
+                        CardHeadlineTextView(text: "Цена:")
+                        CardContentTextView(
+                            text: data.course.price.amount == 0
+                                ? "Бесплатно"
+                                : "\(data.course.price.amount) \(data.course.price.currency)")
+                        Spacer()
+                        Button(action: {
+                            if data.isFavourite {
+                                model.deleteFromFavourites(id: data.course.id) { error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    } else {
+                                        data.isFavourite.toggle()
+                                    }
+                                }
+                            } else {
+                                model.addToFavourites(id: data.course.id) { error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    } else {
+                                        data.isFavourite.toggle()
+                                    }
+                                }
+                            }
+                            
+                        }, label: {
+                            Image(systemName: data.isFavourite ? "heart.fill" : "heart")
+                                .resizable()
+                                .frame(minWidth: 25, maxWidth: 25,
+                                       minHeight: 20, maxHeight: 20)
+                                .foregroundColor(data.isFavourite ? Color(red: 52 / 255.0,
+                                                                          green: 152 / 255.0,
+                                                                          blue: 219 / 255.0) : .gray)
+                                .aspectRatio(contentMode: .fit)
+                            
+                        })
+                        Button(action: {
+                            if data.isViewed {
+                                model.deleteFromViewed(id: data.course.id) { error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    } else {
+                                        data.isViewed.toggle()
+                                    }
+                                }
+                            } else {
+                                model.addToViewed(id: data.course.id) { error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    } else {
+                                        data.isViewed.toggle()
+                                    }
+                                }
+                            }
+                        }, label: {
+                            Image(systemName: data.isViewed ? "eye" : "eye.slash")
+                                .resizable()
+                                .frame(minWidth: 30, maxWidth: 30,
+                                       minHeight: 20, maxHeight: 20)
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(data.isViewed ? Color(red: 52 / 255.0,
+                                                                       green: 152 / 255.0,
+                                                                       blue: 219 / 255.0) : .gray)
+                        })
+                    }
+                    .padding(.top, -5)
+                    HStack {
+                        CardHeadlineTextView(text: "Язык:")
+                        CardContentTextView(text: "\(data.course.courseLanguages.first ?? "unknown")")
+                        Spacer()
+                    }
+                    VStack(alignment: .leading) {
+                        HStack {
+                            CardHeadlineTextView(text: "Категории:")
+                            Spacer()
+                        }
+                    }
+                }
+                .padding(.top, 20)
+                .padding(.horizontal, 15)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    ContentChipsContent(chips: convertToChips(array: data.course.categories))
+                }
+                .frame(maxWidth: .infinity)
+                Divider()
+                VStack {
+                    HStack {
+                        CardHeadlineTextView(text: "Платформа")
+                        Spacer()
+                        CardHeadlineTextView(text: "Автор")
+                    }
+                    .padding(.bottom, 5)
+                    HStack {
+                        Button(action: { if let link = URL(string: data.course.vendor.link) {
+                            openURL(link)
+                        } }, label: {
+                            HStack(alignment: .center) {
+                                RemoteImage(url: data.course.vendor.icon)
+                                    .centerCropped()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 20,
+                                           maxHeight: 20)
+                                
+                                Text(data.course.vendor.name)
+                                    .font(.body)
+                                    .fontWeight(.regular)
+                                    .multilineTextAlignment(.leading)
+                            }
+                        })
+                        Spacer()
+                        Button(action: {
+                            if let link = URL(string: data.course.author.link) {
+                                openURL(link)
+                            }
+                        }, label: {
+                            HStack {
+                                RemoteImage(url: data.course.author.icon)
+                                    .centerCropped()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: 20,
+                                           maxHeight: 20)
+                                
+                                Text(data.course.author.name)
+                                    .font(.body)
+                                    .fontWeight(.regular)
+                                    .multilineTextAlignment(.leading)
+                            }
+                        })
+                    }
+                }.padding(.horizontal, 15)
+                Divider()
+                VStack(alignment: .leading, spacing: 5) {
+                    CardHeadlineTextView(text: "Рейтинг")
+                        .padding(.bottom, 5)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            RatingHeading(text: "Рейтинг \(data.course.vendor.name): ")
+                            StarsView(rating: CGFloat(data.course.rating.external.averageScore), maxRating: 5)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            RatingHeading(text: "Внутренний рейтинг: ")
+                            StarsView(rating: CGFloat(data.course.rating.inner.averageScore), maxRating: 5)
+                        }
+                    }
+                }.padding(.horizontal, 15)
+                Divider()
+                VStack(alignment: .leading) {
+                    HStack {
+                        CardHeadlineTextView(text: "Описание:")
+                        Spacer()
+                    }.padding(.bottom, 5)
+                    
+                    Text(data.course.description)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                }.padding(.horizontal, 15)
+                Divider()
+                VStack(alignment: .leading) {
+                    HStack {
+                        CardHeadlineTextView(text: "Комментрии:")
+                        Button(action: {
+                            withAnimation {
+                                isShowing.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "pencil.circle")
+                                .resizable()
+                                .frame(minWidth: 30, maxWidth: 30,
+                                       minHeight: 30, maxHeight: 30)
+                                .foregroundColor(.black)
+                                .aspectRatio(contentMode: .fit)
+                        })
+                        Spacer()
+                    }
+                    .padding(.bottom, 5)
+                    CommentsList(refresh: refresh, data: data, model: $model)
+                }
+                .padding(.bottom, 10)
+                .padding(.horizontal, 15)
+            }
+    }
 }

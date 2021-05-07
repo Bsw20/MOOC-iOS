@@ -46,9 +46,8 @@ class ReviewsRequest: IRequest {
         
         var request = URLRequest(url: url, timeoutInterval: 5)
         
-        
         if self.type == .post,
-           let bodyArguments = bodyArguments{
+           let bodyArguments = bodyArguments {
             let arguments = [
                 "rating": bodyArguments["rating"] ?? "",
                 "text": bodyArguments["text"] ?? "no text"
@@ -57,12 +56,13 @@ class ReviewsRequest: IRequest {
         }
         
         request.httpMethod = self.type.rawValue
-                
+        
         if let headArguments = headArguments {
             request.allHTTPHeaderFields = headArguments
         }
-        
-        print(String(decoding: request.httpBody ?? Data(), as: UTF8.self))
+//        print(url)
+//        print(headArguments)
+//        print(String(decoding: request.httpBody ?? Data(), as: UTF8.self))
         return request
     }
     

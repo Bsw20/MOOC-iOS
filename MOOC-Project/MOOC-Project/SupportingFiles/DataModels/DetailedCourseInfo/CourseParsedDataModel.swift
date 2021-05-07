@@ -72,7 +72,7 @@ struct CourseParsedRatingsDataModel {
 }
 
 struct CourseParsedRatingDataModel {
-    var averageScore: Double
+    @State var averageScore: Double
     var countReviews: Int
 }
 

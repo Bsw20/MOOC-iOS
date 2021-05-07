@@ -31,6 +31,7 @@ struct RemoteImage: View {
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
                 Logger.logNetWork(description: "Invalid image URL: \(url)", logType: .error)
+                state = .failure
                 return
             }
 
@@ -60,7 +61,7 @@ struct RemoteImage: View {
 
     init(url: String,
          loading: Image = Image(systemName: "photo"),
-         failure: Image = Image(systemName: "photo")) {
+         failure: Image = Image(uiImage: UIImage())) {
         _loader = StateObject(wrappedValue: Loader(url: url))
         self.loading = loading
         self.failure = failure
