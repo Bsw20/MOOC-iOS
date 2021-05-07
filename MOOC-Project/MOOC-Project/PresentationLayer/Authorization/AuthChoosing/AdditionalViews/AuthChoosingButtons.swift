@@ -38,7 +38,7 @@ struct AuthChoosingRoundedRectButton: View {
     
     var body: some View {
         
-        Button(action: { action() }) {
+        Button(action: { action() }, label: {
             HStack {
                 image
                     .padding(.all, 10)
@@ -64,6 +64,6 @@ struct AuthChoosingRoundedRectButton: View {
             )
             .padding(.vertical, 0)
             .padding(.horizontal, 15)
-        }
+        })
     }
 }

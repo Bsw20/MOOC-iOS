@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if isLoggedIn {
-                EmptyView()
+                SearchMainView()
             } else {
                 WelcomeView()
             }

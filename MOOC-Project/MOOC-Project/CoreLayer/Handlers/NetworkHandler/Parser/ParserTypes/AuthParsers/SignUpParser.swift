@@ -17,6 +17,8 @@ class SignUpParser: IParser {
         do {
             return  try JSONDecoder().decode(SignUpResponse.self, from: data)
         } catch {
+            Logger.logNetWork(description: "FAILED TO PARSE SIGN UP RESPONSE: \n\(error.localizedDescription)",
+                              logType: .error)
             return nil
         }
     }

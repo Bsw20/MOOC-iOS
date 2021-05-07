@@ -13,4 +13,5 @@ protocol ServiceAssemblyProtocol {
     var jwtTokenHandler: JWTTokenHandlerProtocol {get set}
     var networkService: NetworkServiceProtocol {get}
     var sessionService: SessionServiceProtocol {get}
+    var informationService: InformationServiceProtocol {get}
 }

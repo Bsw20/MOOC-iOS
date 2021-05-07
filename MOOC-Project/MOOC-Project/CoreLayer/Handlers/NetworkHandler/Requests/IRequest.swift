@@ -8,5 +8,11 @@
 import Foundation
 
 protocol IRequest {
-    func getUrlRequest(bodyArguments: [String: String]?) -> URLRequest?
+    
+    func getUrlRequest(headArguments: [String: String]?,
+                       bodyArguments: [String: String]?) -> URLRequest?
+    func setRequestConfigue(url: URL,
+                            headArguments: [String: String]?,
+                            bodyArguments: [String: String]?)
+    -> URLRequest
 }

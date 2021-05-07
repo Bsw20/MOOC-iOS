@@ -43,7 +43,7 @@ struct SignIn: View {
                     isAlertVisible.toggle()
                     animate.toggle()
                     
-                }}) {
+                }}, label: {
             HStack {
                 Text(text)
                     .fontWeight(.bold)
@@ -70,6 +70,6 @@ struct SignIn: View {
                                     : Color.gray))
             )
             .padding(.horizontal, 15)
-        }
+        })
     }
 }

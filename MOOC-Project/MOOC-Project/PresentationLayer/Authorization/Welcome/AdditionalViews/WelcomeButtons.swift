@@ -38,7 +38,7 @@ struct WelcomeRoundedRectButton: View {
     var backColor: Color
     
     var body : some View {
-        Button(action: { showAuthView.toggle() }) {
+        Button(action: { showAuthView.toggle() }, label: {
             HStack {
                 Text(text)
                     .fontWeight(.bold)
@@ -65,7 +65,7 @@ struct WelcomeRoundedRectButton: View {
             )
             .padding(.horizontal, 0)
             .padding(.vertical, 5)
-        }
+        })
         .fullScreenCover(isPresented: $showAuthView,
                          content: { AuthChoosing() })
     }

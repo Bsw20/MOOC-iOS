@@ -10,7 +10,13 @@ import Foundation
 struct SignInResponse: Decodable {
     let accessToken: String?
     let refreshToken: String?
+    let user: UserResponse?
     let error: String?
+}
+
+struct UserResponse: Decodable {
+    var username: String?
+    var email: String?
 }
 
 class SignInParser: IParser {    
@@ -18,7 +24,8 @@ class SignInParser: IParser {
         do {
             return  try JSONDecoder().decode(SignInResponse.self, from: data)
         } catch {
-            print(error.localizedDescription)
+            Logger.logNetWork(description: "FAILED TO PARSE SIGN IN RESPONSE: \n\(error.localizedDescription)",
+                              logType: .error)
             return nil
         }
     }

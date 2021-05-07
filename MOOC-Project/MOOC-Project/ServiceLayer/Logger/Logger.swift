@@ -22,11 +22,11 @@ class Logger {
         if CommandLine.arguments.contains(Logger.keyToLogNetWork) {
             switch logType {
             case LogType.error:
-                NSLog("📕 NETWORK ERROR: \(description)")
+                NSLog("📕 NETWORK ERROR: \(description.uppercased())")
             case LogType.warning:
-                NSLog("📙 NETWORK WARNING: \(description)")
+                NSLog("📙 NETWORK WARNING: \(description.uppercased())")
             case LogType.success:
-                NSLog("📗 NETWORK SUCCESS: \(description)")
+                NSLog("📗 NETWORK SUCCESS: \(description.uppercased())")
             }
         }
     }
@@ -35,11 +35,11 @@ class Logger {
         if CommandLine.arguments.contains(Logger.keyToLogJWTErrors) {
             switch logType {
             case LogType.error:
-                NSLog("📕 JWT ERROR: \(description)")
+                NSLog("📕 JWT ERROR: \(description.uppercased())")
             case LogType.warning:
-                NSLog("📙 JWT WARNING: \(description)")
+                NSLog("📙 JWT WARNING: \(description.uppercased())")
             case LogType.success:
-                NSLog("📗 JWT SUCCESS: \(description)")
+                NSLog("📗 JWT SUCCESS: \(description.uppercased())")
             }
         }
     }
