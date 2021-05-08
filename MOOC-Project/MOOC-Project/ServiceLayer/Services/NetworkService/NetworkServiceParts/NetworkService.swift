@@ -126,7 +126,7 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func logOut() {
+    func logOut(resultHandler: @escaping () -> Void) {
         let logOutConfigue = RequestFactory.AuthRequests.newLogOutConfigure()
         let headers = ["content-type": "application/json",
                        "x-refresh-token": RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .refreshToken) ?? "NONE"]
@@ -143,6 +143,7 @@ class NetworkService: NetworkServiceProtocol {
                 Logger.logNetWork(description: "ERROR OCCURIED: \(error.localizedDescription)", logType: .warning)
             }
             RootAssembly.serviceAssembly.sessionService.setCurrentSessionValue(for: "status", value: false)
+            resultHandler()
         }
     }
 }

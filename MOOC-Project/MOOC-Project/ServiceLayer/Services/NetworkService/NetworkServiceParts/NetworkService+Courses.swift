@@ -60,7 +60,7 @@ extension NetworkService {
         }
     }
     
-    private func parseCourse(from response: GeneralCourseResponse) -> GeneralParsedCourseDataModel? {
+    func parseCourse(from response: GeneralCourseResponse) -> GeneralParsedCourseDataModel? {
         guard
             let isViewed = response.isViewed,
             let isLiked = response.isFavourite
@@ -154,14 +154,15 @@ extension NetworkService {
         }
     }
     
-    private func parseCourses(from response: CoursesResponse?) -> GeneralParsedCoursesDataModel? {
-        guard let response = response else {
-            return nil
-        }
+    func parseCoursesArray(from array: [CourseResponseShortDataModel]?) ->
+    [CourseParsedShortDataModel]{
         
+        guard let array = array else {
+            return []
+        }
         var models: [CourseParsedShortDataModel] = []
         
-        for course in response.courses {
+        for course in array {
             guard
                 let courseName = course.courseName,
                 let id = course.id,
@@ -220,9 +221,18 @@ extension NetworkService {
                                 price: .init(amount: priceAmount,
                                              currency: priceCurrency)))
         }
+        return models
+    }
+    
+    func parseCourses(from response: CoursesResponse?) -> GeneralParsedCoursesDataModel? {
+        guard let response = response else {
+            return nil
+        }
+      
+        
         return .init(previousPage: response.previousPage,
                      nextPage: response.nextPage,
-                     courses: models,
+                     courses: parseCoursesArray(from: response.courses),
                      countPages: response.countPages)
     }
 

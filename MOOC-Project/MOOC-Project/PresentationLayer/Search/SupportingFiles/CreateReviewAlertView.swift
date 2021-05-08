@@ -41,7 +41,7 @@ struct CreateReviewAlertView: View {
                         model.addReview(id: data.course.id,
                                         rating: rating,
                                         text: text) { error in
-                            if let error = error {
+                            if error != nil {
                                 return
                             }
                             withAnimation {
@@ -79,8 +79,6 @@ struct CreateReviewAlertView: View {
             .background(RoundedRectangle(cornerRadius: 25)
                             .fill(Color.white)
                             .shadow(radius: 10))
-            
-
             .padding(.horizontal, 15)
             .zIndex(2)
             
@@ -97,7 +95,7 @@ struct CreateReviewAlertView: View {
     }
 }
 
-//struct CreateReviewAlertView_Previews: PreviewProvider {
+// struct CreateReviewAlertView_Previews: PreviewProvider {
 //    @State static var model: SearchModel = SearchModel()
 //    @State static var data: CourseReviewParsedDataModel =
 //        CourseReviewParsedDataModel(rating: 0,
@@ -110,4 +108,4 @@ struct CreateReviewAlertView: View {
 //                              isShowing: $isShowing,
 //                              data: $data)
 //    }
-//}
+// }

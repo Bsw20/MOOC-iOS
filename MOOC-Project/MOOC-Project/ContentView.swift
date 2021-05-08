@@ -8,26 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var barImages: [String] = ["magnifyingglass.circle", "star", "gear"]
+    @State var isLoading: Bool = false
+    @State var barImages: [String] = ["magnifyingglass.circle", "star", "person.crop.circle"]
     @State var barTexts: [String] = ["Поиск", "Главная", "Профиль"]
     @State var isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
     @State var selectedIndex = 0
     @State var showBottomBar: Bool = true
     
     var body: some View {
+        ZStack {
         VStack {
             if isLoggedIn {
-                
                 NavigationView {
                     ZStack {
-                        SearchMainView(showBottomBar: $showBottomBar)
+                        switch selectedIndex {
+                        case 0:
+                            SearchMainView(showBottomBar: $showBottomBar)
+                                .background(Image("searchBack")
+                                                .resizable()
+                                                .scaledToFit())
+                        case 1:
+                            SearchMainView(showBottomBar: $showBottomBar)
+                        case 2:
+                            
+                                ProfileMainView(isLoading: $isLoading)
+                                    .background(VStack {
+                                        Spacer()
+                                        Image("IntroImage")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                    })
+                        default:
+                            SearchMainView(showBottomBar: $showBottomBar)
+                        }
+                        
                         if showBottomBar {
                             BottomBar(selectedIndex: $selectedIndex,
                                       barImages: $barImages,
                                       barTexts: $barTexts)
                         }
                     }
-                    
                 }
             } else {
                 WelcomeView()
@@ -38,6 +58,13 @@ struct ContentView: View {
             RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status") {
                 self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
                 
+            }
+        }
+            if isLoading {
+                HUDProgressView(placeHolder: "Please Wait",
+                                show: $isLoading)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(2)
             }
         }
     }
@@ -56,11 +83,12 @@ struct BottomBar: View {
     var body: some View {
         HStack {
             ForEach(0..<3) { index in
+                Spacer()
                 Button(action: { withAnimation { selectedIndex = index } },
                        label: {
                         VStack {
                             Image(systemName: barImages[index])
-                                .font(.system(size: 30, weight: .medium))
+                                .font(.system(size: 27, weight: .regular))
                                 .foregroundColor(selectedIndex == index
                                                     ? Color.black
                                                     : Color("textFieldColor"))
@@ -70,17 +98,17 @@ struct BottomBar: View {
                                                     ? Color.black
                                                     : Color("textFieldColor"))
                         }
-                        
+                        .padding(.vertical, 5)
                        })
-                    .padding(.horizontal, 10)
-                    .padding(.all, 5)
+                Spacer()
             }
         }
-        .padding(.horizontal)
         .background(RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.white))
-        .background(RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color("textFieldColor"), lineWidth: 4))
-        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .fill(Color.white)
+                        .shadow(radius: 4))
+        .frame(
+            maxHeight: .infinity,
+               alignment: .bottom)
+        .padding(.horizontal, 15)
     }
 }

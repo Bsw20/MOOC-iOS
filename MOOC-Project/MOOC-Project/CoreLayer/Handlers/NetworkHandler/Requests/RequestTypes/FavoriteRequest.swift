@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum FavouriteRequestType: String {
+enum FavoriteRequestType: String {
     case post = "POST"
     case delete = "DELETE"
     case get = "GET"
 }
 
-class FavouriteRequest: IRequest {
+class FavoriteRequest: IRequest {
    
     private var baseURL: String = "https://api.mooc.ij.je/users/favourite"
-    private var type: FavouriteRequestType
+    private var type: FavoriteRequestType
     
     private func queryBuilder(with bodyArguments: [String: String]?) -> String {
         guard let bodyArguments = bodyArguments else {
@@ -26,7 +26,7 @@ class FavouriteRequest: IRequest {
         return "?id=\(bodyArguments["id"] ?? "")"
     }
     
-    init(type: FavouriteRequestType) {
+    init(type: FavoriteRequestType) {
         self.type = type
     }
     
@@ -59,4 +59,3 @@ class FavouriteRequest: IRequest {
                                   bodyArguments: nil)
     }
 }
-

@@ -9,11 +9,11 @@ import Foundation
 
 extension NetworkService {
     
-    func deleteFromFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void) {
+    func deleteFromFavorites(id: String, resultHandler: @escaping(NetworkError?) -> Void) {
         let deleteConfigue = RequestFactory.FavouritesRequests.newDeleteFromFavouritesConfigue()
         let headers = ["content-type": "application/json",
                        "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"]
-        RootAssembly.coreAssembly.favouritesInteractionRequestSender.send(
+        RootAssembly.coreAssembly.favoritesInteractionRequestSender.send(
             with: headers,
             with: ["id": id],
             config: deleteConfigue) { result in
@@ -27,7 +27,7 @@ extension NetworkService {
                 case .badCode(let code):
                     if code == 401 {
                         self.refreshToken(resultHandler: {
-                            self.deleteFromFavourites(id: id, resultHandler: resultHandler)
+                            self.deleteFromFavorites(id: id, resultHandler: resultHandler)
                         })
                     } else {
                         resultHandler(error)
@@ -39,11 +39,38 @@ extension NetworkService {
         }
     }
     
-    func addToFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void) {
+    func getFavoritesCourses(resultHandler: @escaping ([CourseParsedShortDataModel]?, NetworkError?) -> Void) {
+        let getConfigue = RequestFactory.FavouritesRequests.getFavoritesConfigue()
+        RootAssembly.coreAssembly.favoritesRequestSender.send(
+            with: ["content-type": "application/json",
+                   "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"],
+            with: nil,
+            config: getConfigue) { result in
+            switch result {
+            case .success(let response):
+                resultHandler(self.parseCoursesArray(from: response.favouriteCourses), nil)
+            case .failure(let error):
+                switch error {
+                case .badCode(let code):
+                    if code == 401 {
+                        self.refreshToken(resultHandler: {
+                            self.getFavoritesCourses(resultHandler: resultHandler)
+                        })
+                    } else {
+                        resultHandler(nil, error)
+                    }
+                default:
+                    resultHandler(nil, error)
+                }
+            }
+        }
+    }
+    
+    func addToFavorites(id: String, resultHandler: @escaping(NetworkError?) -> Void) {
         let addConfigue = RequestFactory.FavouritesRequests.newAddToFavouritesConfigue()
         let headers = ["content-type": "application/json",
                        "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"]
-        RootAssembly.coreAssembly.favouritesInteractionRequestSender.send(
+        RootAssembly.coreAssembly.favoritesInteractionRequestSender.send(
             with: headers,
             with: ["id": id],
             config: addConfigue) { result in
@@ -57,7 +84,7 @@ extension NetworkService {
                 case .badCode(let code):
                     if code == 401 {
                         self.refreshToken(resultHandler: {
-                            self.addToFavourites(id: id, resultHandler: resultHandler)
+                            self.addToFavorites(id: id, resultHandler: resultHandler)
                         })
                     } else {
                         resultHandler(error)
@@ -68,4 +95,6 @@ extension NetworkService {
             }
         }
     }
+    
+    
 }

@@ -16,10 +16,12 @@ class CoreLayerAssembly: CoreLayerAssemblyProtocol {
     var coursesRequestSender: IRequestSender = CoursesRequestSender(with: .shared)
     var categoriesRequestSender: IRequestSender = CategoriesRequestSender(with: .shared)
     var courseRequestSender: IRequestSender  = CourseRequestSender(with: .shared)
-    var favouritesInteractionRequestSender: IRequestSender = FavouritesIntercationRequestSender(with: .shared)
+    var favoritesInteractionRequestSender: IRequestSender = FavoritesIntercationRequestSender(with: .shared)
     var viewedInteractionRequestSender: IRequestSender = ViewedIntercationRequestSender(with: .shared)
     var reviewsRequestSender: IRequestSender = ReviewsRequestSender(with: .shared)
     var reviewsInteractionRequestSender: IRequestSender = ReviewsInteractionRequestSender(with: .shared)
+    var favoritesRequestSender: IRequestSender = FavoritesRequestSender(with: .shared)
+    var viewedRequestSender: IRequestSender = ViewedRequestSender(with: .shared)
 
     var sessionSaveHandler: SessionSaveHandlerProtocol = SessionSaveHandler()
     var informationSaveHandler: InformationSavingHandlerProtocol = InformationSavingHandler()

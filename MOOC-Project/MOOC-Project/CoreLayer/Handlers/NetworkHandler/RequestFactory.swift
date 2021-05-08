@@ -50,25 +50,36 @@ struct RequestFactory {
     struct CategoriesRequests {
         static func newCategoriesConfigue() -> RequestConfig<CategoriesParser> {
             return RequestConfig<CategoriesParser>(
-                    request: CategoriesRequest(),
-                    parser: CategoriesParser())
+                request: CategoriesRequest(),
+                parser: CategoriesParser())
         }
     }
     
     struct FavouritesRequests {
-        static func newDeleteFromFavouritesConfigue() -> RequestConfig<FavouriteResponseInteractionParser> {
-            return RequestConfig<FavouriteResponseInteractionParser>(
-                request: FavouriteRequest(type: .delete),
-                parser: FavouriteResponseInteractionParser())
+        
+        static func getFavoritesConfigue() -> RequestConfig<FavoriteResponseComplicatedParser> {
+            return RequestConfig<FavoriteResponseComplicatedParser>(
+                request: FavoriteRequest(type: .get),
+                parser: FavoriteResponseComplicatedParser())
         }
-        static func newAddToFavouritesConfigue() -> RequestConfig<FavouriteResponseInteractionParser> {
-            return RequestConfig<FavouriteResponseInteractionParser>(
-                request: FavouriteRequest(type: .post),
-                parser: FavouriteResponseInteractionParser())
+        static func newDeleteFromFavouritesConfigue() -> RequestConfig<FavoriteResponseInteractionParser> {
+            return RequestConfig<FavoriteResponseInteractionParser>(
+                request: FavoriteRequest(type: .delete),
+                parser: FavoriteResponseInteractionParser())
+        }
+        static func newAddToFavouritesConfigue() -> RequestConfig<FavoriteResponseInteractionParser> {
+            return RequestConfig<FavoriteResponseInteractionParser>(
+                request: FavoriteRequest(type: .post),
+                parser: FavoriteResponseInteractionParser())
         }
     }
     
     struct ViewsRequests {
+        static func getViewedConfigue() -> RequestConfig<ViewedResponseComplicatedParser> {
+            return RequestConfig<ViewedResponseComplicatedParser>(
+                request: ViewedRequest(type: .get),
+                parser: ViewedResponseComplicatedParser())
+        }
         static func newDeleteFromViewedConfigue() -> RequestConfig<ViewedResponseInteractionParser> {
             return RequestConfig<ViewedResponseInteractionParser>(
                 request: ViewedRequest(type: .delete),

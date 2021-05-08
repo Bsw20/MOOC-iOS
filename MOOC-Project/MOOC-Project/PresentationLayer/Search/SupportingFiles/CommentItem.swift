@@ -36,7 +36,7 @@ struct CommentItem: View {
                 Spacer()
                 if isEditable {
                     Button(action: { model.deleteReview(reviewId: data.id) { error in
-                        if let error = error {
+                        if error != nil {
                             // TODO. обработчик
                             return
                         }

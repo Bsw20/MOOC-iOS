@@ -88,11 +88,11 @@ class SearchModel {
     }
     
     func addToFavourites(id: String, result: @escaping(NetworkError?) -> Void) {
-        RootAssembly.serviceAssembly.networkService.addToFavourites(id: id, resultHandler: result)
+        RootAssembly.serviceAssembly.networkService.addToFavorites(id: id, resultHandler: result)
     }
     
     func deleteFromFavourites(id: String, result: @escaping(NetworkError?) -> Void) {
-        RootAssembly.serviceAssembly.networkService.deleteFromFavourites(id: id, resultHandler: result)
+        RootAssembly.serviceAssembly.networkService.deleteFromFavorites(id: id, resultHandler: result)
     }
     
     func addToViewed(id: String, result: @escaping(NetworkError?) -> Void) {

@@ -17,14 +17,15 @@ protocol NetworkServiceProtocol {
                     resultHandler: @escaping (GeneralParsedCoursesDataModel?, NetworkError?) -> Void)
     func getActualCategories(resultHandler: @escaping ([CourseResponseCategoryDataModel]?, NetworkError?) -> Void)
     func getCourse(id: String, resultHandler: @escaping (Result<GeneralParsedCourseDataModel?, NetworkError>) -> Void)
-    func deleteFromFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
-    func addToFavourites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func deleteFromFavorites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
+    func getViewedCourses(resultHandler: @escaping ([CourseParsedShortDataModel]?, NetworkError?) -> Void)
+    func getFavoritesCourses(resultHandler: @escaping ([CourseParsedShortDataModel]?, NetworkError?) -> Void) 
+    func addToFavorites(id: String, resultHandler: @escaping(NetworkError?) -> Void)
     func deleteFromViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
     func addToViewed(id: String, resultHandler: @escaping(NetworkError?) -> Void)
     func deleteReviewForCourse(reviewId: String, resultHandler: @escaping(NetworkError?) -> Void)
     func addReviewForCourse(id: String, rating: Double, text: String, resultHandler: @escaping(NetworkError?) -> Void)
     func getReviewsToCourse(courseId: String, resultHandler: @escaping(Result<CourseReviewsParsedDataModel?, NetworkError>) -> Void)
     
-    
-    func logOut()
+    func logOut(resultHandler: @escaping() -> Void)
 }
