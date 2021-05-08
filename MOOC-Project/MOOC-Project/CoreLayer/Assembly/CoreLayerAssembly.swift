@@ -22,6 +22,7 @@ class CoreLayerAssembly: CoreLayerAssemblyProtocol {
     var reviewsInteractionRequestSender: IRequestSender = ReviewsInteractionRequestSender(with: .shared)
     var favoritesRequestSender: IRequestSender = FavoritesRequestSender(with: .shared)
     var viewedRequestSender: IRequestSender = ViewedRequestSender(with: .shared)
+    var mainInfoRequestSender: IRequestSender = MainInfoRequestSender(with: .shared)
 
     var sessionSaveHandler: SessionSaveHandlerProtocol = SessionSaveHandler()
     var informationSaveHandler: InformationSavingHandlerProtocol = InformationSavingHandler()

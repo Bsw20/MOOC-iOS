@@ -41,7 +41,16 @@ class CoursesRequest: IRequest {
     
     func getUrlRequest(headArguments: [String: String]?,
                        bodyArguments: [String: String]?) -> URLRequest? {
-        guard let url = URL(string: baseURL + queryBuilder(with: bodyArguments)) else {return nil}
+        var strUrl: String = ""
+        
+        if let bodyArguments = bodyArguments,
+           let url = bodyArguments["url"] {
+            strUrl = url
+        } else {
+            strUrl = baseURL + queryBuilder(with: bodyArguments)
+        }
+        print(strUrl)
+        guard let url = URL(string: strUrl) else {return nil}
         return setRequestConfigue(url: url,
                                   headArguments: headArguments,
                                   bodyArguments: nil)

@@ -154,6 +154,45 @@ extension NetworkService {
         }
     }
     
+    func getMainInfo(resultHandler: @escaping (Result<MainInfoParsedDataModel, NetworkError>) -> Void) {
+        let getMainConfigue = RequestFactory.CoursesRequests.mainInfoConfigue()
+        RootAssembly.coreAssembly.mainInfoRequestSender.send(
+            with: ["content-type": "application/json"],
+            with: nil,
+            config: getMainConfigue) { result in
+            switch result {
+            case .success(let response):
+                if let mainInfo = self.parseMainInfo(from: response) {
+                    resultHandler(.success(mainInfo))
+                } else {
+                    resultHandler(.failure(.badDataWhileParsing(message: "getMainInfo")))
+                }
+            case .failure(let error):
+                resultHandler(.failure(error))
+            }
+        }
+    }
+    
+    func parseMainInfo(from response: MainInfoResponse) -> MainInfoParsedDataModel? {
+        
+        guard let compilations = response.compilations,
+              let courses = response.courses else {return nil}
+        
+        var compilationsParsed: [CompilationParsedDataModel] = []
+        let coursesParsed: [CourseParsedShortDataModel] = parseCoursesArray(from: courses)
+        
+        for compilation in compilations {
+            guard let name = compilation.name,
+                  let ru = name.ru,
+                  let en = name.en,
+                  let icon = compilation.icon,
+                  let link = compilation.link else {continue}
+            compilationsParsed.append(.init(name: .init(ru: ru, en: en), icon: icon, link: link))
+        }
+        return MainInfoParsedDataModel(compilations: compilationsParsed,
+                                       courses: coursesParsed)
+    }
+ 
     func parseCoursesArray(from array: [CourseResponseShortDataModel]?) ->
     [CourseParsedShortDataModel]{
         
@@ -228,12 +267,12 @@ extension NetworkService {
         guard let response = response else {
             return nil
         }
-      
+        
         
         return .init(previousPage: response.previousPage,
                      nextPage: response.nextPage,
                      courses: parseCoursesArray(from: response.courses),
-                     countPages: response.countPages)
+                     countPages: response.countPages ?? 0)
     }
 
 }

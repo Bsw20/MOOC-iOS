@@ -45,6 +45,11 @@ struct RequestFactory {
                 request: CourseRequest(),
                 parser: CourseParser())
         }
+        static func mainInfoConfigue() -> RequestConfig<MainInfoResponseParser> {
+            return RequestConfig<MainInfoResponseParser>(
+                    request: MainInfoRequest(),
+                parser: MainInfoResponseParser())
+        }
     }
     
     struct CategoriesRequests {

@@ -28,7 +28,7 @@ struct ContentView: View {
                                                 .resizable()
                                                 .scaledToFit())
                         case 1:
-                            SearchMainView(showBottomBar: $showBottomBar)
+                            PreviewMainView(isLoading: $isLoading)
                         case 2:
                             
                                 ProfileMainView(isLoading: $isLoading)
