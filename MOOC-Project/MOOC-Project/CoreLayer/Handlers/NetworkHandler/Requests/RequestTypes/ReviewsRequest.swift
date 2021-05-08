@@ -75,4 +75,3 @@ class ReviewsRequest: IRequest {
                                   bodyArguments: bodyArguments)
     }
 }
-

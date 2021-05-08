@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ReviewsInteractionResponse : Decodable {
+struct ReviewsInteractionResponse: Decodable {
     var error: String?
 }
 

@@ -68,4 +68,31 @@ extension NetworkService {
             }
         }
     }
+    
+    func getViewedCourses(resultHandler: @escaping ([CourseParsedShortDataModel]?, NetworkError?) -> Void) {
+        let getConfigue = RequestFactory.ViewsRequests.getViewedConfigue()
+        RootAssembly.coreAssembly.viewedRequestSender.send(
+            with: ["content-type": "application/json",
+                   "Authorization": "Bearer \(RootAssembly.serviceAssembly.jwtTokenHandler.getToken(tokenType: .accessToken) ?? "NONE")"],
+            with: nil,
+            config: getConfigue) { result in
+            switch result {
+            case .success(let response):
+                resultHandler(self.parseCoursesArray(from: response.viewedCourses), nil)
+            case .failure(let error):
+                switch error {
+                case .badCode(let code):
+                    if code == 401 {
+                        self.refreshToken(resultHandler: {
+                            self.getViewedCourses(resultHandler: resultHandler)
+                        })
+                    } else {
+                        resultHandler(nil, error)
+                    }
+                default:
+                    resultHandler(nil, error)
+                }
+            }
+        }
+    }
 }

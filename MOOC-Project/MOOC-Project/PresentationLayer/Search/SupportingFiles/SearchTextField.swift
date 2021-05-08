@@ -16,6 +16,7 @@ struct SearchTextField: View {
     
     @State var textToFind: String = ""
     
+    @Binding var barIsHidden: Bool
     @Binding var categories: [TouchableChip]
     @Binding var model: SearchModel
     @Binding var showCategories: Bool
@@ -58,6 +59,7 @@ struct SearchTextField: View {
                                 }
                             }
                             showCategories.toggle()
+                            barIsHidden = !showCategories
                         }
                     },
                     label: {
@@ -96,6 +98,7 @@ struct SearchTextFieldPreview: PreviewProvider {
     @State static var searchModel = SearchModel()
     @State static var categories: [TouchableChip] = []
     @State static var show: Bool = false
+    @State static var barIsHidden = false
     static var previews: some View {
         VStack {
         SearchTextField(
@@ -113,7 +116,7 @@ struct SearchTextFieldPreview: PreviewProvider {
                     }
                 }
             },
-            categories: $categories,
+            barIsHidden: $barIsHidden, categories: $categories,
                 model: $searchModel,
             showCategories: $show)
             ChipsInnerContent(categories: $categories)

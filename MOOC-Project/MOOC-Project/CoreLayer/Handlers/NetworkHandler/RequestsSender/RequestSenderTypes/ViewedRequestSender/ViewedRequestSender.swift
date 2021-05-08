@@ -1,13 +1,13 @@
 //
-//  FavouritesRequestSender.swift
+//  ViewedRequestSender.swift
 //  MOOC-Project
 //
-//  Created by Андрей Самаренко on 05.05.2021.
+//  Created by Андрей Самаренко on 07.05.2021.
 //
 
 import Foundation
 
-class FavouritesIntercationRequestSender: IRequestSender {
+class ViewedRequestSender: IRequestSender {
     
     let session: URLSession
     
@@ -28,7 +28,7 @@ class FavouritesIntercationRequestSender: IRequestSender {
                 headArguments: head,
                 bodyArguments: body)
         else {
-            completonHandler(.failure(.badUrl(message: "INCORRECT URL - FAVOURITES interaction REQUEST")))
+            completonHandler(.failure(.badUrl(message: "INCORRECT URL - viewed courses REQUEST")))
             return
         }
         
@@ -55,19 +55,13 @@ class FavouritesIntercationRequestSender: IRequestSender {
                 switch response.statusCode {
                 
                 case 200:
-                    Logger.logNetWork(description: "RESPONSE-CODE: 200 course is deleted from favourites SUCCESSFULLY", logType: .success)
+                    Logger.logNetWork(description: "RESPONSE-CODE: 200 viewed courses received SUCCESSFULLY", logType: .success)
                     completonHandler(.success(parsedModel))
                 case 401:
                     Logger.logNetWork(description: "response-code: 401 authorization required", logType: .error)
                     completonHandler(.failure(.badCode(code: 401)))
-                case 201:
-                    Logger.logNetWork(description: "response-code: 201 course is added to favourites", logType: .success)
-                    completonHandler(.success(parsedModel))
-                case 404:
-                    Logger.logNetWork(description: "response-code: 404 course is not found", logType: .error)
-                    completonHandler(.failure(.badCode(code: 404)))
                 default:
-                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - FAVOURITE COURSE RESPONSE \(response.statusCode)", logType: .error)
+                    Logger.logNetWork(description: "UNDEFINED BEHAVIOR - VIEWED courses RESPONSE \(response.statusCode)", logType: .error)
                     completonHandler(.failure(.unknownError(message: "UNKNOWN ERROR CODE")))
                 }
             }

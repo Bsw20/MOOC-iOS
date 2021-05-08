@@ -6,15 +6,15 @@
 //
 import Foundation
 
-struct FavouriteInteractionResponse: Decodable {
+struct FavoriteInteractionResponse: Decodable {
     var favouriteCourses: [String]?
     var error: String?
 }
 
-class FavouriteResponseInteractionParser: IParser {
-    func parse(data: Data) -> FavouriteInteractionResponse? {
+class FavoriteResponseInteractionParser: IParser {
+    func parse(data: Data) -> FavoriteInteractionResponse? {
         do {
-            return  try JSONDecoder().decode(FavouriteInteractionResponse.self, from: data)
+            return  try JSONDecoder().decode(FavoriteInteractionResponse.self, from: data)
         } catch {
             Logger.logNetWork(description: "failed to load courses - Favourite Response interaction parser", logType: .error)
         }
