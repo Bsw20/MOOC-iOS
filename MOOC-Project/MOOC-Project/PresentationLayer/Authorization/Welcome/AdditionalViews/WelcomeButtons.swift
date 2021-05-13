@@ -66,8 +66,9 @@ struct WelcomeRoundedRectButton: View {
             .padding(.horizontal, 0)
             .padding(.vertical, 5)
         })
-        .fullScreenCover(isPresented: $showAuthView,
-                         content: { AuthChoosing() })
+        .sheet(isPresented: $showAuthView, content: {
+            SignUpView()
+        })
     }
 }
 

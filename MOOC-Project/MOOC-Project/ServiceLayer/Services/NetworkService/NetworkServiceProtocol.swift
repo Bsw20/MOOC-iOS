@@ -26,6 +26,6 @@ protocol NetworkServiceProtocol {
     func deleteReviewForCourse(reviewId: String, resultHandler: @escaping(NetworkError?) -> Void)
     func addReviewForCourse(id: String, rating: Double, text: String, resultHandler: @escaping(NetworkError?) -> Void)
     func getReviewsToCourse(courseId: String, resultHandler: @escaping(Result<CourseReviewsParsedDataModel?, NetworkError>) -> Void)
-    
+    func getMainInfo(resultHandler: @escaping (Result<MainInfoParsedDataModel, NetworkError>) -> Void)
     func logOut(resultHandler: @escaping() -> Void)
 }

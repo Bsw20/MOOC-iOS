@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-struct SearchCellDataModel: Identifiable {
-    var id: String
-    var vendorName: String
-    var vendorIcon: String
-    var courseName: String
-    var courseRating: Double
-    var courseImage: String
-    var price: CourseParsedPriceDataModel
-    var shortDescription: String
-    var countViews: Int
-}
-
 struct RemoteImage: View {
     private enum LoadState {
         case loading, success, failure

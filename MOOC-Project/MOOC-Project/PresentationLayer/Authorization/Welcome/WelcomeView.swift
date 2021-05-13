@@ -45,7 +45,7 @@ struct WelcomeTopView: View {
                 .fontWeight(.bold)
                 .padding(.horizontal, 0)
                 .padding(.vertical, 4)
-            WelcomeBigBoldTextView(text: "Welcome to\nMOOC!")
+            WelcomeBigBoldTextView(text: "Добро пожаловать в\nMOOC!")
         }
     }
 }
@@ -65,9 +65,9 @@ struct WelcomeBottomView: View {
         VStack {
             WelcomeRoundedRectButton(
                 showAuthView: $isAuthChoosingViewEnabled,
-                text: "Create account",
+                text: "Создать аккаунт",
                 backColor: Color(.black))
-            WelcomeUnderLinedTextButton(text: "I already have an account",
+            WelcomeUnderLinedTextButton(text: "У меня уже есть аккаунт",
                                         showAuthInputView: $isAuthInputViewEnabled)
         }.padding(.bottom)
     }

@@ -82,13 +82,13 @@ struct SignUpMiddleView: View {
             
             VStack(alignment: .leading) {
                 
-                SignBigBoldTextView(text: "Welcome,")
+                SignBigBoldTextView(text: "Добро пожаловть,")
                 
-                SignBoldSubTextView(text: "Let's create new account!")
+                SignBoldSubTextView(text: "Давайте создадим новый аккаунт!")
                     .minimumScaleFactor(0.5)
                     .padding(.bottom, 10)
                 
-                SignDescriptionTextView(text: "To use our app you have to create an account, it’ll only take few moments")
+                SignDescriptionTextView(text: "Чтобы использовать наше приложение вам необходим аккаунт, не беспокойтесь это займет пару минут!")
                 // if UIScreen.screenHeight > 640 { }
                 WelcomePreviewImageView(image: "CurrentlyInProgress")
             }
@@ -128,7 +128,7 @@ struct SignUpMiddleView: View {
                        error: $error,
                        isLoading: $isAnimating,
                        isAlertVisible: $isAlertVisible,
-                       text: "Sign Up",
+                       text: "Зарегестрироваться",
                        backColor: Color(.black),
                        email: $email,
                        userName: $userName,
@@ -138,7 +138,6 @@ struct SignUpMiddleView: View {
                                                  password: password))
                     .padding(.bottom, 2)
                 
-                SignUnderlinedTextView(text: "Register")
             }
         }
         .padding(.horizontal, 5)
