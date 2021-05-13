@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Network
 
 struct ContentView: View {
     @State var isLoading: Bool = false
@@ -14,6 +15,7 @@ struct ContentView: View {
     @State var isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
     @State var selectedIndex = 0
     @State var showBottomBar: Bool = true
+    @State var isDisconnected: Bool = false
     
     var body: some View {
         ZStack {
@@ -54,11 +56,35 @@ struct ContentView: View {
             }
         }
         .animation(.spring())
+        .alert(isPresented: $isDisconnected, content: {
+            Alert(title: Text("No internet connection!"),
+                  message: Text("Please check your internet connection and try again!"), dismissButton: .cancel() {
+                    // home button pressed programmatically - to thorw app to background
+                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    // terminaing app in background
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        exit(0)
+                    })
+                  })
+        })
         .onAppear {
+            let monitor = NWPathMonitor()
+            monitor.pathUpdateHandler = { path in
+                if path.status == .satisfied {
+                    isDisconnected = false
+                    print("Connected")
+                } else {
+                    isDisconnected = true
+                    print("Disconnected")
+                }
+            }
+            let queue = DispatchQueue(label: "Monitor")
+            monitor.start(queue: queue)
             RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status") {
                 self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
                 
             }
+            
         }
             if isLoading {
                 HUDProgressView(placeHolder: "Please Wait",

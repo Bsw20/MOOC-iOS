@@ -61,15 +61,15 @@ struct AuthChoosingMiddleView: View {
     var body: some View {
         VStack {
             AuthChoosingIntroImageView(image: "LoginImage")
-            AuthChoosingBigBoldTextView(text: "Where self-education begins!")
-                .padding(.horizontal, 15)
+            AuthChoosingBigBoldTextView(text: "Где самообразование берет свои истоки!")
+
                 .padding(.top, -15)
                 .padding(.bottom, 1.5)
             
             AuthChoosingSubTextView(
-                text: "Quarantine is the perfect time to spend your day to learn something new everyday anywhere.")
-                .padding(.horizontal, 15)
-        }
+                text: "Карантин - лучшая пора, что бы учиться чему то новому каждый день, в любом месте, в любое время!")
+               
+        } .padding(.horizontal, 20)
     }
 }
 
@@ -87,10 +87,10 @@ struct AuthChoosingBottomView: View {
                 image: Image("appleIcon"),
                 // button action here
                 backColor: .black,
-                action: {})
+                action: {}).hidden()
                 
             AuthChoosingRoundedRectButton(
-                text: "Continue with email",
+                text: "Продолжить с почтой",
                 image: Image("mailIcon"),
                 backColor: Color("continueWithEmailColor"),
                 action: { emailRegistrationViewIsPresented.toggle()})
@@ -120,7 +120,7 @@ struct AuthChoosingBottomView: View {
                         }
                     }*/
                 }
-            )
+            ).hidden()
         }
         .padding(.top, 5)
         .padding(.bottom, 10)

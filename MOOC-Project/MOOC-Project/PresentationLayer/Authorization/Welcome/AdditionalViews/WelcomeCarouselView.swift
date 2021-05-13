@@ -49,14 +49,13 @@ struct WelcomeContentView: View {
     
     let contents = [
         WelcomeCarouselContentView(imageName: "CurrentlyInProgress",
-                                   text: WelcomeSubTextView(text: "The App is currently in pre-release mode,"
-                                                                + " if you find any bugs - contact us as soon as possible!")),
+                                   text: WelcomeSubTextView(text: "Приложение находится на стадии разработки, если у вас появятся предложения или баг-репорты - пишите нам!")),
         WelcomeCarouselContentView(imageName: "IntroImage",
-                                   text: WelcomeSubTextView(text: "MOOC is a developing platform for finding massive open online courses. "
-                                                                + "Join us and find something special just for you!")),
+                                   text: WelcomeSubTextView(text: "MOOC - это развивающаяся платформа для поиска массовых онлайн курсов. "
+                                                                + "Присоединяйтесь к нам и мы всегда сможем найти что-то подходящее только для вас!")),
         WelcomeCarouselContentView(imageName: "LoginImage",
-                                   text: WelcomeSubTextView(text: "We can find course based on your interests and wishes,"
-                                                                + " search, like and comment to get courses that you like!"))
+                                   text: WelcomeSubTextView(text: "Мы можем найти курсы, основываясь на ваших интересах и увлечениях,"
+                                                                + " смело комментируйте, ставьте лайки и следите за обновлениями!"))
     ]
     
     var body: some View {

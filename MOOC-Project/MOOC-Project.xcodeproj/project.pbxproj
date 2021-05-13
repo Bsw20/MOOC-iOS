@@ -14,7 +14,7 @@
 		6A253AE22636E866003353E0 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A253AE12636E866003353E0 /* AuthRequest.swift */; };
 		6A36AE6D2635EE4E0033660C /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A36AE6C2635EE4E0033660C /* SignUpModel.swift */; };
 		6A37AEA5263EA3930051DBC7 /* ChipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37AEA4263EA3930051DBC7 /* ChipsView.swift */; };
-		6A37AEA8263EB8100051DBC7 /* SearchCellDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37AEA7263EB8100051DBC7 /* SearchCellDataModel.swift */; };
+		6A37AEA8263EB8100051DBC7 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37AEA7263EB8100051DBC7 /* RemoteImage.swift */; };
 		6A37AEAB263EDB8D0051DBC7 /* SearchButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37AEAA263EDB8C0051DBC7 /* SearchButtons.swift */; };
 		6A37AEAE263EE34F0051DBC7 /* SearchQueryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A37AEAD263EE34F0051DBC7 /* SearchQueryDataModel.swift */; };
 		6A4B278C262C4EB600EFF317 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B278B262C4EB600EFF317 /* AppDelegate.swift */; };
@@ -138,7 +138,7 @@
 		6A253AE12636E866003353E0 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		6A36AE6C2635EE4E0033660C /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		6A37AEA4263EA3930051DBC7 /* ChipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsView.swift; sourceTree = "<group>"; };
-		6A37AEA7263EB8100051DBC7 /* SearchCellDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellDataModel.swift; sourceTree = "<group>"; };
+		6A37AEA7263EB8100051DBC7 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		6A37AEAA263EDB8C0051DBC7 /* SearchButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtons.swift; sourceTree = "<group>"; };
 		6A37AEAD263EE34F0051DBC7 /* SearchQueryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQueryDataModel.swift; sourceTree = "<group>"; };
 		6A4B2788262C4EB600EFF317 /* MOOC-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MOOC-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -730,7 +730,7 @@
 				6AAC413F26401B0A006BC4F2 /* DetailedCourseInfo */,
 				6A84E2392634DD71004E936A /* UserDataModel.swift */,
 				6A7A08B3263DE253005A681E /* ChipDataModel.swift */,
-				6A37AEA7263EB8100051DBC7 /* SearchCellDataModel.swift */,
+				6A37AEA7263EB8100051DBC7 /* RemoteImage.swift */,
 				6A37AEAD263EE34F0051DBC7 /* SearchQueryDataModel.swift */,
 				6A6E730C26471E4B0074C2A3 /* MainInfoParsedDataModel.swift */,
 			);
@@ -1241,7 +1241,7 @@
 				6ADD204B2642EF8800D3AF70 /* CommentItem.swift in Sources */,
 				6ADD20332642B2B200D3AF70 /* NetworkService+Favorites.swift in Sources */,
 				6ADD20482642DB4600D3AF70 /* NetworkService+Viewed.swift in Sources */,
-				6A37AEA8263EB8100051DBC7 /* SearchCellDataModel.swift in Sources */,
+				6A37AEA8263EB8100051DBC7 /* RemoteImage.swift in Sources */,
 				6A37AEA5263EA3930051DBC7 /* ChipsView.swift in Sources */,
 				6A84E2232634B184004E936A /* NetworkServiceProtocol.swift in Sources */,
 				6A600FFE2636FA220008251E /* JWTTokenHandlerProtocol.swift in Sources */,

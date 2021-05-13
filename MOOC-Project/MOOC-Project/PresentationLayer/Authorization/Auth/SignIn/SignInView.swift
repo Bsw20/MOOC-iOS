@@ -107,10 +107,10 @@ struct AuthInputMiddleView: View {
         
         ScrollView {
             VStack(alignment: .leading) {
-                SignBigBoldTextView(text: "Welcome,")
-                SignBoldSubTextView(text: "Sign in to continue!")
+                SignBigBoldTextView(text: "Добро пожаловть,")
+                SignBoldSubTextView(text: "Войдите в аккаунт, чтобы продолжить!")
                     .padding(.bottom)
-                SignDescriptionTextView(text: "We use JWT-tokens for authorization, so you don't have to worry about the safety of your data.")
+                SignDescriptionTextView(text: "Мы используем JWT токены, так что вы можете смело доверять нам свои данные!")
             }
             .padding(.horizontal, 15)
             
@@ -128,6 +128,7 @@ struct AuthInputMiddleView: View {
                                           color: Color("continueWithFacebook"))
                     Spacer()
                 }
+                .hidden()
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 
@@ -149,7 +150,7 @@ struct AuthInputMiddleView: View {
             Spacer()
             VStack {
                 SignIn(model: $model,
-                       text: "Sing In",
+                       text: "Авторизоваться",
                        backColor: Color(.black),
                        animate: $isLoading,
                        error: $error,
@@ -160,7 +161,6 @@ struct AuthInputMiddleView: View {
                                                  password: password))
                     .padding(.bottom, 2)
                     
-                SignUnderlinedTextView(text: "Register")
             }
         }
     }
