@@ -88,7 +88,7 @@ struct PreviewMainView: View {
     
     @State var gmodel: GeneralModel = GeneralModel()
     @State var model: SearchModel = SearchModel()
-    @State private var result:Result<MainInfoParsedDataModel, NetworkError>?
+    @State private var result: Result<MainInfoParsedDataModel, NetworkError>?
     
     var body: some View {
         switch result {
@@ -126,7 +126,7 @@ struct Categories: View {
             HStack {
                 Button(action: {
                     
-                    model.getMainInfo{ result in
+                    model.getMainInfo { result in
                         switch result {
                         case .success(let response):
                             self.courses = response.courses

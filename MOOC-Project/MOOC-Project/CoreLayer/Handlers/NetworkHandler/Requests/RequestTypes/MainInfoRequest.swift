@@ -10,8 +10,7 @@ import Foundation
 class MainInfoRequest: IRequest {
     
     private var baseURL: String = "https://api.mooc.ij.je/courses/main"
-    
-    
+        
     func setRequestConfigue(url: URL,
                             headArguments: [String: String]?,
                             bodyArguments: [String: String]?)

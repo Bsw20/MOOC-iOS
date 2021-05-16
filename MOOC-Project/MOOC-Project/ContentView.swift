@@ -19,73 +19,73 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-        VStack {
-            if isLoggedIn {
-                NavigationView {
-                    ZStack {
-                        switch selectedIndex {
-                        case 0:
-                            SearchMainView(showBottomBar: $showBottomBar)
-                                .background(Image("searchBack")
-                                                .resizable()
-                                                .scaledToFit())
-                        case 1:
-                            PreviewMainView(isLoading: $isLoading)
-                        case 2:
-                            
+            VStack {
+                if isLoggedIn {
+                    NavigationView {
+                        ZStack {
+                            switch selectedIndex {
+                            case 0:
+                                SearchMainView(showBottomBar: $showBottomBar)
+                                    .background(Image("searchBack")
+                                                    .resizable()
+                                                    .scaledToFit())
+                            case 1:
+                                PreviewMainView(isLoading: $isLoading)
+                            case 2:
+                                
                                 ProfileMainView(isLoading: $isLoading)
                                     .background(VStack {
                                         Spacer()
                                         Image("IntroImage")
-                                                    .resizable()
-                                                    .scaledToFit()
+                                            .resizable()
+                                            .scaledToFit()
                                     })
-                        default:
-                            SearchMainView(showBottomBar: $showBottomBar)
-                        }
-                        
-                        if showBottomBar {
-                            BottomBar(selectedIndex: $selectedIndex,
-                                      barImages: $barImages,
-                                      barTexts: $barTexts)
+                            default:
+                                SearchMainView(showBottomBar: $showBottomBar)
+                            }
+                            
+                            if showBottomBar {
+                                BottomBar(selectedIndex: $selectedIndex,
+                                          barImages: $barImages,
+                                          barTexts: $barTexts)
+                            }
                         }
                     }
-                }
-            } else {
-                WelcomeView()
-            }
-        }
-        .animation(.spring())
-        .alert(isPresented: $isDisconnected, content: {
-            Alert(title: Text("No internet connection!"),
-                  message: Text("Please check your internet connection and try again!"), dismissButton: .cancel() {
-                    // home button pressed programmatically - to thorw app to background
-                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-                    // terminaing app in background
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        exit(0)
-                    })
-                  })
-        })
-        .onAppear {
-            let monitor = NWPathMonitor()
-            monitor.pathUpdateHandler = { path in
-                if path.status == .satisfied {
-                    isDisconnected = false
-                    print("Connected")
                 } else {
-                    isDisconnected = true
-                    print("Disconnected")
+                    WelcomeView()
                 }
             }
-            let queue = DispatchQueue(label: "Monitor")
-            monitor.start(queue: queue)
-            RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status") {
-                self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
+            .animation(.spring())
+            .alert(isPresented: $isDisconnected, content: {
+                Alert(title: Text("No internet connection!"),
+                      message: Text("Please check your internet connection and try again!"), dismissButton: .cancel() {
+                        // home button pressed programmatically - to thorw app to background
+                        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                        // terminaing app in background
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            exit(0)
+                        })
+                      })
+            })
+            .onAppear {
+                let monitor = NWPathMonitor()
+                monitor.pathUpdateHandler = { path in
+                    if path.status == .satisfied {
+                        isDisconnected = false
+                        Logger.logNetWork(description: "Connected successfully", logType: .success)
+                    } else {
+                        isDisconnected = true
+                        Logger.logNetWork(description: "Connection time out", logType: .error)
+                    }
+                }
+                let queue = DispatchQueue(label: "Monitor")
+                monitor.start(queue: queue)
+                RootAssembly.serviceAssembly.sessionService.enableObserver(for: "status") {
+                    self.isLoggedIn = RootAssembly.serviceAssembly.sessionService.getCurrentSessionValue()
+                    
+                }
                 
             }
-            
-        }
             if isLoading {
                 HUDProgressView(placeHolder: "Please Wait",
                                 show: $isLoading)
@@ -134,7 +134,7 @@ struct BottomBar: View {
                         .shadow(radius: 4))
         .frame(
             maxHeight: .infinity,
-               alignment: .bottom)
+            alignment: .bottom)
         .padding(.horizontal, 15)
     }
 }

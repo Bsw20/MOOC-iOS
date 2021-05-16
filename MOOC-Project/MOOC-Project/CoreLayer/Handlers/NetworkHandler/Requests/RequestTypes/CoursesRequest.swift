@@ -49,7 +49,7 @@ class CoursesRequest: IRequest {
         } else {
             strUrl = baseURL + queryBuilder(with: bodyArguments)
         }
-        print(strUrl)
+        // print(strUrl)
         guard let url = URL(string: strUrl) else {return nil}
         return setRequestConfigue(url: url,
                                   headArguments: headArguments,
