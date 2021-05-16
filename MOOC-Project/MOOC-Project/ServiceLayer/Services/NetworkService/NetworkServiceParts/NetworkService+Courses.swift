@@ -194,7 +194,7 @@ extension NetworkService {
     }
  
     func parseCoursesArray(from array: [CourseResponseShortDataModel]?) ->
-    [CourseParsedShortDataModel]{
+    [CourseParsedShortDataModel] {
         
         guard let array = array else {
             return []
@@ -267,7 +267,6 @@ extension NetworkService {
         guard let response = response else {
             return nil
         }
-        
         
         return .init(previousPage: response.previousPage,
                      nextPage: response.nextPage,

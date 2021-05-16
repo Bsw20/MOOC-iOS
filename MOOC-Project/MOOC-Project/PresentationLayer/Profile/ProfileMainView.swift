@@ -39,8 +39,8 @@ struct TopView: View {
                 .font(.title)
             Divider()
             HStack {
-                VStack {
-                    RemoteImage(url: "https://sun9-5.userapi.com/impg/EJvrEdq_H8E2dff_VgmkvYo14WFqSQH_72uLWQ/Ts9dzI_epLU.jpg?size=960x539&quality=96&sign=d91cd7a784b0370e2d76e375fd929c23&type=album")
+                VStack { RemoteImage(url: "https://sun9-5.userapi.com/impg/EJvrEdq_H8E2dff_VgmkvYo14WFqSQH_72uLWQ/Ts9dzI_epL"
+                    + "U.jpg?size=960x539&quality=96&sign=d91cd7a784b0370e2d76e375fd929c23&type=album")
                         .clipShape(Circle())
                         .centerCropped()
                         .frame(width: 90, height: 80, alignment: .center)
@@ -101,7 +101,7 @@ struct MiddleView: View {
                     showFavorites.toggle()
                     showLoading.toggle()
                 }
-                    model.getFavoriteCourses { array, error in
+                    model.getFavoriteCourses { array, _ in
                         guard let array = array else {
                             // TODO. alert
                             return
@@ -145,7 +145,7 @@ struct MiddleView: View {
                 withAnimation {
                     showViewed.toggle()
                     showLoading.toggle()
-                    model.getViewedCourses { array, error in
+                    model.getViewedCourses { array, _ in
                         guard let array = array else {
                             // TODO. array
                             return
